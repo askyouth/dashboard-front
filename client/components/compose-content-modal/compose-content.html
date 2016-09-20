@@ -1,0 +1,30 @@
+<div id="compose-content__modal" class="modal fade tweet-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header tweet-modal__header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+        <h4 class="modal-title tweet-modal__title">Compose new Tweet</h4>
+      </div>
+
+      <div class="modal-body tweet-modal__body">
+        <div class="tweet-modal__form tweet-form">
+          <div class="tweet-form__content" contenteditable="true" ng-model="$ctrl.tweetForm.content"
+            data-placeholder="Compose new Tweet"></div><!-- /.tweet-form__content -->
+        </div><!-- /.tweet-modal__form tweet-form -->
+      </div>
+
+      <div class="modal-footer tweet-modal__footer">
+        <div class="tweet-modal__toolbar">
+          <button class="btn btn-link tweet-modal__button"><span class="glyphicon glyphicon-camera"></span></button>
+        </div><!-- /.tweet-modal__toolbar -->
+
+        <span class="tweet-footer__counter">{{140 - $ctrl.tweetForm.content.length}}</span>
+        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+        <button type="button" class="btn btn-primary tweet-modal__submit" ng-disabled="!$ctrl.tweetForm.content.length">Tweet</button>
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

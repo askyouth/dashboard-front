@@ -1,0 +1,48 @@
+body {
+  min-width: 1220px;
+}
+
+application {
+  display: block;
+}
+
+#application {
+  min-width: 1220px;
+  padding-top: 82px;
+}
+
+#brand {
+  color: $primary-color;
+}
+
+#profile__link {
+  color: $primary-color;
+}
+
+#container {
+  @media (min-width: 1200px) {
+    width: 1220px;
+  }
+}
+
+.navigation__item {
+  a {
+    &.is-active {
+      box-shadow: 0 -4px 0 0 $primary-color inset;
+    }
+  }
+}
+
+.header-search {
+  text-align: right;
+  width: 330px;
+}
+
+.header-search__input {
+  transition: width .5s !important;
+  width: 200px !important;
+
+  &:focus {
+    width: 300px !important;
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "selectors": {
+    "composeContentModal": "#compose-content__modal"
+  }
+}

@@ -4,11 +4,10 @@ const config = require('./config.json');
 /**
  * IndexController
  */
-class IndexController {
+class LoginController {
   constructor($element) {
     'ngInject';
     this._$element = $element;
-    this.title = config.title;
   }
 
   $onInit() {
@@ -18,14 +17,10 @@ class IndexController {
   $onDestroy() {
 
   }
-
-  selectTweet() {
-    console.log('tweet selected');
-  }
 };
 
 
 module.exports = {
-  templateUrl: 'views/index/index.html',
-  controller: IndexController
+  templateUrl: 'views/login/login.html',
+  controller: LoginController
 };

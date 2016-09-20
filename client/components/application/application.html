@@ -1,0 +1,53 @@
+<div id="application" class="application">
+  <div id="header" class="header navbar navbar-default navbar-fixed-top">
+    <div id="header-container" class="container-fluid">
+      <a id="brand" ui-sref="index" class="navbar-brand">Ask youth</a>
+
+      <ul id="navigation" class="navigation nav navbar-nav">
+        <li class="navigation__item">
+          <a ui-sref="index" ui-sref-active="is-active">Home</a>
+        </li><!-- /.navigation__item -->
+        <li class="navigation__item">
+          <a ui-sref="handles" ui-sref-active="is-active">Handles</a>
+        </li><!-- /.navigation__item -->
+        <li class="navigation__item">
+          <a ui-sref="topics" ui-sref-active="is-active">Topics</a>
+        </li><!-- /.navigation__item -->
+        <li class="navigation__item">
+          <a ui-sref="conversations" ui-sref-active="is-active">Conversations</a>
+        </li><!-- /.navigation__item -->
+        <li class="navigation__item">
+          <a ui-sref="infographics" ui-sref-active="is-active">Infographics</a>
+        </li><!-- /.navigation__item -->
+      </ul><!-- /#navigation.navigation -->
+
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <span id="header__user">John McClane</span> <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a ui-sref="profile">Account settings</a></li>
+            <li><a ui-sref="logout">Logout</a></li>
+          </ul><!-- /.dropdown-menu -->
+        </li><!-- /.dropdown -->
+      </ul><!-- /.nav.navbar-nav.navbar-right -->
+
+      <div id="compose-content" class="navbar-form navbar-right">
+        <button id="compose-content__button" class="btn btn-primary"
+          data-toggle="modal" data-target="#compose-content__modal">Compose a new tweet</button>
+      </div><!-- /#compose-content.compose-content -->
+
+      <div id="search" class="header-search navbar-form navbar-right">
+        <input type="text" class="form-control header-search__input" placeholder="Search anything" />
+      </div><!-- /#search.search -->
+
+    </div><!-- /#header-container.container-fluid -->
+  </div><!-- /#header.header -->
+
+  <div id="container" class="container">
+    <div id="content" ui-view></div><!-- /#content -->
+  </div><!-- /#container.container-fluid -->
+
+  <compose-content-modal></compose-content-modal>
+</div><!-- /#application -->

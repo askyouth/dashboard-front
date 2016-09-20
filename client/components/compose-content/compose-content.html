@@ -1,0 +1,15 @@
+<div class="compose-content">
+  <div class="compose-content__body">
+    <div class="tweet-form">
+      <div class="tweet-form__content" contenteditable="true" ng-model="$ctrl.tweetForm.content"
+        data-placeholder="Compose new Tweet">
+      </div><!-- /.tweet-form__content -->
+    </div><!-- /.tweet-form -->
+  </div><!-- /.compose-content__body -->
+
+  <div class="compose-content__footer">
+    <span class="tweet-footer__counter">{{140 - $ctrl.tweetForm.content.length}}</span>
+
+    <button class="btn btn-primary compose-content__submit" ng-disabled="!$ctrl.tweetForm.content.length" ng-click="$ctrl.submitContent()">Tweet</button>
+  </div><!-- /.compose-content__footer -->
+</div><!-- /.compose-content -->
