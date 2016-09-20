@@ -18,6 +18,10 @@ var livereload = require('tiny-lr')();
 var htmlMin = require('gulp-htmlmin');
 var ngAnnotate = require('gulp-ng-annotate');
 
+/**
+ * Webpack config
+ * @type {Object}
+ */
 var webpackConfig = require('./webpack.config');
 
 /**
