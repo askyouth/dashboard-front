@@ -8,6 +8,7 @@ application {
 
 #application {
   min-width: 1220px;
+  padding-bottom: 32px;
   padding-top: 82px;
 }
 
@@ -27,6 +28,11 @@ application {
 
 .navigation__item {
   a {
+    &:hover {
+      box-shadow: 0 -4px 0 0 $primary-color inset;
+      transition: box-shadow .5s;
+    }
+
     &.is-active {
       box-shadow: 0 -4px 0 0 $primary-color inset;
     }

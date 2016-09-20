@@ -6,13 +6,13 @@ const indexComponent = require('./components/index');
 // Initialize application
 const app = angular.module('ask-youth', [
   // resources
-  'ui.router'
+  'ui.router',
+  'permission', 'permission.ui'
 ]);
 
 // Configuration and router
 app.config(require('./config.js'))
     .config(require('./router.js'))
-    .config(require('./roles.js'));
 
 // Route components
 app.component('application', require('./components/application/application.js'))
@@ -33,6 +33,4 @@ app.component('tweetContent', require('./components/content/tweet.js'));
 app.directive('contenteditable', require('./components/shared/contenteditable.js'));
 
 // Run application
-app.run(function () {
-  'ngInject';
-});
+app.run(require('./roles.js'));
