@@ -1,0 +1,25 @@
+{
+  "name": "project-boilerplate",
+  "description": "Basic project boilerplate for server and client app",
+  "main": "index.js",
+  "authors": [
+    "Davor Grubelić <davor.grubelic@gmail.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [
+    "es6",
+    "node"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-ui-router": "^0.3.1"
+  }
+}
