@@ -84,7 +84,7 @@ gulp.task('styles', function () {
 });
 
 gulp.task('styles.build', function () {
-  return gulp.src('./client/components/app.scss')
+  return gulp.src('./client/app.scss')
     .on('error', errorHandler)
     .pipe(plumber(errorHandler))
     .pipe(sass().on('error', sass.logError))
