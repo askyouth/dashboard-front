@@ -7,7 +7,8 @@ const config = require('./config.json');
 class ComposeContentController {
   constructor($element) {
     'ngInject';
-    this._$element = $element[0];
+    this._element = $element[0];
+    this._$element = $element;
 
     this.tweetForm = {
       content: null
@@ -18,7 +19,7 @@ class ComposeContentController {
   }
 
   $onInit() {
-    let $contentInput = this._$element
+    let $contentInput = this._element
       .querySelector(config.selectors.CONTENT_INPUT)
 
     $contentInput.addEventListener('keyup', this.onContentKeyupBind)
@@ -27,7 +28,7 @@ class ComposeContentController {
   }
 
   $onDestroy() {
-    let $contentInput = this._$element
+    let $contentInput = this._element
       .querySelector(config.selectors.CONTENT_INPUT)
 
     $contentInput.removeEventListener('keyup', this.onContentKeyupBind)
@@ -36,15 +37,15 @@ class ComposeContentController {
   }
 
   onContentFocus() {
-    angular.element(this._$element).addClass(config.cssClasses.IS_FOCUSED);
+    this._$element.addClass(config.cssClasses.IS_FOCUSED);
   }
 
   onContentBlur() {
-    angular.element(this._$element).removeClass(config.cssClasses.IS_FOCUSED);
+    this._$element.removeClass(config.cssClasses.IS_FOCUSED);
     if (this.tweetForm.content) {
-      angular.element(this._$element).addClass(config.cssClasses.IS_DIRTY);
+      this._$element.addClass(config.cssClasses.IS_DIRTY);
     } else {
-      angular.element(this._$element).removeClass(config.cssClasses.IS_DIRTY);
+      this._$element.removeClass(config.cssClasses.IS_DIRTY);
     }
   }
 
@@ -54,8 +55,8 @@ class ComposeContentController {
 
   submitContent() {
     this.tweetForm.content = null;
-    angular.element(this._$element).removeClass(config.cssClasses.IS_FOCUSED);
-    angular.element(this._$element).removeClass(config.cssClasses.IS_DIRTY);
+    this._$element.removeClass(config.cssClasses.IS_FOCUSED);
+    this._$element.removeClass(config.cssClasses.IS_DIRTY);
   }
 
 };

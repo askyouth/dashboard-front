@@ -14,6 +14,8 @@
 }
 
 .tweet__user {
+  outline: none;
+  
   &, &:hover {
     text-decoration: none;
   }
@@ -37,11 +39,13 @@
 .tweet__user__name {
   color: #000;
   font-weight: 600;
+  outline: none;
 }
 
 .tweet__user__username {
   color: #8899a6;
   font-size: 13px;
+  outline: none;
 }
 
 .tweet__time {

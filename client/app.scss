@@ -1,7 +1,9 @@
 $primary-color: #ED403B;
+$accent-color: #1B95E0;
 
 @import "components/application/application.scss";
 @import "components/index/index.scss";
 @import "components/compose-content-modal/compose-content.scss";
 @import "components/compose-content/compose-content.scss";
 @import "components/content/tweets.scss";
+@import "components/shared/content-input.scss"

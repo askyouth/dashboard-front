@@ -31,6 +31,7 @@ app.component('tweetContent', require('./components/content/tweet.js'));
 
 // Directives
 app.directive('contenteditable', require('./components/shared/contenteditable.js'));
+app.directive('contentInput', require('./components/shared/content-input.js'));
 
 // Run application
 app.run(require('./roles.js'));

@@ -1,0 +1,55 @@
+.atwho-view-ul {
+  padding: 5px 0 !important;
+
+  li {
+    border: 0px !important;
+    padding: 9px 12px !important;
+
+    &.cur {
+      background-color: $accent-color;
+
+      .handle__name {
+        color: #fff;
+      }
+
+      .handle__username {
+        color: #fff;
+
+        strong {
+          color: #fff;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}
+
+.handle {
+  &__name {
+    color: #000;
+    font-weight: 600;
+  }
+
+  &__username {
+    color: #8899a6;
+    font-size: 13px;
+
+    strong {
+      color: #8899a6;
+      font-weight: 400;
+    }
+  }
+
+  .handle__avatar {
+    display: inline-block;
+    height: 36px;
+    margin-right: 9px;
+    width: 36px;
+
+    img {
+      border-radius: 5px;
+      height: inherit;
+      width: inherit;
+    }
+  }
+}

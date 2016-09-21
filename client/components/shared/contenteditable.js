@@ -7,7 +7,7 @@ module.exports = function ContentEditable() {
     link: function(scope, element, attrs, ngModel) {
 
       function read() {
-        ngModel.$setViewValue(element.html());
+        ngModel.$setViewValue(element.text());
       }
 
       ngModel.$render = function() {
