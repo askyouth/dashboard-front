@@ -4,7 +4,7 @@ const config = require('./config.json');
 /**
  * IndexController
  */
-class IndexController {
+class ConversationsController {
   constructor($element) {
     'ngInject';
     this._$element = $element;
@@ -18,14 +18,10 @@ class IndexController {
   $onDestroy() {
 
   }
-
-  selectTweet() {
-    console.log('tweet selected');
-  }
 };
 
 
 module.exports = {
-  templateUrl: 'views/index/index.html',
-  controller: IndexController
+  templateUrl: 'views/conversations/conversations.html',
+  controller: ConversationsController
 };

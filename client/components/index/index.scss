@@ -1,4 +1,14 @@
-index-component {
-  display: block;
-  margin: 32px 0;
+.tweets {
+  border: 1px solid #e1e8ed;
+  border-radius: 5px;
+
+  tweet-content {
+    display: block;
+  }
+
+  tweet-content:last-child {
+    .tweet {
+      border-bottom: none;
+    }
+  }
 }
