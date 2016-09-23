@@ -44,7 +44,7 @@ module.exports = function TweetService($q, $rootScope, $timeout) {
 
   let simulateTwitterStream = () => {
     $serviceScope.$broadcast('tweet:interaction', transformContent());
-    $timeout(simulateTwitterStream, 15000);
+    // $timeout(simulateTwitterStream, 15000);
   }
 
   $timeout(simulateTwitterStream, 500);

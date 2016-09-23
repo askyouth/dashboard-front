@@ -8,12 +8,12 @@
           <span class="tweet__user__username">@Hoophall</span>
         </a><!-- /.tweet__user -->
 
-        <span class="tweet__short-date">- Sep 19</span>
+        <span class="tweet__short-date">• {{$ctrl.tweet.created_at | dateFilter:'MMM d'}}</span>
       </div><!-- /.tweet__meta -->
 
       <div class="tweet__text" ng-bind-html="$ctrl.tweet.text_content"></div><!-- /.tweet__text -->
 
-      <div class="tweet__date">07:17 PM - 22 Sep 2016</div><!-- /.tweet__date -->
+      <div class="tweet__date">{{$ctrl.tweet.created_at | dateFilter:'shortTime'}} - {{$ctrl.tweet.created_at | dateFilter:'d MMM yyyy'}}</div><!-- /.tweet__date -->
     </div>
 
     <div class="tweet__toolbar">

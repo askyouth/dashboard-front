@@ -211,8 +211,7 @@ tweet {
       display: block;
       font-size: 18px;
       line-height: 1.25;
-      margin-top: 3px;
-      padding-top: 2px;
+      padding-top: 3px;
     }
 
     .tweet__content {
@@ -236,6 +235,12 @@ tweet {
 
     .tweet__toolbar {
       padding-top: 10px;
+    }
+  }
+
+  &.tweet--in-reply-to {
+    .tweet {
+      background-color: #f5f8fa;
     }
   }
 }
