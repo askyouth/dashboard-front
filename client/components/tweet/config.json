@@ -1,0 +1,11 @@
+{
+  "cssClasses": {
+    "IS_SELECTED": "is-selected"
+  },
+
+  "selectors": {
+    "TWEET_CONTENT": ".tweet__content",
+    "TWEET_TOOLBAR": ".tweet__toolbar",
+    "TWEET_MENU": ".tweet__action-more"
+  }
+}
