@@ -78,3 +78,16 @@ application {
   background-color: $accent-color;
   color: #fff;
 }
+
+.bootstrap-select {
+  width: 100% !important;
+
+  .dropdown-menu {
+    li {
+      &, &:hover, &:focus, &.selected, a {
+        box-shadow: none;
+        outline: none;
+      }
+    }
+  }
+}

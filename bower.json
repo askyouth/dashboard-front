@@ -26,7 +26,8 @@
     "angular-ui-router": "^0.3.1",
     "angular-permission": "^4.0.5",
     "angular-sanitize": "^1.5.8",
-    "tribute": "^2.0.5"
+    "tribute": "^2.0.5",
+    "bootstrap-select": "^1.11.2"
   },
   "overrides": {
     "bootstrap": {

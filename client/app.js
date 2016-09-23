@@ -36,12 +36,14 @@ app.component('tweetModal', require('./components/tweet-modal/tweet-modal.js'));
 // Directives
 app.directive('contenteditable', require('./components/shared/contenteditable.js'));
 app.directive('contentInput', require('./components/shared/content-input.js'));
+app.directive('select', require('./components/shared/select.js'));
 
 // Services
 app.service('TweetService', require('./components/tweet/tweet-service.js'));
 
 // Filters
 app.filter('dateFilter', require('./components/shared/date-filter.js'));
+app.filter('capitalize', require('./components/shared/capitalize.js'));
 
 // Run application
 app.run(require('./roles.js')).run(function ($rootScope) {
