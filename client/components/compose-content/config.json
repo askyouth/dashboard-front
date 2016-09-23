@@ -5,6 +5,7 @@
   },
 
   "selectors": {
-    "CONTENT_INPUT": ".tweet-form__content"
+    "CONTENT_INPUT": ".tweet-form__content",
+    "CONTENT_TOOLBAR": ".compose-content__toolbar"
   }
 }

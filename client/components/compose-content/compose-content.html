@@ -1,13 +1,26 @@
 <div class="compose-content">
   <div class="compose-content__body">
+    <div class="compose-content__avatar">
+      <img src="https://pbs.twimg.com/profile_images/745553396015505408/E7b52fGn_normal.jpg" alt="Davor Grubelić">
+    </div>
     <div class="tweet-form">
       <div class="tweet-form__content" contenteditable="true" ng-model="$ctrl.tweetForm.content"
         data-placeholder="Compose new Tweet" content-input>
+
       </div><!-- /.tweet-form__content -->
     </div><!-- /.tweet-form -->
   </div><!-- /.compose-content__body -->
 
   <div class="compose-content__footer">
+    <div class="compose-content__toolbar">
+      <button class="btn btn-link compose-content__button">
+        <label class="upload">
+          <input type="file" class="upload__input">
+          <span class="upload__icon glyphicon glyphicon-camera"></span>
+        </label>
+      </button>
+    </div>
+
     <span class="tweet-footer__counter">{{140 - $ctrl.tweetForm.content.length}}</span>
 
     <button class="btn btn-primary compose-content__submit" ng-disabled="!$ctrl.tweetForm.content.length" ng-click="$ctrl.submitContent()">Tweet</button>

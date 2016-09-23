@@ -6,19 +6,16 @@ compose-content {
   &.is-dirty,
   &.is-focused {
     .compose-content__body {
-      padding-bottom: 7px;
+      padding-bottom: 2px;
     }
 
     .compose-content__footer {
       display: block;
+      padding-bottom: 10px;
     }
 
     .tweet-form__content {
-      height: 80px;
-
-      &:empty:before {
-        height: 62px;
-      }
+      min-height: 80px;
     }
   }
 }
@@ -26,13 +23,28 @@ compose-content {
 .compose-content {
   background-color: $tweet-form-background;
   border-bottom: 1px solid #e1e8ed;
+  padding-left: 55px;
 
   .tweet-form__content {
-    height: 36px;
+    min-height: 36px;
+  }
+}
 
-    &:empty:before {
-      height: 18px;
-    }
+.compose-content__toolbar {
+  float: left;
+}
+
+.compose-content__avatar {
+  height: 32px;
+  margin-left: -42px;
+  margin-top: 2px;
+  position: absolute;
+  width: 32px;
+
+  img {
+    border-radius: 4px;
+    height: inherit;
+    width: inherit;
   }
 }
 
@@ -48,7 +60,19 @@ compose-content {
 }
 
 .compose-content__toolbar {
+  .btn {
+    border-radius: 2px;
+    height: 40px;
+    outline: none;
 
+    &:hover {
+      border: 1px solid #a3d4f2;
+    }
+
+    .glyphicon {
+      font-size: 24px;
+    }
+  }
 }
 
 .compose-content__counter {
@@ -70,9 +94,10 @@ compose-content {
   border: 1px solid #c6e4f7;
   border-radius: 3px;
   cursor: text;
-  height: 80px;
+  min-height: 80px;
   outline: none;
   padding: 8px 10px;
+  position: relative;
 
   &:focus {
     border: 1px solid #a3d4f2;
@@ -83,5 +108,10 @@ compose-content {
     content: attr(data-placeholder);
     display: block;
     height: 62px;
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    left: 10px;
+    right: 10px;
   }
 }
