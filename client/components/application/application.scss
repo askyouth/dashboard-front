@@ -1,5 +1,10 @@
 body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   min-width: 1220px;
+}
+
+a {
+  color: $accent-color;
 }
 
 application {
@@ -9,7 +14,7 @@ application {
 #application {
   min-width: 1220px;
   padding-bottom: 32px;
-  padding-top: 82px;
+  padding-top: 64px;
 }
 
 #brand {
@@ -51,4 +56,25 @@ application {
   &:focus {
     width: 300px !important;
   }
+}
+
+.upload {
+  cursor: pointer;
+
+  &__input {
+    height: 1px;
+    opacity: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  &__icon {
+    cursor: pointer;
+  }
+}
+
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
+  background-image: none;
+  background-color: $accent-color;
+  color: #fff;
 }

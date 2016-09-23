@@ -19,12 +19,14 @@
     "tests"
   ],
   "dependencies": {
+    "jquery": "^3.1.0",
+    "At.js": "^1.5.1",
+    "bootstrap": "^3.3.7",
     "angular": "^1.5.8",
     "angular-ui-router": "^0.3.1",
-    "bootstrap": "^3.3.7",
-    "jquery": "^3.1.0",
     "angular-permission": "^4.0.5",
-    "At.js": "^1.5.1"
+    "angular-sanitize": "^1.5.8",
+    "tribute": "^2.0.5"
   },
   "overrides": {
     "bootstrap": {

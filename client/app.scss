@@ -1,9 +1,15 @@
 $primary-color: #ED403B;
 $accent-color: #1B95E0;
 
+$tweet-form-background: #E8F3FD;
+$tweet-button-background: #1b95e0;
+$tweet-button-border: #1b95e0;
+
 @import "components/application/application.scss";
 @import "components/index/index.scss";
 @import "components/compose-content-modal/compose-content.scss";
 @import "components/compose-content/compose-content.scss";
-@import "components/content/tweets.scss";
+@import "components/timeline/timeline.scss";
+@import "components/tweet/tweet.scss";
+@import "components/tweet-modal/tweet-modal.scss";
 @import "components/shared/content-input.scss"
