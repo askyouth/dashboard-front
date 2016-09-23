@@ -5,31 +5,48 @@ const config = require('./config.json');
  * IndexController
  */
 class ComposeContentModalController {
-  constructor($element) {
+  constructor($element, TweetService) {
     'ngInject';
-    this._$element = $element[0];
+    this._element = $element[0]
+    this._$element = $element;
+    this.TweetService = TweetService;
+
     this.tweetForm = {
       content: null
     };
   }
 
   $onInit() {
-    angular.element(this._$element.querySelector(config.selectors.composeContentModal))
-      .on('hidden.bs.modal', this.onModalHide);
+    this._element.querySelector(config.selectors.composeContentModal)
+      .addEventListener('hidden.bs.modal', this.onModalHide.bind(this));
   }
 
   $onDestroy() {
-    angular.element(this._$element.querySelector(config.selectors.composeContentModal))
-      .off('hidden.bs.modal', this.onModalHide);
+    this._element.querySelector(config.selectors.composeContentModal)
+      .removeEventListener('hidden.bs.modal');
   }
 
   onModalHide() {
     console.log('modal hide');
+  }
+
+  submitContent() {
+    this.tweetForm.content = null;
+
+    let $createdTweet = { id: new Date().getTime() };
+    this.TweetService.createTweet($createdTweet);
+    this.onCreate($createdTweet);
+
+    // Close modal
+    $(this._element.querySelector(config.selectors.composeContentModal)).modal('hide');
   }
 };
 
 
 module.exports = {
   templateUrl: 'views/compose-content-modal/compose-content.html',
-  controller: ComposeContentModalController
+  controller: ComposeContentModalController,
+  bindings: {
+    onCreate: '&'
+  }
 };
