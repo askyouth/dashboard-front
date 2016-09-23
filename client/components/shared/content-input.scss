@@ -1,11 +1,23 @@
-.atwho-view-ul {
-  padding: 5px 0 !important;
+.atwho-view,
+.tribute-container {
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  // padding: 5px 0 !important;
+
+  ul {
+    background: #fff;
+    border-radius: 4px;
+    margin-top: 0;
+    overflow: hidden;
+    padding: 0;
+  }
 
   li {
     border: 0px !important;
     padding: 9px 12px !important;
 
-    &.cur {
+    &.cur,
+    &.highlight {
       background-color: $accent-color;
 
       .handle__name {
