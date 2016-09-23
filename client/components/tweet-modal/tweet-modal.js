@@ -9,28 +9,13 @@ class TweetModalController {
     'ngInject';
 
     this._$scope = $scope;
+    this._$timeout = $timeout;
     this._$element = $element;
     this._element = $element[0];
-    this._$timeout = $timeout;
     this.TweetService = TweetService;
 
     this.tweetReplies = [];
-
-    // this.TweetService.createTweet().then((tweet) => {
-    //   this.tweetReplies.push(tweet);
-    // });
-
-    let fetchReply = () => {
-      this.TweetService.createTweet().then((tweet) => {
-        this.tweetReplies.push(tweet);
-
-        if (this.tweetReplies.length < 5) {
-          $timeout(fetchReply, 1000);
-        }
-      });
-    };
-
-    $timeout(fetchReply, 1000);
+    this.fetchTweetReplies();
   }
 
   $onInit() {
@@ -42,8 +27,6 @@ class TweetModalController {
         this.onClose();
       });
     });
-
-    console.log(this.tweetReplies.length);
   }
 
   $postLink() {
@@ -51,23 +34,54 @@ class TweetModalController {
 
     // Open modal
     this._$timeout(() => {
-      // $modal.modal({
-      //   keyboard: false
-      // });
       $modal.modal('show');
     }, 10);
   }
 
   $onDestroy() {
+    console.log('destroy tweet-modal');
     let $modal = $(this._element).find('.modal');
 
     // Bind modal events
+    (function () {
+      $modal.modal('hide');
+    }())
     $modal.off('hidden.bs.modal');
   }
 
   onTweetReply(tweet) {
     console.log(tweet);
   }
+
+  onReplySelect(tweet) {
+    this.tweet = null;
+    this.tweetReplies.length = 0;
+
+    // For now, we simulate load from API
+    this._$timeout(() => {
+      this.tweet = tweet;
+      this.fetchTweetReplies();
+    }, 2000);
+  }
+
+  onReplyToSelect(tweet) {
+    this.onReplySelect(tweet);
+  }
+
+  fetchTweetReplies() {
+    let fetchReply = () => {
+      this.TweetService.createTweet().then((tweet) => {
+        this.tweetReplies.push(tweet);
+
+        if (this.tweetReplies.length < 5) {
+          this._$timeout(fetchReply, 1000);
+        }
+      });
+    };
+
+    this._$timeout(fetchReply, 1000);
+  }
+
 };
 
 

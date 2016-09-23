@@ -1,6 +1,10 @@
 <div id="tweet-details__modal" class="modal fade tweet-modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog tweet-modal__dialog" role="document" ng-class="{'is-loading': !$ctrl.tweet}">
     <div class="modal-content">
+
+      <div class="modal-header tweet-modal__in-reply-to">
+        <tweet tweet="$ctrl.tweet" class="tweet--in-reply-to" ng-click="$ctrl.onReplyToSelect($ctrl.tweet)"></tweet>
+      </div><!-- /.modal-header -->
 
       <div class="modal-header tweet-modal__header">
         <tweet tweet="$ctrl.tweet" class="tweet--details"></tweet>
@@ -12,10 +16,16 @@
 
       <div class="modal-footer tweet-modal__footer" ng-if="$ctrl.tweetReplies.length">
         <div class="tweet-modal__replies tweet-replies">
-          <tweet ng-repeat="tweet in $ctrl.tweetReplies track by tweet.id_str" tweet="tweet"></tweet>
+          <tweet ng-repeat="tweet in $ctrl.tweetReplies track by tweet.id_str" ng-click="$ctrl.onReplySelect(tweet)" tweet="tweet"></tweet>
         </div><!-- /.tweet-replies -->
       </div>
 
+    </div><!-- /.modal-content -->
+
+    <div class="modal-content tweet-modal__content--loading">
+      <div class="modal-body">
+        Loading tweet...
+      </div><!-- /.modal-body -->
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

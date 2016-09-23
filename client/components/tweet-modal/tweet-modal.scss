@@ -8,6 +8,37 @@
   }
 }
 
+.tweet-modal__dialog {
+  &.is-loading {
+    .modal-content {
+      display: none;
+
+      &.tweet-modal__content--loading {
+        display: block;
+      }
+    }
+  }
+}
+
+.tweet-modal__content--loading {
+  display: none;
+
+  .modal-body {
+    color: #8899a6;
+    padding: 30px 40px;
+    text-align: center;
+  }
+}
+
+.tweet-modal__in-reply-to {
+  border-bottom: 0;
+  padding: 0;
+
+  .tweet {
+    padding: 9px 40px;
+  }
+}
+
 .tweet-modal__header {
   border-bottom: none;
   padding: 30px 40px;
