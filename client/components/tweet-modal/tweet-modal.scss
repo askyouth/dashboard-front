@@ -1,0 +1,41 @@
+.tweet-modal {
+  .modal-dialog {
+    width: 640px;
+  }
+
+  .modal-content {
+    overflow: hidden;
+  }
+}
+
+.tweet-modal__header {
+  border-bottom: none;
+  padding: 30px 40px;
+}
+
+.tweet-modal__body {
+  background-color: #E8F3FD;
+  border-top: 1px solid #e5e5e5;
+  padding: 0 20px 0 24px;
+
+  .compose-content {
+    border-bottom: 0;
+  }
+}
+
+.tweet-modal__footer {
+  background-color: #F5F8FA;
+  padding: 0;
+  text-align: left;
+}
+
+.tweet-modal__replies {
+  // border-bottom: 1px solid #e1e8ed;
+  border-top: 1px solid #e1e8ed;
+  margin-top: 10px;
+  margin-bottom: 20px;
+
+  .tweet:last-child {
+    // border-bottom: none;
+  }
+}

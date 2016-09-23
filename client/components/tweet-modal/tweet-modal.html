@@ -1,0 +1,23 @@
+<div id="tweet-details__modal" class="modal fade tweet-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header tweet-modal__header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+        <tweet tweet="$ctrl.tweet" class="tweet--details"></tweet>
+      </div><!-- /.modal-header -->
+
+      <div class="modal-body tweet-modal__body">
+        <compose-content reply-to="$ctrl.tweet" on-create="$ctrl.onTweetReply($createdTweet)"></compose-content>
+      </div>
+
+      <div class="modal-footer tweet-modal__footer" ng-if="$ctrl.tweetReplies.length">
+        <div class="tweet-modal__replies tweet-replies">
+          <tweet ng-repeat="tweet in $ctrl.tweetReplies track by tweet.id_str" tweet="tweet"></tweet>
+        </div><!-- /.tweet-replies -->
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
