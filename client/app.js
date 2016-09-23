@@ -40,5 +40,13 @@ app.directive('contentInput', require('./components/shared/content-input.js'));
 // Services
 app.service('TweetService', require('./components/tweet/tweet-service.js'));
 
+// Filters
+app.filter('dateFilter', require('./components/shared/date-filter.js'));
+
 // Run application
-app.run(require('./roles.js'));
+app.run(require('./roles.js')).run(function ($rootScope) {
+  'ngInject';
+  $rootScope.$on('$stateChangeStart', function () {
+    angular.element('.modal-backdrop').remove();
+  });
+});
