@@ -1,0 +1,58 @@
+.add-handle-row {
+  margin-bottom: 10px;
+  margin-top: 30px;
+}
+
+.handles__handle {
+  min-height: 80px;
+  padding-left: 74px;
+  position: relative;
+
+  .handle {
+    padding-right: 100px;
+  }
+}
+
+.handle__topics {
+  margin-top: 9px;
+}
+
+.handle__topic {
+  border: 1px solid #ddd;
+  color: inherit;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 400;
+  margin-right: 10px;
+}
+
+.handle__topic__delete {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  margin-left: 10px;
+}
+
+.handle__type {
+  &--youth {
+    background-color: #5bc0de;
+    color: #fff;
+  }
+
+  &--policy {
+    background-color: #5cb85c;
+    color: #fff;
+  }
+}
+
+.handle__klout-score {
+  color: #E67C69;
+  position: absolute;
+  right: 15px;
+  text-align: right;
+  top: 10px;
+
+  &__score {
+    font-weight: 600;
+  }
+}

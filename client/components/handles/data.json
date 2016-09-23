@@ -1,0 +1,85 @@
+[
+  {
+    "id": "6253282",
+    "username": "dgrubelic",
+    "name": "Davor Grubelić",
+    "avatar": "https://pbs.twimg.com/profile_images/745553396015505408/E7b52fGn_normal.jpg",
+    "meta": {
+      "type": "youth"
+    },
+    "topics": [
+      { "id": 2, "title": "Economic crisis / Economy" },
+      { "id": 3, "title": "Immigration" },
+      { "id": 5, "title": "Environment" }
+    ]
+  },
+  {
+    "id": "6253282",
+    "username": "viborc",
+    "name": "Vibor Cipan",
+    "avatar": "https://pbs.twimg.com/profile_images/378800000692640528/c74e221eec719bc38d2a131765f8efaf_normal.jpeg",
+    "meta": {
+      "type": "policy"
+    },
+    "topics": [
+      { "id": 1, "title": "Sexual orientation and gender rights" },
+      { "id": 2, "title": "Economic crisis / Economy" },
+      { "id": 4, "title": "Terrorism" }
+    ]
+  },
+  {
+    "id": "6253282",
+    "username": "darkoche",
+    "name": "Darko Čengija",
+    "avatar": "https://pbs.twimg.com/profile_images/2245549123/UXPassion_AmbPortraitsCOL-6b_normal.png",
+    "meta": {
+      "type": "policy"
+    },
+    "topics": [
+      { "id": 1, "title": "Sexual orientation and gender rights" },
+      { "id": 2, "title": "Economic crisis / Economy" },
+      { "id": 4, "title": "Terrorism" }
+    ]
+  },
+
+  {
+    "id": "6253282",
+    "username": "djelich",
+    "name": "David Jelić",
+    "avatar": "https://pbs.twimg.com/profile_images/1247583358/profile_normal.jpg",
+    "meta": {
+      "type": "youth"
+    },
+    "topics": [
+      { "id": 2, "title": "Economic crisis / Economy" },
+      { "id": 3, "title": "Immigration" }
+    ]
+  },
+
+  {
+    "id": "6253282",
+    "username": "Hoophall",
+    "name": "Basketball HOF",
+    "avatar": "https://pbs.twimg.com/profile_images/2903581807/b77cac936eefb40c416985abcc04a687_normal.png",
+    "meta": {
+      "type": "policy"
+    },
+    "topics": [
+      { "id": 5, "title": "Environment" }
+    ]
+  },
+
+  {
+    "id": "6253282",
+    "username": "alleniverson",
+    "name": "Allen Iverson",
+    "avatar": "https://pbs.twimg.com/profile_images/762467096861081600/vUcqJGLT_normal.jpg",
+    "meta": {
+      "type": "youth"
+    },
+    "topics": [
+      { "id": 4, "title": "Terrorism" },
+      { "id": 5, "title": "Environment" }
+    ]
+  }
+]

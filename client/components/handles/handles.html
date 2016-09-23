@@ -2,7 +2,108 @@
 
   <!-- Content -->
   <div id="handles-page__content" class="col-md-12">
-    Content
+    <div class="container">
+
+      <div class="row filters-row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="search__handles">Search</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+              <input type="text" class="form-control" id="search__handles" placeholder="Search handles">
+            </div>
+          </div>
+        </div><!-- /.col-md-6 -->
+
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="filter__arrange-by">Arrange by</label>
+            <select id="filter__arrange-by" ng-model="$ctrl.filters.arrangeBy">
+              <option value="date">Date added</option>
+              <option value="klout_score">Klout score</option>
+              <option value="name">Name</option>
+            </select>
+          </div><!-- /.form-group -->
+        </div><!-- /.col-md-2 -->
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="filter__show-groups">Show groups</label>
+            <select id="filter__show-groups" ng-model="$ctrl.filters.showGroups">
+              <option value="both">Both groups</option>
+              <option value="youth">Youth</option>
+              <option value="policy">Policy makers</option>
+            </select>
+          </div><!-- /.form-group -->
+        </div><!-- /.col-md-2 -->
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="filter__topic">Topic filter</label>
+            <select id="filter__topic" ng-model="$ctrl.filters.topicFilter">
+              <option value="all">All</option>
+              <option value="1">Topic 1</option>
+              <option value="2">Topic 2</option>
+              <option value="3">Topic 3</option>
+            </select>
+          </div><!-- /.form-group -->
+        </div><!-- /.col-md-2 -->
+      </div><!-- /.row.filters-row -->
+
+      <div class="row add-handle-row">
+        <div class="col-md-6">
+          <div class="input-group">
+            <div class="input-group-btn">
+              <select ng-model="$ctrl.handleForm.type">
+                <option value="youth">Youth</option>
+                <option value="policy">Policy</option>
+              </select>
+            </div><!-- /.input-group-btn -->
+            <input type="text" class="form-control" ng-model="$ctrl.handleForm.handle" ng-keyup="$ctrl.createHandle($event)" placeholder="Add handle">
+            <div class="input-group-btn">
+              <button class="btn btn-danger" type="button" ng-disabled="!$ctrl.handleForm.handle">
+                <i class="glyphicon glyphicon-remove"></i></button>
+            </div><!-- /.input-group-btn -->
+          </div><!-- /.input-group -->
+        </div><!-- /.col-md-6 -->
+      </div><!-- /.row add-handle-row -->
+
+      <div class="row handles-list-row">
+        <div class="col-md-12">
+          <div class="list-group handles">
+            <div class="list-group-item handles__handle" ng-repeat="handle in $ctrl.handles track by $index">
+
+              <div class="handle">
+
+                <div class="handle__meta">
+                  <a ui-sref="handle({ id: handle.id })" class="tweet__user">
+                    <img ng-src="{{handle.avatar}}" alt="" class="tweet__avatar">
+                    <span class="tweet__user__name">{{handle.name}}</span>
+                    <span class="tweet__user__username">@{{handle.username}}</span>
+                  </a><!-- /.tweet__user -->
+
+                  <span class="handle__type handle__type--{{handle.meta.type}} badge">{{handle.meta.type | capitalize}}</span>
+                </div><!-- /.handle__meta -->
+
+                <div class="handle__topics">
+                  <span class="label handle__topic" ng-repeat="topic in handle.topics">
+                    {{topic.title}}
+                    <span class="handle__topic__delete"><i class="glyphicon glyphicon-remove"></i></span>
+                  </span>
+
+                  <a href="#" class="handle__add-topic">+ add topic</a>
+                </div><!-- /.handle__topics -->
+
+                <div class="handle__klout-score">
+                  Klout: <span class="handle__klout-score__score">50.00</span>
+                </div><!-- /.handle__klout-score -->
+
+              </div><!-- /.handle -->
+
+            </div><!-- /.list-group-item -->
+          </div><!-- /.list-group -->
+        </div><!-- /.col-md-12 -->
+      </div><!-- /.row handles-list-row -->
+
+    </div><!-- /.container -->
   </div><!-- /#handles-page__content.col-md-12 -->
 
 </div><!-- /#handles-page -->
