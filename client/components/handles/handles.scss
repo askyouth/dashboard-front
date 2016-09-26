@@ -13,8 +13,21 @@
   }
 }
 
+handle-list-item {
+  &.is-adding-topic {
+    .handle__add-topic-button {
+      display: none;
+    }
+
+    .handle__add-topic-menu-group {
+      display: inline-block !important;
+    }
+  }
+}
+
 .handle__topics {
   margin-top: 9px;
+  min-height: 30px;
 }
 
 .handle__topic {
@@ -23,7 +36,24 @@
   display: inline-block;
   font-size: 14px;
   font-weight: 400;
+  line-height: 20px;
   margin-right: 10px;
+}
+
+.handle__add-topic-button {
+  line-height: 28px;
+}
+
+.handle__add-topic-menu {
+  width: 160px !important;
+}
+
+.handle__add-topic-menu-group {
+  display: none !important;
+}
+
+.handle__add-topic-menu-close {
+  float: none !important;
 }
 
 .handle__topic__delete {

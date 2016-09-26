@@ -33,6 +33,7 @@ app.component('composeContent', require('./components/compose-content/compose-co
 app.component('timeline', require('./components/timeline/timeline.js'));
 app.component('tweet', require('./components/tweet/tweet.js'));
 app.component('tweetModal', require('./components/tweet-modal/tweet-modal.js'));
+app.component('handleListItem', require('./components/handles/handle-list-item.js'))
 
 // Directives
 app.directive('contenteditable', require('./components/shared/contenteditable.js'));

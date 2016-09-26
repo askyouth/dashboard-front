@@ -71,32 +71,7 @@
           <div class="list-group handles">
             <div class="list-group-item handles__handle" ng-repeat="handle in $ctrl.handles track by $index">
 
-              <div class="handle">
-
-                <div class="handle__meta">
-                  <a ui-sref="handle({ id: handle.id })" class="tweet__user">
-                    <img ng-src="{{handle.avatar}}" alt="" class="tweet__avatar">
-                    <span class="tweet__user__name">{{handle.name}}</span>
-                    <span class="tweet__user__username">@{{handle.username}}</span>
-                  </a><!-- /.tweet__user -->
-
-                  <span class="handle__type handle__type--{{handle.meta.type}} badge">{{handle.meta.type | capitalize}}</span>
-                </div><!-- /.handle__meta -->
-
-                <div class="handle__topics">
-                  <span class="label handle__topic" ng-repeat="topic in handle.topics">
-                    {{topic.title}}
-                    <span class="handle__topic__delete"><i class="glyphicon glyphicon-remove"></i></span>
-                  </span>
-
-                  <a href="#" class="handle__add-topic">+ add topic</a>
-                </div><!-- /.handle__topics -->
-
-                <div class="handle__klout-score">
-                  Klout: <span class="handle__klout-score__score">50.00</span>
-                </div><!-- /.handle__klout-score -->
-
-              </div><!-- /.handle -->
+              <handle-list-item handle="handle" topics="$ctrl.topics" on-delete="$ctrl.onHandleDelete(handle)"></handle-list-item>
 
             </div><!-- /.list-group-item -->
           </div><!-- /.list-group -->

@@ -1,3 +1,11 @@
 {
-  
+  "cssClasses": {
+    "IS_ADDING_TOPIC": "is-adding-topic"
+  },
+
+  "selectors": {
+    "ADD_TOPIC_BUTTON": ".handle__add-topic-button",
+    "ADD_TOPIC_CLOSE": ".handle__add-topic-menu-close",
+    "ADD_TOPIC_MENU": ".handle__add-topic-menu"
+  }
 }

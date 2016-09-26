@@ -17,7 +17,7 @@ class HandlesController {
 
     this.handleForm = {
       type: 'youth',
-      handle: '@'
+      handle: null
     };
   }
 
@@ -31,7 +31,7 @@ class HandlesController {
 
   createHandle($event) {
     if ($event.keyCode === 13) {
-      this.handleForm.handle = '@';
+      this.handleForm.handle = null;
     }
   }
 };
@@ -39,5 +39,8 @@ class HandlesController {
 
 module.exports = {
   templateUrl: 'views/handles/handles.html',
-  controller: HandlesController
+  controller: HandlesController,
+  bindings: {
+    topics: '='
+  }
 };
