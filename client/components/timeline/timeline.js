@@ -4,11 +4,11 @@
  * TweetsController
  */
 class TweetsController {
-  constructor($scope, $element, TweetService) {
+  constructor($scope, $element, TweetTimelineService) {
     'ngInject';
     this._element = $element[0];
     this._$element = $element;
-    this.TweetService = TweetService;
+    this.TweetService = new TweetTimelineService();
   }
 
   $onInit() {

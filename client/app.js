@@ -41,7 +41,10 @@ app.directive('contentInput', require('./components/shared/content-input.js'));
 app.directive('select', require('./components/shared/select.js'));
 
 // Services
+app.service('TweetTimelineService', require('./components/tweet/tweet-timeline-service.js'));
 app.service('TweetService', require('./components/tweet/tweet-service.js'));
+app.service('TopicService', require('./components/topic/topic.service.js'));
+app.factory('SocketConnection', require('./components/shared/socket-connection.js'));
 
 // Filters
 app.filter('dateFilter', require('./components/shared/date-filter.js'));

@@ -1,3 +1,11 @@
+const pipes = require('./pipes');
+
+/**
+ * Dummy tweets list
+ * @type {Array}
+ */
+var data = require('./data.json');
+
 module.exports = function TweetTimelineServiceFactory($q, $rootScope, $timeout) {
   'ngInject';
 
@@ -30,6 +38,17 @@ module.exports = function TweetTimelineServiceFactory($q, $rootScope, $timeout) 
           args = arguments;
       return $serviceScope.$emit.apply($serviceScope, arguments);
     };
+
+    /**
+     * @TODO: Remove after development
+     */
+
+    let simulateTwitterStream = () => {
+      $serviceScope.$broadcast('tweet:interaction', transformContent());
+      // $timeout(simulateTwitterStream, 15000);
+    }
+
+    $timeout(simulateTwitterStream, 500);
   }
 
 }

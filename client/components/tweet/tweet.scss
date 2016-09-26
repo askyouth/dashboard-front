@@ -2,6 +2,15 @@
   border: 1px solid #e1e8ed;
   border-radius: 5px;
 
+  .compose-content {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  .tweet {
+    border-radius: 5px;
+  }
+
   tweet:last-child {
     .tweet {
       border-bottom: none;
@@ -21,6 +30,7 @@
     background-color: #f5f8fa;
     border-bottom: 1px solid #e1e8ed;
     color: $accent-color;
+    cursor: pointer;
     display: block;
     padding: 10px 0;
     text-align: center;
@@ -184,6 +194,11 @@
   vertical-align: text-bottom;
 }
 
+.tweet__more-replies {
+  display: block;
+  margin: 10px 0 2px;
+}
+
 tweet {
   display: block;
 
@@ -205,6 +220,10 @@ tweet {
 
     .tweet__avatar {
       margin-top: 0;
+    }
+
+    .tweet__user {
+      float: left;
     }
 
     .tweet__user__name {

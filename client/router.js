@@ -17,8 +17,14 @@ module.exports = function ($stateProvider) {
 
   $stateProvider.state('handles', {
     url: '/handles',
-    template: '<handles-component></handles-component>',
+    template: '<handles-component topics="$resolve.topics"></handles-component>',
     data: { permissions: { only: ['user'], redirectTo: 'login' } },
+    resolve: {
+      topics: function (TopicService) {
+        'ngInject';
+        return TopicService.list(true);
+      }
+    },
     onEnter: function ($document) {
       'ngInject';
       $document[0].title = 'Handles • Ask Youth';
@@ -45,11 +51,51 @@ module.exports = function ($stateProvider) {
 
   $stateProvider.state('topics', {
     url: '/topics',
-    template: '<topics-component></topics-component>',
+    template: '<div></div>',
     data: { permissions: { only: ['user'], redirectTo: 'login' } },
+    onEnter: function ($state, TopicService) {
+      'ngInject';
+      TopicService.findFirst().then(function (topic) {
+        return $state.go('topic', { id: topic.id });
+      });
+    }
+  })
+
+  $stateProvider.state('manage_topics', {
+    url: '/topics/manage',
+    template: '<manage-topics-component topics="$resolve.topics"></manage-topics-component>',
+    data: { permissions: { only: ['user'], redirectTo: 'login' } },
+    resolve: {
+      topics: function (TopicService) {
+        'ngInject';
+        return TopicService.list(true);
+      }
+    },
     onEnter: function ($document) {
       'ngInject';
-      $document[0].title = 'Topics • Ask Youth';
+      $document[0].title = 'Manage topics • Ask Youth';
+    }
+  })
+
+  $stateProvider.state('topic', {
+    url: '/topic/:id',
+    template: '<topic-component topics="$resolve.topics" topic-cursors="$resolve.topicCursors"></topic-component>',
+    data: { permissions: { only: ['user'], redirectTo: 'login' } },
+    resolve: {
+      topics: function (TopicService) {
+        'ngInject';
+        return TopicService.list(true);
+      },
+      topicCursors: function ($stateParams, TopicService) {
+        'ngInject';
+        return TopicService.find($stateParams.id).then(function (topicModel) {
+          return TopicService.getCursors(topicModel);
+        });
+      }
+    },
+    onEnter: function ($document, topicCursors) {
+      'ngInject';
+      $document[0].title = topicCursors.currentTopic.id + ' • Ask Youth';
     }
   })
 

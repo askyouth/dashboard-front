@@ -27,7 +27,8 @@
     "angular-permission": "^4.0.5",
     "angular-sanitize": "^1.5.8",
     "tribute": "^2.0.5",
-    "bootstrap-select": "^1.11.2"
+    "bootstrap-select": "^1.11.2",
+    "angular-socket-io": "^0.7.0"
   },
   "overrides": {
     "bootstrap": {

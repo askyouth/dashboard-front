@@ -8,7 +8,6 @@ class ConversationsController {
   constructor($element) {
     'ngInject';
     this._$element = $element;
-    this.title = config.title;
   }
 
   $onInit() {

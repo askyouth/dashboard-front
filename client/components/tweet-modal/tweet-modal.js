@@ -5,14 +5,14 @@ const config = require('./config.json');
  * TweetModalController
  */
 class TweetModalController {
-  constructor($scope, $element, $timeout, TweetService) {
+  constructor($scope, $element, $timeout, TweetTimelineService) {
     'ngInject';
 
     this._$scope = $scope;
     this._$timeout = $timeout;
     this._$element = $element;
     this._element = $element[0];
-    this.TweetService = TweetService;
+    this.TweetService = new TweetTimelineService();
 
     this.tweetReplies = [];
     this.fetchTweetReplies();
