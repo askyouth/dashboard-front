@@ -1,0 +1,44 @@
+<div id="topics-page">
+
+  <div class="row topics-navigation">
+    <div class="col-md-4 topics-navigation__previous">
+      <a ui-sref="topic({ id: $ctrl.topicCursors.previousTopic.id })" class="btn btn-link">
+        <i class="glyphicon glyphicon-menu-left"></i>
+        <span>{{$ctrl.topicCursors.previousTopic.title}}</span>
+      </a>
+    </div><!-- /.col-md-3 -->
+    <div class="col-md-4">
+
+      <select class="topics-navigation__menu"
+        ng-model="$ctrl.selectedTopicId" ng-change="$ctrl.changeTopic()"
+        ng-options="topic.id as topic.title for topic in $ctrl.topics">
+      </select>
+
+      <a ui-sref="manage_topics" class="btn btn-link">Manage topics</a>
+
+    </div><!-- /.col-md-6 -->
+
+    <div class="col-md-4 topics-navigation__next">
+      <a ui-sref="topic({ id: $ctrl.topicCursors.nextTopic.id })" class="btn btn-link">
+        <span>{{$ctrl.topicCursors.nextTopic.title}}</span>
+        <i class="glyphicon glyphicon-menu-right"></i>
+      </a>
+    </div><!-- /.col-md-3 -->
+  </div><!-- /.row -->
+
+  <!-- Left sidebar -->
+  <div id="topics-page__left-sidebar" class="col-md-3">
+    Left sidebar
+  </div><!-- /#topics-page__left-sidebar.col-md-3 -->
+
+  <!-- Content -->
+  <div id="topics-page__content" class="col-md-6">
+    Content
+  </div><!-- /#topics-page__content.col-md-6 -->
+
+  <!-- Right sidebar -->
+  <div id="topics-page__right-sidebar" class="col-md-3">
+    Right sidebar
+  </div><!-- /#topics-page__right-sidebar.col-md-3 -->
+
+</div><!-- /#topics-page -->
