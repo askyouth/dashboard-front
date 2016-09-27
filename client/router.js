@@ -9,9 +9,9 @@ module.exports = function ($stateProvider) {
     url: '/',
     template: '<index-component></index-component>',
     data: { permissions: { only: ['user'], redirectTo: 'login' } },
-    onEnter: function ($document) {
+    onEnter: function (PageService) {
       'ngInject';
-      $document[0].title = 'Home • Ask Youth';
+      PageService.setTitle('Home');
     }
   })
 
@@ -25,9 +25,9 @@ module.exports = function ($stateProvider) {
         return TopicService.list(true);
       }
     },
-    onEnter: function ($document) {
+    onEnter: function (PageService) {
       'ngInject';
-      $document[0].title = 'Handles • Ask Youth';
+      PageService.setTitle('Handles');
     }
   })
 
@@ -43,9 +43,9 @@ module.exports = function ($stateProvider) {
         };
       }
     },
-    onEnter: function ($document, handleModel) {
+    onEnter: function (PageService, handleModel) {
       'ngInject';
-      $document[0].title = handleModel.id + ' • Ask Youth';
+      PageService.setTitle(handleModel.id);
     }
   })
 
@@ -71,9 +71,9 @@ module.exports = function ($stateProvider) {
         return TopicService.list(true);
       }
     },
-    onEnter: function ($document) {
+    onEnter: function (PageService) {
       'ngInject';
-      $document[0].title = 'Manage topics • Ask Youth';
+      PageService.setTitle('Manage topics');
     }
   })
 
@@ -93,9 +93,9 @@ module.exports = function ($stateProvider) {
         });
       }
     },
-    onEnter: function ($document, topicCursors) {
+    onEnter: function (PageService, topicCursors) {
       'ngInject';
-      $document[0].title = topicCursors.currentTopic.id + ' • Ask Youth';
+      PageService.setTitle(topicCursors.currentTopic.title);
     }
   })
 
@@ -103,9 +103,9 @@ module.exports = function ($stateProvider) {
     url: '/conversations',
     template: '<conversations-component></conversations-component>',
     data: { permissions: { only: ['user'], redirectTo: 'login' } },
-    onEnter: function ($document) {
+    onEnter: function (PageService) {
       'ngInject';
-      $document[0].title = 'Conversations • Ask Youth';
+      PageService.setTitle('Conversations');
     }
   })
 
@@ -113,9 +113,9 @@ module.exports = function ($stateProvider) {
     url: '/infographics',
     template: '<infographics-component></infographics-component>',
     data: { permissions: { only: ['user'], redirectTo: 'login' } },
-    onEnter: function ($document) {
+    onEnter: function (PageService) {
       'ngInject';
-      $document[0].title = 'Infographics • Ask Youth';
+      PageService.setTitle('Infographics');
     }
   })
 
@@ -127,9 +127,9 @@ module.exports = function ($stateProvider) {
      url: '/profile',
      template: '<profile-component></profile-component>',
      data: { permissions: { only: ['user'] } },
-     onEnter: function ($document) {
+     onEnter: function (PageService) {
        'ngInject';
-       $document[0].title = 'Profile • Ask Youth';
+       PageService.setTitle('Profile');
      }
    })
 
@@ -137,9 +137,9 @@ module.exports = function ($stateProvider) {
      url: '/login',
      template: '<login-component></login-component>',
      data: { permissions: { only: ['guest'], redirectTo: 'index' } },
-     onEnter: function ($document) {
+     onEnter: function (PageService) {
        'ngInject';
-       $document[0].title = 'Login • Ask Youth';
+       PageService.setTitle('Login');
      }
    })
 

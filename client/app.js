@@ -44,7 +44,9 @@ app.directive('select', require('./components/shared/select.js'));
 app.service('TweetTimelineService', require('./components/tweet/tweet-timeline-service.js'));
 app.service('TweetService', require('./components/tweet/tweet-service.js'));
 app.service('TopicService', require('./components/topic/topic.service.js'));
+app.service('PageService', require('./components/shared/page-service.js'));
 app.factory('SocketConnection', require('./components/shared/socket-connection.js'));
+
 
 // Filters
 app.filter('dateFilter', require('./components/shared/date-filter.js'));
