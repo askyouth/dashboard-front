@@ -7,10 +7,27 @@
   width: 250px !important;
 }
 
+.topics-navigation__previous,
+.topics-navigation__next {
+  a {
+    display: block;
+  }
+}
+
 .topics-navigation__previous {
-  text-align: left;
+  a { text-align: left; }
 }
 
 .topics-navigation__next {
-  text-align: right;
+  a { text-align: right; }
+}
+
+.topic-info__keyword {
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+.topic-stats__no-stats {
+  color: #8899a6;
+  text-align: center;
 }

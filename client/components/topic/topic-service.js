@@ -2,37 +2,30 @@
 var data = require('./data.json');
 
 class TopicService {
-  constructor($q, $http) {
+  constructor($q, ApiService) {
     'ngInject';
     this._$q = $q;
-    this._$http = $http;
-    this.topics = angular.copy(data);
+    this.ApiService = ApiService;
+    this.topics = null;
   }
 
   list(force) {
-    let deferred = this._$q.defer();
-    if (force) this.topics = angular.copy(data);
-
-    deferred.resolve(this.topics);
-    return deferred.promise;
+    if ((this.topics === null) || force) {
+      return this.ApiService.get('topics').then((response) => {
+        this.topics = response.data;
+        return this.topics;
+      });
+    } else {
+      let deferred = this._$q.defer();
+      deferred.resolve(this.topics);
+      return deferred.promise;
+    }
   }
 
   find(topicId) {
-    let deferred = this._$q.defer();
-    let topicObject;
-
-    angular.forEach(this.topics, (topic) => {
-      if (topic.id == topicId) {
-        topicObject = topic;
-      }
+    return this.ApiService.get(`topics/${topicId}`).then(function (response) {
+      return response.data;
     });
-
-    if (topicObject) {
-      deferred.resolve(topicObject);
-    } else {
-      deferred.reject(new Error('Topic not found'));
-    }
-    return deferred.promise;
   }
 
   findFirst() {
@@ -40,7 +33,7 @@ class TopicService {
       if (topics[0]) {
         return topics[0];
       } else {
-        throw new Error('No topics found');
+        return null;
       }
     });
   }
@@ -81,6 +74,10 @@ class TopicService {
         throw new Error('No topics found');
       }
     });
+  }
+
+  create(name) {
+    return this.ApiService.post('topics', { name });
   }
 }
 

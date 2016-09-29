@@ -2,16 +2,16 @@
 
   <div class="row topics-navigation">
     <div class="col-md-4 topics-navigation__previous">
-      <a ui-sref="topic({ id: $ctrl.topicCursors.previousTopic.id })" class="btn btn-link">
+      <a ui-sref="topic({ id: $ctrl.topicCursors.previousTopic.id })" class="btn btn-link" ng-if="$ctrl.topicCursors.previousTopic">
         <i class="glyphicon glyphicon-menu-left"></i>
-        <span>{{$ctrl.topicCursors.previousTopic.title}}</span>
+        <span>{{$ctrl.topicCursors.previousTopic.name}}</span>
       </a>
     </div><!-- /.col-md-3 -->
     <div class="col-md-4">
 
       <select class="topics-navigation__menu"
         ng-model="$ctrl.selectedTopicId" ng-change="$ctrl.changeTopic()"
-        ng-options="topic.id as topic.title for topic in $ctrl.topics">
+        ng-options="topic.id as topic.name for topic in $ctrl.topics">
       </select>
 
       <a ui-sref="manage_topics" class="btn btn-link">Manage topics</a>
@@ -19,26 +19,28 @@
     </div><!-- /.col-md-6 -->
 
     <div class="col-md-4 topics-navigation__next">
-      <a ui-sref="topic({ id: $ctrl.topicCursors.nextTopic.id })" class="btn btn-link">
-        <span>{{$ctrl.topicCursors.nextTopic.title}}</span>
+      <a ui-sref="topic({ id: $ctrl.topicCursors.nextTopic.id })" class="btn btn-link" ng-if="$ctrl.topicCursors.nextTopic">
+        <span>{{$ctrl.topicCursors.nextTopic.name}}</span>
         <i class="glyphicon glyphicon-menu-right"></i>
       </a>
     </div><!-- /.col-md-3 -->
   </div><!-- /.row -->
 
-  <!-- Left sidebar -->
-  <div id="topics-page__left-sidebar" class="col-md-3">
-    Left sidebar
-  </div><!-- /#topics-page__left-sidebar.col-md-3 -->
+  <div class="row">
+    <!-- Left sidebar -->
+    <div id="topics-page__left-sidebar" class="col-md-3">
+      <topic-info-module topic="$ctrl.topicCursors.currentTopic"></topic-info-module>
+    </div><!-- /#topics-page__left-sidebar.col-md-3 -->
 
-  <!-- Content -->
-  <div id="topics-page__content" class="col-md-6">
-    Content
-  </div><!-- /#topics-page__content.col-md-6 -->
+    <!-- Content -->
+    <div id="topics-page__content" class="col-md-6">
+      <timeline></timeline>
+    </div><!-- /#topics-page__content.col-md-6 -->
 
-  <!-- Right sidebar -->
-  <div id="topics-page__right-sidebar" class="col-md-3">
-    Right sidebar
-  </div><!-- /#topics-page__right-sidebar.col-md-3 -->
+    <!-- Right sidebar -->
+    <div id="topics-page__right-sidebar" class="col-md-3">
+      <topic-stats-module topic="$ctrl.topicCursors.currentTopic"></topic-stats-module>
+    </div><!-- /#topics-page__right-sidebar.col-md-3 -->
+  </div><!-- /.row -->
 
 </div><!-- /#topics-page -->
