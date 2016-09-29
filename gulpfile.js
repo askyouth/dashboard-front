@@ -8,6 +8,8 @@ var autoprefixer = require('gulp-autoprefixer');
 var uglifycss = require('gulp-uglifycss');
 var mainBowerFiles = require('gulp-main-bower-files');
 var concat = require('gulp-concat');
+var concatCss = require('gulp-concat-css');
+var stripCssComments = require('gulp-strip-css-comments');
 var uglify = require('gulp-uglify');
 var gulpFilter = require('gulp-filter');
 var plumber = require('gulp-plumber');
@@ -71,7 +73,7 @@ gulp.task('libraries.css', function () {
     .pipe(filterCSS)
     .pipe(concat('libs.css'))
     .pipe(uglifycss())
-    .pipe(gulp.dest('./public/styles/'))
+    .pipe(gulp.dest('./public/styles'))
 });
 
 gulp.task('styles', function () {
