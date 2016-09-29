@@ -17,9 +17,13 @@ module.exports = function ($stateProvider) {
 
   $stateProvider.state('handles', {
     url: '/handles',
-    template: '<handles-component topics="$resolve.topics"></handles-component>',
+    template: '<handles-component handles="$resolve.handles" topics="$resolve.topics"></handles-component>',
     data: { permissions: { only: ['user'], redirectTo: 'login' } },
     resolve: {
+      handles: function (HandleService) {
+        'ngInject'
+        return HandleService.list();
+      },
       topics: function (TopicService) {
         'ngInject';
         return TopicService.list(true);
@@ -56,7 +60,11 @@ module.exports = function ($stateProvider) {
     onEnter: function ($state, TopicService) {
       'ngInject';
       TopicService.findFirst().then(function (topic) {
-        return $state.go('topic', { id: topic.id });
+        if (topic) {
+          return $state.go('topic', { id: topic.id });
+        } else {
+          return $state.go('manage_topics');
+        }
       });
     }
   })
@@ -74,6 +82,22 @@ module.exports = function ($stateProvider) {
     onEnter: function (PageService) {
       'ngInject';
       PageService.setTitle('Manage topics');
+    }
+  })
+
+  $stateProvider.state('manage_topics.topic', {
+    url: '/:id',
+    template: '<manage-topic-component topic="$resolve.topicModel"></manage-topic-component>',
+    data: { permissions: { only: ['user'], redirectTo: 'login' } },
+    resolve: {
+      topicModel: function ($stateParams, TopicService) {
+        'ngInject';
+        return TopicService.find($stateParams.id);
+      }
+    },
+    onEnter: function (PageService, topicModel) {
+      'ngInject';
+      PageService.setTitle('Manage "' + topicModel.name + '" topic');
     }
   })
 
@@ -95,7 +119,7 @@ module.exports = function ($stateProvider) {
     },
     onEnter: function (PageService, topicCursors) {
       'ngInject';
-      PageService.setTitle(topicCursors.currentTopic.title);
+      PageService.setTitle(topicCursors.currentTopic.name);
     }
   })
 

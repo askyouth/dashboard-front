@@ -6,3 +6,4 @@ public/scripts/libs.js
 public/styles/app.css
 public/styles/libs.css
 config/local.json
+**/*.DS_Store

@@ -28,7 +28,10 @@
     "angular-sanitize": "^1.5.8",
     "tribute": "^2.0.5",
     "bootstrap-select": "^1.11.2",
-    "angular-socket-io": "^0.7.0"
+    "angular-socket-io": "^0.7.0",
+    "ng-tags-input": "^3.1.1",
+    "angular-toastr": "^2.1.1",
+    "angular-animate": "^1.5.8"
   },
   "overrides": {
     "bootstrap": {
@@ -36,6 +39,12 @@
         "./dist/css/bootstrap.min.css",
         "./dist/css/bootstrap-theme.min.css",
         "./dist/js/bootstrap.min.js"
+      ]
+    },
+    "angular-toastr": {
+      "main": [
+        "./dist/angular-toastr.tpls.js",
+        "./dist/angular-toastr.css"
       ]
     }
   }
