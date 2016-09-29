@@ -1,7 +1,11 @@
 {
   "app": {
+    "debug": true,
     "livereload": {
       "port": 35729
     }
+  },
+  "api": {
+    "domain": "https://ask-dashboard-api.uxpassion.co"
   }
 }

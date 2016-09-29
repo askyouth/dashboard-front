@@ -1,6 +1,13 @@
-module.exports = function ($urlRouterProvider, $locationProvider, $compileProvider) {
+'use strict';
+const config = require('../config');
+
+module.exports = function ($urlRouterProvider, $locationProvider, $compileProvider, toastrConfig) {
   'ngInject';
   $urlRouterProvider.otherwise('/');
   $locationProvider.html5Mode(true);
-  $compileProvider.debugInfoEnabled(false);
+  $compileProvider.debugInfoEnabled(config.get('app.debug'));
+
+  angular.extend(toastrConfig, {
+
+  });
 };
