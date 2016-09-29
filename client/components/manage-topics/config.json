@@ -1,3 +1,11 @@
 {
-  
+  "cssClasses": {
+    "IS_ADDING_TOPIC": "is-adding-topic"
+  },
+  "selectors": {
+    "ADD_TOPIC_BUTTON": ".topic-list__add-button",
+    "REMOVE_TOPIC_BUTTON": ".topic-list__remove-button",
+    "TOPICS_SIDEBAR": "#manage-topics-page__left-sidebar",
+    "TOPIC_INPUT": ".topic-list__input"
+  }
 }

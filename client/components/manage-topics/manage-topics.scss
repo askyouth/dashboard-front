@@ -1,0 +1,22 @@
+.manage-topics-page {
+  padding-bottom: 32px;
+  padding-top: 16px;
+
+  .topic-list__add-button {
+    display: inline-block;
+  }
+
+  .topic-list__add-input {
+    display: none;
+  }
+
+  .is-adding-topic {
+    .topic-list__add-button {
+      display: none;
+    }
+
+    .topic-list__add-input {
+      display: table;
+    }
+  }
+}
