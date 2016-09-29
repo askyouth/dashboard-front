@@ -35,7 +35,7 @@ module.exports = function BootstrapSelect($document, $timeout) {
     }, refresh, true);
 
     if (attrs.ngOptions && / in /.test(attrs.ngOptions)) {
-      scope.$watch(attrs.ngOptions.replace('::', '').split(' in ')[1].split(' ')[0], refresh, true);
+      scope.$watch('$parent.' + attrs.ngOptions.replace('::', '').split(' in ')[1].split(' ')[0], refresh, true);
     }
 
     if (attrs.ngDisabled) {
