@@ -5,12 +5,16 @@ const config = require('./config.json');
  * IndexController
  */
 class HandlesController {
-  constructor($element) {
+  constructor($element, HandleService, Notifications) {
     'ngInject';
     this._$element = $element;
+    this.HandleService = HandleService;
+    this.Notifications = Notifications;
+
+    this.handles = this.handles || [];
 
     this.filters = {
-      arrangeBy: 'date',
+      arrangeBy: 'asc',
       showGroups: 'both',
       topicFilter: 'all'
     };
@@ -22,7 +26,7 @@ class HandlesController {
   }
 
   $onInit() {
-    this.handles = require('./data.json');
+
   }
 
   $onDestroy() {
@@ -31,8 +35,23 @@ class HandlesController {
 
   createHandle($event) {
     if ($event.keyCode === 13) {
-      this.handleForm.handle = null;
+      this.HandleService.create(this.handleForm.handle).then((handle) => {
+        this.handleForm.handle = null;
+        this.handles.push(handle);
+      }).catch(() => {
+        this.Notifications.error('Handle create failed');
+      });
     }
+  }
+
+  onHandleRemove(handle) {
+    if (!handle) return;
+
+    angular.forEach(this.handles, (existingHandle, index) => {
+      if (existingHandle.id === handle.id) {
+        this.handles.splice(index, 1);
+      }
+    });
   }
 };
 
@@ -41,6 +60,7 @@ module.exports = {
   templateUrl: 'views/handles/handles.html',
   controller: HandlesController,
   bindings: {
+    handles: '=',
     topics: '='
   }
 };

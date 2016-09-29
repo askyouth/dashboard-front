@@ -5,12 +5,16 @@ const config = require('./config.json');
  * IndexController
  */
 class HandleListItemController {
-  constructor($element) {
+  constructor($element, HandleService, Notifications) {
     'ngInject';
     this._element = $element[0];
     this._$element = $element;
+    this.HandleService = HandleService;
+    this.Notifications = Notifications;
 
     this.selectedTopic = null;
+    this.availableTopics = [];
+    this.checkAvailableTopics();
 
     this.onAddTopicButtonClickBind = this.onAddTopicButtonClick.bind(this);
     this.onAddTopicCloseButtonClickBind = this.onAddTopicCloseButtonClick.bind(this);
@@ -33,7 +37,13 @@ class HandleListItemController {
   }
 
   deleteHandle() {
-    this.onDelete($ctrl.handle);
+    this._$element.addClass(config.cssClasses.IS_REMOVING_HANDLE);
+    this._$element.find(config.selectors.REMOVE_HANDLE_BUTTON).attr('disabled', true);
+
+    this.HandleService.remove(this.handle).then(() => {
+      this.Notifications.success('Handle removed');
+      this.onDelete(this.handle);
+    });
   }
 
   addTopic() {
@@ -57,19 +67,52 @@ class HandleListItemController {
       });
 
       if (!topicExists) {
-        this.handle.topics.push(topic);
-        this.selectedTopicId = null;
-        this._$element.removeClass(config.cssClasses.IS_ADDING_TOPIC);
+        this.HandleService.assignTopic(this.handle.id, topic.id).then((response) => {
+          this.Notifications.success('Topic added');
+          this.handle.topics.push(response.data);
+
+          this.selectedTopicId = null;
+          this._$element.removeClass(config.cssClasses.IS_ADDING_TOPIC);
+          this.checkAvailableTopics();
+        }).catch(() => {
+          this.Notifications.error('Topic not added');
+        });
       }
     }
   }
 
   deleteTopic(topic) {
-    angular.forEach(this.handle.topics, (existingTopic, index) => {
-      if (existingTopic.id === topic.id) {
-        this.handle.topics.splice(index, 1);
-      }
+    this.HandleService.removeTopic(this.handle.id, topic.id).then((response) => {
+      this.Notifications.success('Topic removed');
+
+      angular.forEach(this.handle.topics, (existingTopic, index) => {
+        if (existingTopic && existingTopic.id === topic.id) {
+          this.handle.topics.splice(index, 1);
+        }
+      })
+
+      this.checkAvailableTopics();
+    }).catch(() => {
+      this.Notifications.error('Topic not removed');
     })
+  }
+
+  checkAvailableTopics() {
+    this.availableTopics.length = 0;
+
+    angular.forEach(this.topics, (topic) => {
+      let topicExists = false;
+
+      angular.forEach(this.handle.topics, (handleTopic) => {
+        if (handleTopic.id === topic.id) {
+          topicExists = true;
+        }
+      })
+
+      if (!topicExists) {
+        this.availableTopics.push(angular.copy(topic));
+      }
+    });
   }
 
   onAddTopicButtonClick() {

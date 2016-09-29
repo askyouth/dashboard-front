@@ -1,11 +1,13 @@
 {
   "cssClasses": {
-    "IS_ADDING_TOPIC": "is-adding-topic"
+    "IS_ADDING_TOPIC": "is-adding-topic",
+    "IS_REMOVING_HANDLE": "is-removing-handle"
   },
 
   "selectors": {
     "ADD_TOPIC_BUTTON": ".handle__add-topic-button",
     "ADD_TOPIC_CLOSE": ".handle__add-topic-menu-close",
-    "ADD_TOPIC_MENU": ".handle__add-topic-menu"
+    "ADD_TOPIC_MENU": ".handle__add-topic-menu",
+    "REMOVE_HANDLE_BUTTON": ".handle__remove-button"
   }
 }

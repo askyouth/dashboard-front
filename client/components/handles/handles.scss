@@ -11,6 +11,12 @@
   .handle {
     padding-right: 100px;
   }
+
+  &:hover {
+    .handle__remove {
+      display: inline-block;
+    }
+  }
 }
 
 handle-list-item {
@@ -21,6 +27,12 @@ handle-list-item {
 
     .handle__add-topic-menu-group {
       display: inline-block !important;
+    }
+  }
+
+  &.is-removing-handle {
+    .handle__remove {
+      display: inline-block;
     }
   }
 }
@@ -85,4 +97,11 @@ handle-list-item {
   &__score {
     font-weight: 600;
   }
+}
+
+.handle__remove {
+  bottom: 10px;
+  display: none;
+  position: absolute;
+  right: 15px;
 }

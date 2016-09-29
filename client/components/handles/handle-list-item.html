@@ -1,7 +1,7 @@
 <div class="handle">
   <div class="handle__meta">
     <a ui-sref="handle({ id: $ctrl.handle.id })" class="tweet__user">
-      <img ng-src="{{$ctrl.handle.avatar}}" alt="" class="tweet__avatar">
+      <img ng-src="{{$ctrl.handle.profile.image}}" alt="" class="tweet__avatar">
       <span class="tweet__user__name">{{$ctrl.handle.name}}</span>
       <span class="tweet__user__username">@{{$ctrl.handle.username}}</span>
     </a><!-- /.tweet__user -->
@@ -11,12 +11,12 @@
 
   <div class="handle__topics">
     <span class="label handle__topic" ng-repeat="topic in $ctrl.handle.topics">
-      {{topic.title}}
+      {{topic.name}}
       <span class="handle__topic__delete" ng-click="$ctrl.deleteTopic(topic)"><i class="glyphicon glyphicon-remove"></i></span>
     </span>
 
     <div class="btn-group handle__add-topic-menu-group">
-      <select class="handle__add-topic-menu" ng-model="$ctrl.selectedTopicId" ng-change="$ctrl.addTopic()" data-live-search="true" data-style="btn-default btn-sm" ng-options="topic.id as topic.title for topic in $ctrl.topics">
+      <select class="handle__add-topic-menu" ng-model="$ctrl.selectedTopicId" ng-change="$ctrl.addTopic()" data-live-search="true" data-style="btn-default btn-sm" ng-options="topic.id as topic.name for topic in $ctrl.availableTopics">
       </select>
       <button class="btn btn-default btn-sm handle__add-topic-menu-close" type="button"><i class="glyphicon glyphicon-remove"></i></button>
     </div><!-- /.handle__add-topic-menu -->
@@ -27,5 +27,9 @@
   <div class="handle__klout-score">
     Klout: <span class="handle__klout-score__score">50.00</span>
   </div><!-- /.handle__klout-score -->
+
+  <div class="handle__remove">
+    <button class="btn btn-danger handle__remove-button" ng-click="$ctrl.deleteHandle()"><i class="glyphicon glyphicon-trash"></i></button>
+  </div><!-- /.handle__remove -->
 
 </div><!-- /.handle -->
