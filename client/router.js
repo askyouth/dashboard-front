@@ -134,12 +134,21 @@ module.exports = function ($stateProvider) {
   })
 
   $stateProvider.state('infographics', {
-    url: '/infographics',
+    url: '/infographics/:start_date/:end_date',
+    // params: { start_date: null, end_date: null },
     template: '<infographics-component></infographics-component>',
     data: { permissions: { only: ['user'], redirectTo: 'login' } },
-    onEnter: function (PageService) {
+    onEnter: function ($state, $stateParams, $filter, PageService) {
       'ngInject';
-      PageService.setTitle('Infographics');
+
+      if (!$stateParams.start_date && !$stateParams.end_date) {
+        $state.go('infographics', {
+          start_date: '2016-10-01',
+          end_date: '2016-10-31'
+        }, { reload: true, location: true });
+      } else {
+        PageService.setTitle($filter('dateFilter')($stateParams.start_date, 'MMMM') + ' infographics');
+      }
     }
   })
 

@@ -39,6 +39,7 @@ app.component('tweetModal', require('./components/tweet-modal/tweet-modal.js'));
 app.component('handleListItem', require('./components/handles/handle-list-item.js'))
 app.component('topicInfoModule', require('./components/topic/components/topic-info-module.js'));
 app.component('topicStatsModule', require('./components/topic/components/topic-stats-module.js'));
+app.component('infographicsWall', require('./components/infographics/infographics-wall.js'));
 
 // Directives
 app.directive('contenteditable', require('./components/shared/contenteditable.js'));

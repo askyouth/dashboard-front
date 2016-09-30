@@ -2,12 +2,17 @@
 
   <!-- Left sidebar -->
   <div id="infographics-page__left-sidebar" class="col-md-3">
-    Left sidebar
+    <div class="list-group">
+      <div class="heading list-group-item disabled">Infographics</div><!-- /.heading list-group-item disabled -->
+      <a ui-sref="infographics({ start_date: month.start_date, end_date: month.end_date })" ui-sref-active="active" class="list-group-item" ng-repeat="month in $ctrl.months">
+        {{month.start_date | dateFilter:'MMMM'}}
+      </a><!-- /.list-group-item -->
+    </div><!-- /.list-group -->
   </div><!-- /#infographics-page__left-sidebar.col-md-3 -->
 
   <!-- Content -->
   <div id="infographics-page__content" class="col-md-9">
-    Content
+    <infographics-wall images="$ctrl.images"></infographics-wall>
   </div><!-- /#infographics-page__content.col-md-9 -->
 
 </div><!-- /#infographics-page -->

@@ -30,7 +30,8 @@
     "bootstrap-select": "^1.11.2",
     "angular-socket-io": "^0.7.0",
     "ng-tags-input": "^3.1.1",
-    "angular-animate": "^1.5.8"
+    "angular-animate": "^1.5.8",
+    "masonry": "^4.1.1"
   },
   "overrides": {
     "bootstrap": {
@@ -44,6 +45,12 @@
       "main": [
         "./dist/angular-toastr.tpls.js"
       ]
+    },
+    "masonry": {
+      "main": [
+        "./dist/masonry.pkgd.js"
+      ],
+      "dependencies": {}
     }
   }
 }
