@@ -38,6 +38,22 @@ class TopicService {
     });
   }
 
+  create(name) {
+    return this.ApiService.post('topics', { name });
+  }
+
+  update(topic) {
+    return this.ApiService.put(`topics/${topic.id}`, {
+      name: topic.name,
+      description: 'topic description',
+      keywords: topic.keywords
+    });
+  }
+
+  remove(topic) {
+    return this.ApiService.delete(`topics/${topic.id}`);
+  }
+
   getCursors(currentTopic) {
     let currentTopicIndex = -1;
     let previousTopicIndex;
@@ -74,10 +90,6 @@ class TopicService {
         throw new Error('No topics found');
       }
     });
-  }
-
-  create(name) {
-    return this.ApiService.post('topics', { name });
   }
 }
 

@@ -5,20 +5,39 @@ const config = require('./config.json');
  * IndexController
  */
 class ManageTopicController {
-  constructor($element) {
+  constructor($element, $state, TopicService, Notifications) {
     'ngInject';
+    this._$state = $state;
     this._$element = $element;
     this.topicKeywords = [];
-
-    this.keywordsToTags();
+    this.TopicService = TopicService;
+    this.Notifications = Notifications;
   }
 
   $onInit() {
-
+    this.keywordsToTags();
   }
 
   $onDestroy() {
 
+  }
+
+  updateTopic() {
+    this.tagsToKeywords();
+    this.TopicService.update(this.topic).then((response) => {
+      this.Notifications.success('Topic updated');
+    }).catch(() => {
+      this.Notifications.error('Topic update failed');
+    });
+  }
+
+  deleteTopic() {
+    this.TopicService.remove(this.topic).then((response) => {
+      this.Notifications.success('Topic deleted');
+      this._$state.go('manage_topics', null, { reload: true });
+    }).catch(() => {
+      this.Notifications.error('Topic delete failed');
+    });
   }
 
   keywordsToTags() {
@@ -38,7 +57,7 @@ class ManageTopicController {
     this.topic.keywords.length = 0;
 
     angular.forEach(this.topicKeywords, (tag) => {
-      this.topicKeywords.push(tag.text);
+      this.topic.keywords.push(tag.text);
     });
   }
 };

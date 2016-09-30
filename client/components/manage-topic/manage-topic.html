@@ -4,13 +4,24 @@
 
     <!-- Content -->
     <div id="manage-topics-page__content" class="col-md-8">
-      <tags-input ng-model="$ctrl.topicKeywords"></tags-input>
+      <div class="form-group input-group input-group-lg">
+        <input type="text" class="form-control" placeholder="Enter topic name" ng-model="$ctrl.topic.name">
+        <div class="input-group-btn">
+          <button class="btn btn-default btn-danger" ng-click="$ctrl.deleteTopic()"><i class="glyphicon glyphicon-trash"></i></button>
+        </div><!-- /.input-group-btn -->
+      </div><!-- /.form-group -->
+
+      <div class="form-group">
+        <label for="topic__keywords">Relevant keywords</label>
+        <tags-input id="topic__keywords" ng-model="$ctrl.topicKeywords"></tags-input>
+      </div><!-- /.form-group -->
+
     </div><!-- /#manage-topics-page__content.col-md-9 -->
 
     <!-- Right sidebar -->
     <div id="manage-topics-page__right-sidebar" class="col-md-4">
 
-      <button class="btn btn-primary">Save changes</button>
+      <button class="btn btn-primary" ng-click="$ctrl.updateTopic()">Save changes</button>
       <a ui-sref="topics" class="btn btn-link">Discard changes</a>
 
     </div><!-- /#manage-topics-page__right-sidebar.col-md-3 -->
