@@ -17,7 +17,7 @@ class ApiService {
   }
 
   put(url, data, config) {
-    return this._$http.post(this._getUrlPath(url), data, config);
+    return this._$http.put(this._getUrlPath(url), data, config);
   }
 
   delete(url, config) {
