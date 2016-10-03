@@ -11,6 +11,6 @@ module.exports = function ($urlRouterProvider, $locationProvider, $compileProvid
   delete $httpProvider.defaults.headers.common["X-Requested-With"];
 
   angular.extend(toastrConfig, {
-
+    
   });
 };

@@ -8,11 +8,18 @@ class InfographicsController {
   constructor($element) {
     'ngInject';
     this._$element = $element;
-    this.title = config.title;
-  }
 
-  $onInit() {
+
+    /**
+     * List of available months
+     * @type {Array}
+     */
     this.months = require('./data.json');
+
+    /**
+     * List of testing infographics images
+     * @type {Array}
+     */
     this.images = [
       "https://image.freepik.com/free-vector/business-steps-infographic_23-2147509150.jpg",
       "https://image.freepik.com/free-vector/infographic-elements-pack_23-2147507384.jpg",
@@ -26,6 +33,10 @@ class InfographicsController {
       "http://www.cdc.gov/diabetes/pubs/images/diabetes-infographic.jpg",
       "https://s-media-cache-ak0.pinimg.com/originals/bc/20/ab/bc20ab8f2779b00a720f30240fff67f3.jpg"
     ];
+  }
+
+  $onInit() {
+
   }
 
   $onDestroy() {

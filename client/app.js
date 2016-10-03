@@ -10,7 +10,8 @@ const app = angular.module('ask-youth', [
   'ui.router',
   'permission', 'permission.ui',
   'ngTagsInput',
-  'toastr'
+  'toastr',
+  'wu.masonry'
 ]);
 
 // Configuration and router

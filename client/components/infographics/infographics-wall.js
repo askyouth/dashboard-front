@@ -49,16 +49,6 @@ class InfographicsWallController {
     $toggleInfoButton.off('click', this.onInfoToggleBind);
   }
 
-  $postLink() {
-    this._$timeout(() => {
-      $(this._element).find(config.selectors.WALL).masonry({
-        itemSelector: '.infographics__item',
-        isAnimated: true,
-        columnWidth: 290
-      });
-    });
-  }
-
   selectInfographic(image) {
     this.selectedInfographic = image;
     this._$element.find(config.selectors.INFOGRAPHICS_MODAL).modal('show');
@@ -101,8 +91,8 @@ class InfographicsWallController {
 
 module.exports = {
   template: `
-    <div class="infographics__wall">
-      <div class="infographics__item" ng-repeat="image in $ctrl.images" ng-click="$ctrl.selectInfographic(image)">
+    <div class="infographics__wall" masonry column-width="290">
+      <div class="infographics__item masonry-brick" ng-repeat="image in $ctrl.images" ng-click="$ctrl.selectInfographic(image)">
         <img class="infographics__image" ng-src="{{image}}">
       </div>
     </div>
