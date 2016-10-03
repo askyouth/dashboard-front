@@ -5,10 +5,12 @@ const config = require('./config.json');
  * IndexController
  */
 class InfographicsController {
-  constructor($element) {
+  constructor($element, ApiService, Upload, Notifications) {
     'ngInject';
     this._$element = $element;
-
+    this.Notifications = Notifications;
+    this.ApiService = ApiService;
+    this.Upload = Upload;
 
     /**
      * List of available months
@@ -41,6 +43,21 @@ class InfographicsController {
 
   $onDestroy() {
 
+  }
+
+  uploadInfographics(file) {
+    return this.Upload.upload({
+      url: this.ApiService.$url('/files'),
+      method: 'POST',
+      data: {
+        file: file
+      }
+    }).then((response) => {
+      console.log(response);
+      this.Notifications.success('Image uploaded');
+    }).catch(() => {
+      this.Notifications.error('Image upload failed');
+    });
   }
 };
 

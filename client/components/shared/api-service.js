@@ -8,6 +8,10 @@ class ApiService {
     this._$http = $http;
   }
 
+  $url(url) {
+    return this._getUrlPath(url);
+  }
+
   get(url, config) {
     return this._$http.get(this._getUrlPath(url), config);
   }

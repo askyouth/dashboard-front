@@ -11,7 +11,8 @@ const app = angular.module('ask-youth', [
   'permission', 'permission.ui',
   'ngTagsInput',
   'toastr',
-  'wu.masonry'
+  'wu.masonry',
+  'ngFileUpload'
 ]);
 
 // Configuration and router

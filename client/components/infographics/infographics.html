@@ -12,6 +12,15 @@
 
   <!-- Content -->
   <div id="infographics-page__content" class="col-md-9">
+    <h1 class="page__title">
+      Infographics
+
+      <label class="upload pull-right" ngf-select="$ctrl.uploadInfographics($file)">
+        <span class="btn btn-default upload__label">Upload new infographics</span>
+        <input type="file" class="upload__input" name="upload_infographics">
+      </label>
+    </h1>
+
     <infographics-wall images="$ctrl.images"></infographics-wall>
   </div><!-- /#infographics-page__content.col-md-9 -->
 
