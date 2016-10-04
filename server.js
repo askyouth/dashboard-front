@@ -16,7 +16,11 @@ if (config.get('app.debug')) {
 }
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(expressSpa('index.html', { root: path.join(__dirname, 'public') }))
+app.use(expressSpa('index.html', {
+  root: path.join(__dirname, 'public'),
+  dotfiles: "allow",
+  fallthrough: false
+}))
 app.use(function (err, req, res, next) {
   console.error(err);
   next(err);
