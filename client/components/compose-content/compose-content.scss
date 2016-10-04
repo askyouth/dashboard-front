@@ -98,6 +98,8 @@ compose-content {
   outline: none;
   padding: 8px 10px;
   position: relative;
+  resize: none;
+  width: 100%;
 
   &:focus {
     border: 1px solid #a3d4f2;
