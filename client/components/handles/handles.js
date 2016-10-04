@@ -14,7 +14,7 @@ class HandlesController {
     this.handles = this.handles || [];
 
     this.filters = {
-      arrangeBy: 'asc',
+      arrangeBy: 'created_at-desc',
       showGroups: 'both',
       topicFilter: 'all'
     };
@@ -42,6 +42,25 @@ class HandlesController {
         this.Notifications.error('Handle create failed');
       });
     }
+  }
+
+  filterHandles() {
+    let [sort, sortOrder] = this.filters.arrangeBy.split('-');
+    let params = { sort, sortOrder, filter: {} };
+
+    if (this.filters.showGroups !== 'both') {
+      params.filter.camp = parseInt(this.filters.showGroups, 10);
+    }
+
+    if (this.filters.topicFilter !== 'all') {
+      params.filter.topic = parseInt(this.filters.topicFilter, 10);
+    }
+
+    return this.HandleService.list(params).then((handles) => {
+      this.handles = handles;
+    }).catch((err) => {
+      this.Notifications.error('Something bad happened');
+    });
   }
 
   onHandleRemove(handle) {

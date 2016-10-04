@@ -105,3 +105,19 @@ handle-list-item {
   position: absolute;
   right: 15px;
 }
+
+.handle-group {
+  border-radius: 2px;
+  display: inline-block;
+  padding: 5px;
+
+  &--policy {
+    background-color: $policy-color;
+    color: #fff;
+  }
+
+  &--youth {
+    background-color: $youth-color;
+    color: #fff;
+  }
+}

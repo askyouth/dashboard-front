@@ -18,31 +18,30 @@
         <div class="col-md-2">
           <div class="form-group">
             <label for="filter__arrange-by">Arrange by</label>
-            <select id="filter__arrange-by" ng-model="$ctrl.filters.arrangeBy">
-              <option value="newest">Newest first</option>
-              <option value="oldest">Oldest first</option>
-              <option value="date">Date added</option>
-              <option value="lowest_klout_score">Lowest Klout score</option>
-              <option value="highest_klout_score">Highest Klout score</option>
-              <option value="asc">A - Z</option>
-              <option value="desc">Z - A</option>
+            <select id="filter__arrange-by" ng-model="$ctrl.filters.arrangeBy" ng-change="$ctrl.filterHandles()">
+              <option value="created_at-desc">Newest first</option>
+              <option value="created_at-asc">Oldest first</option>
+              <option value="klout-asc">Lowest Klout score</option>
+              <option value="klout-desc">Highest Klout score</option>
+              <option value="name-asc">A - Z</option>
+              <option value="name-desc">Z - A</option>
             </select>
           </div><!-- /.form-group -->
         </div><!-- /.col-md-2 -->
         <div class="col-md-2">
           <div class="form-group">
             <label for="filter__show-groups">Show groups</label>
-            <select id="filter__show-groups" ng-model="$ctrl.filters.showGroups">
+            <select id="filter__show-groups" ng-model="$ctrl.filters.showGroups" ng-change="$ctrl.filterHandles()">
               <option value="both">Both groups</option>
-              <option value="youth">Youth</option>
-              <option value="policy">Policy makers</option>
+              <option value="1">Youth</option>
+              <option value="2">Policy makers</option>
             </select>
           </div><!-- /.form-group -->
         </div><!-- /.col-md-2 -->
         <div class="col-md-2">
           <div class="form-group">
             <label for="filter__topic">Topic filter</label>
-            <select id="filter__topic" ng-model="$ctrl.filters.topicFilter">
+            <select id="filter__topic" ng-model="$ctrl.filters.topicFilter" ng-change="$ctrl.filterHandles()">
               <option value="all">All</option>
               <option value="1">Topic 1</option>
               <option value="2">Topic 2</option>

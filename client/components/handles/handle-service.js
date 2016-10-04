@@ -7,8 +7,8 @@ class HandleService {
     this.ApiService = ApiService;
   }
 
-  list() {
-    return this.ApiService.get('handles', { params: { related: '["topics"]' } }).then(function (response) {
+  list(params) {
+    return this.ApiService.get('handles', { params }).then(function (response) {
       return response.data;
     });
   }
