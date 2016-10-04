@@ -41,6 +41,11 @@ app.component('tweetModal', require('./components/tweet-modal/tweet-modal.js'));
 app.component('handleListItem', require('./components/handles/handle-list-item.js'))
 app.component('topicInfoModule', require('./components/topic/components/topic-info-module.js'));
 app.component('topicStatsModule', require('./components/topic/components/topic-stats-module.js'));
+app.component('globalStatsModule', require('./components/index/components/global-stats-module.js'));
+app.component('userKloutStatsModule', require('./components/index/components/user-klout-stats-module.js'));
+app.component('conversationContributionsStatsModule', require('./components/index/components/conversation-contributions-stats-module.js'));
+app.component('keywordStatsModule', require('./components/index/components/keyword-stats-module.js'));
+app.component('mostTweetsStatsModule', require('./components/index/components/most-tweets-stats-module.js'));
 app.component('infographicsWall', require('./components/infographics/infographics-wall.js'));
 
 // Directives

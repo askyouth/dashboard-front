@@ -1,0 +1,102 @@
+.global-stats {
+  &__logo {
+    height: 60px;
+    width: 100%;
+  }
+
+  &__list {
+    padding-top: 30px;
+  }
+
+  &__item {
+    text-align: center;
+  }
+
+  &__stat-value {
+    color: $primary-color;
+    font-size: 28px;
+    font-weight: 600;
+  }
+
+  &__stat-title {
+    font-size: 12px;
+  }
+}
+
+.user-klout-stats {
+
+}
+
+.user-klout-stats__item,
+.conversation-contributions-stats__item,
+.most-tweets-stats__item {
+  clear: both;
+  margin-bottom: 10px;
+  min-height: 70px;
+  padding-left: 58px;
+
+  .tweet__user {
+    float: left;
+  }
+  .tweet__user__name,
+  .tweet__user__username {
+    display: block;
+  }
+}
+
+.user-klout-stats__group,
+.conversation-contributions-stats__group,
+.most-tweets-stats__group {
+  float: right;
+  margin-top: 4px;
+}
+
+.user-klout-stats__score,
+.conversation-contributions-stats__score,
+.most-tweets-stats__tweets-count {
+  clear: both;
+}
+
+.user-klout-stats__score-value,
+.conversation-contributions-stats__contributions,
+.most-tweets-stats__tweets-count {
+  float: left;
+  font-weight: 600;
+}
+
+.user-klout-stats__score-diff {
+  float: right;
+
+  &--positive {
+    color: $success-color;
+  }
+
+  &--negative {
+    color: $error-color;
+  }
+}
+
+.keyword-stats {
+  margin-bottom: 40px;
+}
+
+.keyword-stats__item {
+  clear: both;
+  margin-bottom: 20px;
+}
+
+.keyword-stats__title {
+  float: left;
+}
+
+.keyword-stats__tweet-count {
+  float: right;
+  font-weight: 600;
+}
+
+.keyword-stats__progress-bar {
+  background-color: $success-color;
+  border-radius: 2px;
+  clear: both;
+  height: 10px;
+}
