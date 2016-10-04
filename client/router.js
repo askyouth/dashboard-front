@@ -22,7 +22,7 @@ module.exports = function ($stateProvider) {
     resolve: {
       handles: function (HandleService) {
         'ngInject'
-        return HandleService.list();
+        return HandleService.list({ sort: 'created_at', sortOrder: 'desc', related: '["topics"]' });
       },
       topics: function (TopicService) {
         'ngInject';
