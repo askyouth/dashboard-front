@@ -43,9 +43,7 @@
             <label for="filter__topic">Topic filter</label>
             <select id="filter__topic" ng-model="$ctrl.filters.topicFilter" ng-change="$ctrl.filterHandles()">
               <option value="all">All</option>
-              <option value="1">Topic 1</option>
-              <option value="2">Topic 2</option>
-              <option value="3">Topic 3</option>
+              <option value="{{topic.id}}" ng-repeat="topic in $ctrl.topics">{{topic.name}}</option>
             </select>
           </div><!-- /.form-group -->
         </div><!-- /.col-md-2 -->

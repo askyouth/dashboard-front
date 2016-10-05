@@ -26,7 +26,7 @@ module.exports = function ($stateProvider) {
       },
       topics: function (TopicService) {
         'ngInject';
-        return TopicService.list(true);
+        return TopicService.list();
       }
     },
     onEnter: function (PageService) {
@@ -108,7 +108,7 @@ module.exports = function ($stateProvider) {
     resolve: {
       topics: function (TopicService) {
         'ngInject';
-        return TopicService.list(true);
+        return TopicService.list();
       },
       topicCursors: function ($stateParams, TopicService) {
         'ngInject';

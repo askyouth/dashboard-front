@@ -2,24 +2,26 @@
 
   <!-- Left sidebar -->
   <div id="manage-topics-page__left-sidebar" class="col-md-3">
-    <div class="list-group topics-list">
-      <div class="list-group-item disabled">
-        <strong class="list-group-item-heading">Topics</strong><!-- /.list-group-item-heading -->
-      </div><!-- /.list-group-item -->
-      <a ui-sref="manage_topics.topic({ id: topic.id })" ui-sref-active="active" class="list-group-item" ng-repeat="topic in $ctrl.topics">{{topic.name}}</a>
+    <div class="panel panel-default">
+      <div class="panel-heading">Topics</div><!-- /.panel-heading -->
 
-      <div class="list-group-item">
-        <a href="#" class="btn btn-link topic-list__add-button">Create new topic</a>
+      <div class="list-group topics-list">
+        <a ui-sref="manage_topics.topic({ id: topic.id })" ui-sref-active="active" class="list-group-item" ng-repeat="topic in $ctrl.topics">{{topic.name}}</a>
 
-        <div class="input-group topic-list__add-input">
-          <input type="text" class="form-control topic-list__input" ng-model="$ctrl.topicForm.title" ng-keyup="$ctrl.createTopic($event)" placeholder="Add topic">
+        <div class="list-group-item">
+          <a href="#" class="btn btn-link topic-list__add-button">Create new topic</a>
 
-          <span class="input-group-btn">
-            <button class="btn btn-default topic-list__remove-button"><i class="glyphicon glyphicon-remove"></i></button>
-          </span>
-        </div><!-- /.input-group -->
-      </div><!-- /.list-group-item -->
-    </div><!-- /.list-group -->
+          <div class="input-group topic-list__add-input">
+            <input type="text" class="form-control topic-list__input" ng-model="$ctrl.topicForm.title" ng-keyup="$ctrl.createTopic($event)" placeholder="Add topic">
+
+            <span class="input-group-btn">
+              <button class="btn btn-default topic-list__remove-button"><i class="glyphicon glyphicon-remove"></i></button>
+            </span>
+          </div><!-- /.input-group -->
+        </div><!-- /.list-group-item -->
+      </div><!-- /.list-group -->
+    </div><!-- /.panel panel-default -->
+
   </div><!-- /#manage-topics-page__left-sidebar.col-md-3 -->
 
   <!-- Content -->

@@ -23,7 +23,7 @@ class TopicStatsController {
 module.exports = {
   template: `
     <div class="module panel panel-default topic-stats">
-      <div class="module__title panel-heading">Topic stats</div>
+      <div class="panel-heading">Topic stats</div>
       <div class="module__content panel-body">
         <div class="topic-stats__no-stats">No stats found</div>
       </div>
