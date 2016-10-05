@@ -126,6 +126,25 @@ application {
   }
 }
 
+.btn-twitter {
+  background-color: #ffffff;
+  background-image: url(/images/twitter-logo.svg);
+  background-size: 16px 16px;
+  background-position: 10px center;
+  background-repeat: no-repeat;
+  padding-left: 20px;
+
+  &:focus, &:hover {
+    background-color: #e0e0e0;
+    background-image: url(/images/twitter-logo.svg);
+    background-position: 10px center;
+  }
+
+  &.btn-block {
+    padding: 6px 36px 6px 36px;
+  }
+}
+
 tags-input {
   .host {
     margin: 0;

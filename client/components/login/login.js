@@ -10,12 +10,12 @@ class LoginController {
     this._$element = $element;
   }
 
-  $onInit() {
-
+  auth() {
+    console.log('auth local');
   }
 
-  $onDestroy() {
-
+  authTwitter() {
+    console.log('auth twitter');
   }
 };
 
