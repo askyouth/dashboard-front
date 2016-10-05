@@ -1,18 +1,120 @@
 <div id="conversations-page">
 
-  <!-- Left sidebar -->
-  <div id="conversations-page__left-sidebar" class="col-md-3">
-    Left sidebar
-  </div><!-- /#conversations-page__left-sidebar.col-md-3 -->
+  <div class="row conversations-navigation">
+    <div class="col-md-6 conversations-navigation__previous">
+      <a ui-sref="topic({ id: $ctrl.topicCursors.previousTopic.id })" class="btn btn-link" ng-if="$ctrl.topicCursors.previousTopic">
+        <i class="glyphicon glyphicon-menu-left"></i>
+        <span>{{$ctrl.topicCursors.previousTopic.name}}</span>
+      </a>
+    </div><!-- /.col-md-6 -->
 
-  <!-- Content -->
-  <div id="conversations-page__content" class="col-md-6">
-    Content
-  </div><!-- /#conversations-page__content.col-md-6 -->
+    <div class="col-md-6 conversations-navigation__next">
+      <a ui-sref="topic({ id: $ctrl.topicCursors.nextTopic.id })" class="btn btn-link" ng-if="$ctrl.topicCursors.nextTopic">
+        <span>{{$ctrl.topicCursors.nextTopic.name}}</span>
+        <i class="glyphicon glyphicon-menu-right"></i>
+      </a>
+    </div><!-- /.col-md-6 -->
+  </div><!-- /.row.conversations-navigation -->
 
-  <!-- Right sidebar -->
-  <div id="conversations-page__right-sidebar" class="col-md-3">
-    Right sidebar
-  </div><!-- /#conversations-page__right-sidebar.col-md-3 -->
+  <div class="row conversations-filters">
+    <div class="col-md-3">
+      <div class="conversations-count">
+        <div class="conversations-count__value">771</div><!-- /.conversations-count__value -->
+        <div class="conversations-count__title">Brokered conversations</div><!-- /.conversations-count__title -->
+      </div><!-- /.conversations-count -->
+    </div><!-- /.col-md-3 -->
+
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="filters__topic">Topic filter</label>
+            <select id="filters__topic" name="filters__topic" placeholder="All topics"
+              data-none-selected-text="All topics" ng-model="$ctrl.filters.topicFilter">
+                <option value="all">All topics</option>
+                <option value="{{topic.id}}" ng-repeat="topic in $ctrl.topics">{{topic.name}}</option>
+              </select>
+          </div><!-- /.form-group -->
+        </div><!-- /.col-md-6 -->
+      </div><!-- /.row -->
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="filters__group">Show conversations</label>
+            <select id="filters__group" name="filters__group" placeholder="Started from either group" ng-model="$ctrl.filters.groupFilter">
+              <option value="both">Started from either group</option>
+              <option value="1">Started from youth</option>
+              <option value="2">Started from policy makers</option>
+            </select>
+          </div><!-- /.form-group -->
+        </div><!-- /.col-md-6 -->
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <div class="checkbox">
+              <label class="label--checkbox">
+                <input type="checkbox" ng-model="$ctrl.filters.bothGroupsInvolved" value="true">
+                <span>Both groups got involved</span>
+              </label>
+            </div><!-- /.checkbox -->
+          </div><!-- /.form-group -->
+        </div><!-- /.col-md-6 -->
+      </div><!-- /.row -->
+
+      <div class="row">
+        <div class="col-md-12 form-inline">
+          <div class="form-group">
+            <label>Show conversations with</label>
+
+            <div class="conversations-filter__content">
+              <select ng-model="$ctrl.filters.participantsNumberType" class="conversations-filter__participants-number-type">
+                <option value="at_least">At least</option>
+                <option value="at_most">At most</option>
+                <option value="exactly">Exactly</option>
+              </select>
+
+              <input type="number" ng-model="$ctrl.filters.participantsNumber" class="form-control conversations-filter__participants-number-type">
+              <span>&nbsp;participants, and &nbsp;</span>
+
+              <select ng-model="$ctrl.filters.tweetCountType" class="conversations-filter__tweet-count-type">
+                <option value="at_least">At least</option>
+                <option value="at_most">At most</option>
+                <option value="exactly">Exactly</option>
+              </select>
+              <input type="number" ng-model="$ctrl.filters.tweetCount" class="form-control conversations-filter__tweet-count-type">
+            </div>
+          </div><!-- /.form-group -->
+        </div><!-- /.col-md-12 -->
+      </div><!-- /.row -->
+
+      <div class="row conversations-filter__content-search">
+        <div class="col-md-12">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+            <input type="text" class="form-control" ng-model="$ctrl.filters.search" placeholder="Find conversations">
+          </div><!-- /.input-group -->
+        </div><!-- /.col-md-12 -->
+      </div>
+    </div><!-- /.col-md-6 -->
+
+  </div><!-- /.row.conversations-filters -->
+
+  <div class="row conversations-content">
+    <div class="col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">Conversations</div><!-- /.panel-heading -->
+        <div class="list-group">
+          <a class="list-group-item" href="#" ng-repeat="conversation in $ctrl.conversations">{{$ctrl.generateConversationTitle(conversation)}}</a><!-- /.list-group-item -->
+        </div><!-- /.list-group -->
+      </div><!-- /.panel -->
+    </div><!-- /.col-md-3 -->
+
+    <div class="col-md-6">
+      <timeline compose-content="false"></timeline>
+    </div><!-- /.col-md-6 -->
+
+    <div class="col-md-3"></div><!-- /.col-md-3 -->
+  </div><!-- /.row.conversations-content -->
 
 </div><!-- /#conversations-page -->

@@ -1,0 +1,27 @@
+.conversations-count {
+  text-align: center;
+
+  &__value {
+    color: $primary-color;
+    font-size: 72px;
+    font-weight: 600;
+  }
+
+  &__title {
+    font-size: 18px;
+  }
+}
+
+.conversations-filter__content {
+  margin-bottom: 20px;
+}
+
+.conversations-filter__content-search {
+  margin-bottom: 40px;
+}
+
+.conversations-filter__participants-number-type,
+.conversations-filter__tweet-count-type {
+  margin-right: 5px;
+  width: 100px !important;
+}

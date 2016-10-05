@@ -125,8 +125,14 @@ module.exports = function ($stateProvider) {
 
   $stateProvider.state('conversations', {
     url: '/conversations',
-    template: '<conversations-component></conversations-component>',
+    template: '<conversations-component topics="$resolve.topics"></conversations-component>',
     data: { permissions: { only: ['user'], redirectTo: 'login' } },
+    resolve: {
+      topics: function (TopicService) {
+        'ngInject';
+        return TopicService.list();
+      }
+    },
     onEnter: function (PageService) {
       'ngInject';
       PageService.setTitle('Conversations');
