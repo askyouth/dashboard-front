@@ -125,12 +125,50 @@ module.exports = function ($stateProvider) {
 
   $stateProvider.state('conversations', {
     url: '/conversations',
-    template: '<conversations-component topics="$resolve.topics"></conversations-component>',
+    templaate: '<div></div>',
+    data: { permissions: { only: ['user'], redirectTo: 'login' } },
+    onEnter: function ($state, TopicService) {
+      'ngInject';
+      TopicService.findFirst().then(function (topic) {
+        if (topic) {
+          return $state.go('topic_conversations', { topic_id: topic.id });
+        } else {
+          // return $state.go('manage_topics');
+        }
+      });
+    }
+  });
+
+  $stateProvider.state('topic_conversations', {
+    url: '/topic/:topic_id/conversations',
+    template: '<conversations-component topics="$resolve.topics" topic-cursors="$resolve.topicCursors"></conversations-component>',
     data: { permissions: { only: ['user'], redirectTo: 'login' } },
     resolve: {
       topics: function (TopicService) {
         'ngInject';
         return TopicService.list();
+      },
+      topicCursors: function ($stateParams, TopicService) {
+        'ngInject';
+        return TopicService.find($stateParams.topic_id).then(function (topicModel) {
+          return TopicService.getCursors(topicModel);
+        });
+      }
+    },
+    onEnter: function (PageService) {
+      'ngInject';
+      PageService.setTitle('Conversations');
+    }
+  })
+
+  $stateProvider.state('topic_conversations.topic_conversation', {
+    url: '/:id',
+    template: '<conversation-component topics="$resolve.conversation"></conversation-component>',
+    data: { permissions: { only: ['user'], redirectTo: 'login' } },
+    resolve: {
+      conversation: function () {
+        'ngInject';
+        return { id: 1, handles: [] };
       }
     },
     onEnter: function (PageService) {

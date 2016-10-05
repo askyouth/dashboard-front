@@ -5,8 +5,10 @@ const config = require('./config.json');
  * IndexController
  */
 class ConversationsController {
-  constructor($element) {
+  constructor($element, $state, $stateParams) {
     'ngInject';
+    this._$state = $state;
+    this._$stateParams = $stateParams;
     this._$element = $element;
 
     this.filters = {
@@ -17,14 +19,27 @@ class ConversationsController {
       tweetCountType: 'at_least',
       tweetCount: 2
     }
+
+    this.selectedTopicId = $stateParams.topic_id;
   }
 
   $onInit() {
     this.conversations = [
-      { handles: [ { username: 'dgrubelic' }, { username: 'djelich' } ] },
-      { handles: [ { username: 'viborc' }, { username: 'djelich' } ] },
-      { handles: [ { username: 'viborc' }, { username: 'darkoche' }, { username: 'djelich' }, { username: 'dgrubelic' } ] }
+      { id: 1, handles: [ { username: 'dgrubelic' }, { username: 'djelich' } ] },
+      { id: 2, handles: [ { username: 'viborc' }, { username: 'djelich' } ] },
+      { id: 3, handles: [ { username: 'viborc' }, { username: 'darkoche' }, { username: 'djelich' }, { username: 'dgrubelic' } ] }
     ];
+
+    let firstConversation = this.conversations[0];
+    this._$state.go('topic_conversations.topic_conversation', {
+      id: firstConversation.id
+    });
+  }
+
+  changeTopic() {
+    this._$state.go('topic_conversations', {
+      topic_id: this.selectedTopicId
+    }, { reload: true });
   }
 
   generateConversationTitle(conversation) {
@@ -51,6 +66,7 @@ module.exports = {
   templateUrl: 'views/conversations/conversations.html',
   controller: ConversationsController,
   bindings: {
-    topics: '='
+    topics: '=',
+    topicCursors: '='
   }
 };

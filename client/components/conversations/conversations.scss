@@ -41,3 +41,20 @@
     font-size: 72px;
   }
 }
+
+.conversations-navigation {
+  margin: 0 0 40px 0;
+}
+
+.conversations-navigation__previous a,
+.conversations-navigation__next a {
+  display: block;
+}
+
+.conversations-navigation__previous a {
+  text-align: left;
+}
+
+.conversations-navigation__next a {
+  text-align: right;
+}

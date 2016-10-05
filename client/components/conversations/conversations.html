@@ -1,19 +1,26 @@
 <div id="conversations-page">
 
   <div class="row conversations-navigation">
-    <div class="col-md-6 conversations-navigation__previous">
-      <a ui-sref="topic({ id: $ctrl.topicCursors.previousTopic.id })" class="btn btn-link" ng-if="$ctrl.topicCursors.previousTopic">
+    <div class="col-md-4 conversations-navigation__previous">
+      <a ui-sref="topic_conversations({ topic_id: $ctrl.topicCursors.previousTopic.id })" class="btn btn-link" ng-if="$ctrl.topicCursors.previousTopic">
         <i class="glyphicon glyphicon-menu-left"></i>
         <span>{{$ctrl.topicCursors.previousTopic.name}}</span>
       </a>
-    </div><!-- /.col-md-6 -->
+    </div><!-- /.col-md-4 -->
 
-    <div class="col-md-6 conversations-navigation__next">
-      <a ui-sref="topic({ id: $ctrl.topicCursors.nextTopic.id })" class="btn btn-link" ng-if="$ctrl.topicCursors.nextTopic">
+    <div class="col-md-4 conversations-navigation__current">
+      <select id="filters__topic" name="filters__topic" placeholder="All topics"
+        data-none-selected-text="All topics" ng-model="$ctrl.selectedTopicId" ng-change="$ctrl.changeTopic()">
+          <option value="{{topic.id}}" ng-repeat="topic in $ctrl.topics">{{topic.name}}</option>
+        </select>
+    </div><!-- /.conversations-navigation__current -->
+
+    <div class="col-md-4 conversations-navigation__next">
+      <a ui-sref="topic_conversations({ topic_id: $ctrl.topicCursors.nextTopic.id })" class="btn btn-link" ng-if="$ctrl.topicCursors.nextTopic">
         <span>{{$ctrl.topicCursors.nextTopic.name}}</span>
         <i class="glyphicon glyphicon-menu-right"></i>
       </a>
-    </div><!-- /.col-md-6 -->
+    </div><!-- /.col-md-4 -->
   </div><!-- /.row.conversations-navigation -->
 
   <div class="row conversations-filters">
@@ -25,19 +32,6 @@
     </div><!-- /.col-md-3 -->
 
     <div class="col-md-6">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="filters__topic">Topic filter</label>
-            <select id="filters__topic" name="filters__topic" placeholder="All topics"
-              data-none-selected-text="All topics" ng-model="$ctrl.filters.topicFilter">
-                <option value="all">All topics</option>
-                <option value="{{topic.id}}" ng-repeat="topic in $ctrl.topics">{{topic.name}}</option>
-              </select>
-          </div><!-- /.form-group -->
-        </div><!-- /.col-md-6 -->
-      </div><!-- /.row -->
-
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
@@ -105,23 +99,12 @@
       <div class="panel panel-default">
         <div class="panel-heading">Conversations</div><!-- /.panel-heading -->
         <div class="list-group">
-          <a class="list-group-item" href="#" ng-repeat="conversation in $ctrl.conversations">{{$ctrl.generateConversationTitle(conversation)}}</a><!-- /.list-group-item -->
+          <a class="list-group-item" ui-sref="topic_conversations.topic_conversation({ id: conversation.id })" ui-sref-active="active" ng-repeat="conversation in $ctrl.conversations">{{$ctrl.generateConversationTitle(conversation)}}</a><!-- /.list-group-item -->
         </div><!-- /.list-group -->
       </div><!-- /.panel -->
     </div><!-- /.col-md-3 -->
 
-    <div class="col-md-6">
-      <timeline compose-content="false"></timeline>
-    </div><!-- /.col-md-6 -->
-
-    <div class="col-md-3">
-      <div class="panel panel-default">
-        <div class="panel-heading">Conversation stats</div><!-- /.panel-heading -->
-        <div class="panel-body">
-          <conversation-stats-module></conversation-stats-module>
-        </div><!-- /.panel-body -->
-      </div><!-- /.panel panel-default -->
-    </div><!-- /.col-md-3 -->
+    <div class="col-md-9" ui-view></div><!-- /.col-md-9 -->
   </div><!-- /.row.conversations-content -->
 
 </div><!-- /#conversations-page -->
