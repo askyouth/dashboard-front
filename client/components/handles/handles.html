@@ -10,7 +10,7 @@
             <label for="search__handles">Search</label>
             <div class="input-group">
               <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
-              <input type="text" class="form-control" id="search__handles" placeholder="Search handles">
+              <input ng-model="$ctrl.filters.search" ng-keyup-enter="$ctrl.filterHandles()" type="text" class="form-control" id="search__handles" placeholder="Search handles (hit ENTER to submit)">
             </div>
           </div>
         </div><!-- /.col-md-6 -->
@@ -21,8 +21,8 @@
             <select id="filter__arrange-by" ng-model="$ctrl.filters.arrangeBy" ng-change="$ctrl.filterHandles()">
               <option value="created_at-desc">Newest first</option>
               <option value="created_at-asc">Oldest first</option>
-              <option value="klout-asc">Lowest Klout score</option>
-              <option value="klout-desc">Highest Klout score</option>
+              <option value="klout_score-asc">Lowest Klout score</option>
+              <option value="klout_score-desc">Highest Klout score</option>
               <option value="name-asc">A - Z</option>
               <option value="name-desc">Z - A</option>
             </select>

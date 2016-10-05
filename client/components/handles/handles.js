@@ -37,7 +37,7 @@ class HandlesController {
     if ($event.keyCode === 13) {
       this.HandleService.create(this.handleForm.handle).then((handle) => {
         this.handleForm.handle = null;
-        this.handles.splice(0, 0, handle);
+        this.handles.push(handle);
       }).catch(() => {
         this.Notifications.error('Handle create failed');
       });
@@ -48,6 +48,10 @@ class HandlesController {
     let [sort, sortOrder] = this.filters.arrangeBy.split('-');
     let params = { sort, sortOrder, filter: {} };
 
+    if (this.filters.search) {
+      params.filter.search = this.filters.search;
+    }
+
     if (this.filters.showGroups !== 'both') {
       params.filter.camp = parseInt(this.filters.showGroups, 10);
     }
@@ -55,6 +59,8 @@ class HandlesController {
     if (this.filters.topicFilter !== 'all') {
       params.filter.topic = parseInt(this.filters.topicFilter, 10);
     }
+
+    params.related = '["topics"]';
 
     return this.HandleService.list(params).then((handles) => {
       this.handles = handles;

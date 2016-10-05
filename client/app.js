@@ -46,12 +46,14 @@ app.component('userKloutStatsModule', require('./components/index/components/use
 app.component('conversationContributionsStatsModule', require('./components/index/components/conversation-contributions-stats-module.js'));
 app.component('keywordStatsModule', require('./components/index/components/keyword-stats-module.js'));
 app.component('mostTweetsStatsModule', require('./components/index/components/most-tweets-stats-module.js'));
+app.component('conversationStatsModule', require('./components/conversations/components/conversation-stats-module.js'));
 app.component('infographicsWall', require('./components/infographics/infographics-wall.js'));
 
 // Directives
 app.directive('contenteditable', require('./components/shared/contenteditable.js'));
 app.directive('contentInput', require('./components/shared/content-input.js'));
 app.directive('select', require('./components/shared/select.js'));
+app.directive('ngKeyupEnter', require('./components/shared/ng-keyup-enter.js'));
 
 // Services
 app.service('TweetTimelineService', require('./components/tweet/tweet-timeline-service.js'));

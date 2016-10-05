@@ -25,3 +25,19 @@
   margin-right: 5px;
   width: 100px !important;
 }
+
+.conversation-stats {
+  &__item {
+    margin: 30px 0;
+    text-align: center;
+  }
+
+  &__label {
+    font-size: 18px;
+  }
+
+  &__value {
+    color: $accent-color;
+    font-size: 72px;
+  }
+}
