@@ -54,26 +54,27 @@ function notifyLiveReload(event) {
 
 gulp.task('libraries.js', function () {
   var filterJS = gulpFilter('**/*.js', { restore: true });
-  gulp.src('./bower.json')
-    .on('error', errorHandler)
+  return gulp.src('./bower.json')
     .pipe(plumber(errorHandler))
     .pipe(mainBowerFiles())
     .pipe(filterJS)
-    .pipe(concat('libs.js'))
     .pipe(uglify())
-    .pipe(gulp.dest('./public/scripts/'));
+    .pipe(concat('libs.js'))
+    .pipe(gulp.dest('./public/scripts/'))
+    .pipe(filterJS.restore)
 });
 
 gulp.task('libraries.css', function () {
   var filterCSS = gulpFilter('**/*.css', { restore: true });
-  gulp.src('./bower.json')
-    .on('error', errorHandler)
+
+  return gulp.src('./bower.json')
     .pipe(plumber(errorHandler))
     .pipe(mainBowerFiles())
     .pipe(filterCSS)
-    .pipe(concat('libs.css'))
     .pipe(uglifycss())
-    .pipe(gulp.dest('./public/styles'))
+    .pipe(concat('libs.css'))
+    .pipe(gulp.dest('./public/styles/'))
+    .pipe(filterCSS.restore)
 });
 
 gulp.task('styles', function () {
