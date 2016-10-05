@@ -18,7 +18,9 @@ class HandleService {
   }
 
   create(username) {
-    return this.ApiService.post('handles', { username });
+    return this.ApiService.post('handles', { username }).then(function (response) {
+      return response.data;
+    });
   }
 
   remove(handle) {

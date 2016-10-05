@@ -37,7 +37,7 @@ class HandlesController {
     if ($event.keyCode === 13) {
       this.HandleService.create(this.handleForm.handle).then((handle) => {
         this.handleForm.handle = null;
-        this.handles.push(handle);
+        this.handles.splice(0, 0, handle);
       }).catch(() => {
         this.Notifications.error('Handle create failed');
       });
