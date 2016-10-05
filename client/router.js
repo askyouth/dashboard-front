@@ -153,7 +153,7 @@ module.exports = function ($stateProvider) {
           end_date: '2016-10-31'
         }, { reload: true, location: true });
       } else {
-        PageService.setTitle($filter('dateFilter')($stateParams.start_date, 'MMMM') + ' infographics');
+        PageService.setTitle($filter('dateFilter')($stateParams.start_date, 'MMMM yyyy') + ' infographics');
       }
     }
   })

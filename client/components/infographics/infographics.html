@@ -7,7 +7,7 @@
 
       <div class="list-group">
         <a ui-sref="infographics({ start_date: month.start_date, end_date: month.end_date })" ui-sref-active="active" class="list-group-item" ng-repeat="month in $ctrl.months">
-          {{month.start_date | dateFilter:'MMMM'}}
+          {{month.start_date | dateFilter:'MMMM yyyy'}}
         </a><!-- /.list-group-item -->
       </div><!-- /.list-group -->
     </div><!-- /.panel panel-default -->
