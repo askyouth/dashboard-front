@@ -121,7 +121,7 @@ module.exports = {
             <div class="infographics-modal__link">
               <input class="infographics-modal__link-input form-control" value="{{$ctrl.selectedInfographic}}" readonly>
             </div>
-            <img class="infographics-modal__image" ng-src="{{::$ctrl.selectedInfographic}}">
+            <img class="infographics-modal__image" ng-src="{{$ctrl.selectedInfographic}}">
           </div>
 
           <div class="infographics-modal__sidebar">
