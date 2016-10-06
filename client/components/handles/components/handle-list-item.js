@@ -1,5 +1,5 @@
 'use strict';
-const config = require('./config.json');
+const config = require('../config.json');
 
 /**
  * IndexController
@@ -26,6 +26,7 @@ class HandleListItemController {
     this._$element.find(config.selectors.REMOVE_HANDLE_BUTTON).attr('disabled', true);
 
     this.HandleService.remove(this.handle).then(() => {
+      this._$element.find(config.selectors.REMOVE_HANDLE_BUTTON).attr('disabled', false);
       this.Notifications.success('Handle removed');
       this.onDelete(this.handle);
     });
@@ -34,7 +35,7 @@ class HandleListItemController {
 
 
 module.exports = {
-  templateUrl: 'views/handles/handle-list-item.html',
+  templateUrl: 'views/handles/components/handle-list-item.html',
   controller: HandleListItemController,
   bindings: {
     topics: '=',

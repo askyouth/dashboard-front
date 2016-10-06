@@ -39,8 +39,8 @@ app.component('composeContent', require('./components/compose-content/compose-co
 app.component('timeline', require('./components/timeline/timeline.js'));
 app.component('tweet', require('./components/tweet/tweet.js'));
 app.component('tweetModal', require('./components/tweet-modal/tweet-modal.js'));
-app.component('handleListItem', require('./components/handles/handle-list-item.js'))
-app.component('handleTopics', require('./components/handles/handle-topics.js'))
+app.component('handleListItem', require('./components/handles/components/handle-list-item.js'))
+app.component('handleTopics', require('./components/handles/components/handle-topics.js'))
 app.component('handleStatsModule', require('./components/handle/components/handle-stats-module.js'))
 app.component('topicInfoModule', require('./components/topic/components/topic-info-module.js'));
 app.component('topicStatsModule', require('./components/topic/components/topic-stats-module.js'));

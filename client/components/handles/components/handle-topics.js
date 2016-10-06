@@ -1,5 +1,5 @@
 'use strict';
-const config = require('./config.json');
+const config = require('../config.json');
 
 /**
  * IndexController
@@ -19,7 +19,6 @@ class HandleTopicsController {
     this.checkAvailableTopics();
 
     TopicService.list().then((topics) => {
-      console.log(this.topics);
       this.topics = topics;
       this.checkAvailableTopics();
     });
