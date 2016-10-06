@@ -5,6 +5,24 @@ module.exports = function ($stateProvider) {
    * Component routes
    */
 
+  $stateProvider.state('error-404', {
+    url: '/error/page-not-found',
+    templateUrl: 'error/error-404.html',
+    onEnter: function (PageService) {
+      'ngInject';
+      PageService.setTitle('Page not found!');
+    }
+  });
+
+  $stateProvider.state('error-500', {
+    url: '/error/samething-bad-happened',
+    templateUrl: 'error/error-500.html',
+    onEnter: function (PageService) {
+      'ngInject';
+      PageService.setTitle('Something bad happened!');
+    }
+  });
+
   $stateProvider.state('index', {
     url: '/',
     template: '<index-component></index-component>',

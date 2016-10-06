@@ -74,9 +74,18 @@ app.filter('dateFilter', require('./components/shared/date-filter.js'));
 app.filter('capitalize', require('./components/shared/capitalize.js'));
 
 // Run application
-app.run(require('./roles.js')).run(function ($rootScope) {
+app.run(require('./roles.js')).run(function ($rootScope, $state) {
   'ngInject';
+
   $rootScope.$on('$stateChangeStart', function () {
     angular.element('.modal-backdrop').remove();
+  });
+
+  $rootScope.$on('$stateChangeError', function () {
+    $state.go('error-500');
+  });
+
+  $rootScope.$on('$stateNotFound', function () {
+    $state.go('error-404');
   });
 });
