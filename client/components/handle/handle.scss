@@ -1,0 +1,70 @@
+.handle-profile {
+  &__avatar {
+    margin-bottom: 15px;
+  }
+
+  &__user {
+    margin-bottom: 15px;
+  }
+
+  &__name {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  &__username {
+    color: #8899a6;
+    font-size: 14px;
+  }
+
+  &__meta {
+
+  }
+
+  &__klout-score {
+    color: $klout-color;
+    float: left;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 34px;
+
+    .klout-logo {
+      float: left;
+      height: 34px;
+      margin-right: 5px;
+      width: 65px;
+    }
+  }
+
+  &__group {
+    float: right;
+    width: 100px;
+  }
+}
+
+.handle-profile-topics {
+  .handle__topics {
+    margin-top: 0;
+  }
+
+  .handle__topic {
+    margin-right: 5px;
+  }
+}
+
+.handle-stats {
+  &__item {
+    margin: 30px 0;
+    text-align: center;
+  }
+
+  &__label {
+    font-size: 18px;
+  }
+
+  &__value {
+    color: $accent-color;
+    font-size: 72px;
+  }
+}

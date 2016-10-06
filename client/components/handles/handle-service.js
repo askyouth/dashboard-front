@@ -13,8 +13,10 @@ class HandleService {
     });
   }
 
-  find(id) {
-    return this.ApiService.get(`handles/${id}`);
+  find(id, params) {
+    return this.ApiService.get(`handles/${id}`, { params }).then(function (response) {
+      return response.data;
+    });
   }
 
   create(username) {

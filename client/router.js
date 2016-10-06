@@ -37,19 +37,17 @@ module.exports = function ($stateProvider) {
 
   $stateProvider.state('handle', {
     url: '/handle/:id',
-    template: '<handle-component></handle-component>',
+    template: '<handle-component handle="$resolve.handleModel"></handle-component>',
     data: { permissions: { only: ['user'], redirectTo: 'login' } },
     resolve: {
-      handleModel: function ($stateParams) {
+      handleModel: function ($stateParams, HandleService) {
         'ngInject';
-        return {
-          id: $stateParams.id
-        };
+        return HandleService.find($stateParams.id, { related: '["topics"]' });
       }
     },
     onEnter: function (PageService, handleModel) {
       'ngInject';
-      PageService.setTitle(handleModel.id);
+      PageService.setTitle(handleModel.name);
     }
   })
 

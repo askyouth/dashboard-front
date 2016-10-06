@@ -1,1 +1,66 @@
-Handle component
+<div class="handle-component">
+  <div class="col-md-3">
+    <div class="handle-profile panel panel-default">
+      <div class="panel-body">
+        <img ng-src="{{$ctrl.profileImage($ctrl.handle.profile.image)}}" alt="{{$ctrl.handle.name}}" class="handle-profile__avatar img-thumbnail">
+        <div class="handle-profile__user">
+          <div class="handle-profile__name">{{$ctrl.handle.name}}</div><!-- /.handle-profile__name -->
+          <div class="handle-profile__username">@{{$ctrl.handle.username}}</div><!-- /.handle-profile__username -->
+        </div><!-- /.handle-profile__meta -->
+
+        <div class="handle-profile__meta">
+          <div class="handle-profile__klout-score">
+            <span class="klout-logo klout-logo--small"></span><span>{{$ctrl.handle.klout_score || '0,00'}}</span>
+          </div><!-- /.handle-profile__klout-score -->
+
+          <div class="handle-profile__group">
+            <select ng-model="$ctrl.handle.camp_id" data-none-selected-text="Group">
+              <option value="1">Youth</option>
+              <option value="2">Policy</option>
+            </select>
+          </div><!-- /.handle-profile__group -->
+        </div><!-- /.handle-profile__meta -->
+      </div><!-- /.panel-body -->
+    </div><!-- /.panel panel-default -->
+
+    <div class="handle-profile-topics panel panel-default">
+      <div class="panel-heading">Topics</div><!-- /.panel-heading -->
+      <div class="panel-body">
+        <handle-topics handle="$ctrl.handle"></handle-topics>
+      </div><!-- /.panel-body -->
+    </div><!-- /.panel panel-default -->
+  </div><!-- /.col-md-3 -->
+
+  <div class="col-md-6">
+    <timeline></timeline>
+  </div><!-- /.col-md-6 -->
+
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">Filter tweets</div><!-- /.panel-heading -->
+      <div class="panel-body">
+        <label for="handle-tweets__full-feed">
+          <input type="radio" id="handle-tweets__full-feed" ng-model="$ctrl.feedFilter" value="full">
+          Show the entire feed
+        </label>
+
+        <label for="handle-tweets__single-feed">
+          <input type="radio" id="handle-tweets__single-feed" ng-model="$ctrl.feedFilter" value="singe_group">
+          Show single group conversations
+        </label>
+
+        <label for="handle-tweets__double-feed">
+          <input type="radio" id="handle-tweets__double-feed" ng-model="$ctrl.feedFilter" value="both_groups">
+          Show both group conversations
+        </label>
+      </div><!-- /.panel-body -->
+    </div><!-- /.panel panel-default -->
+
+    <div class="panel panel-default">
+      <div class="panel-heading">{{$ctrl.handle.name}}'s stats</div><!-- /.panel-heading -->
+      <div class="panel-body">
+        <handle-stats-module handle="$ctrl.handle"></handle-stats-module>
+      </div><!-- /.panel-body -->
+    </div><!-- /.panel panel-default -->
+  </div><!-- /.col-md-3 -->
+</div>

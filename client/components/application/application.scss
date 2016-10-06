@@ -26,8 +26,12 @@ application {
 }
 
 #container {
-  @media (min-width: 1200px) {
-    width: 1220px;
+  width: 1220px;
+}
+
+#header {
+  .container-fluid {
+    min-width: 1220px;
   }
 }
 
@@ -142,6 +146,19 @@ application {
 
   &.btn-block {
     padding: 6px 36px 6px 36px;
+  }
+}
+
+.klout-logo {
+  background: transparent url(/images/klout-logo.png) center center no-repeat;
+  background-size: contain;
+  display: inline-block;
+  width: 100px;
+  height: 61px;
+
+  &--small {
+    width: 40px;
+    height: 26px;
   }
 }
 

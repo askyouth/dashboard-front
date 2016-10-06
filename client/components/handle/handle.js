@@ -18,10 +18,17 @@ class HandleController {
   $onDestroy() {
 
   }
+
+  profileImage(image) {
+    return image.replace('_normal', '');
+  }
 };
 
 
 module.exports = {
   templateUrl: 'views/handle/handle.html',
-  controller: HandleController
+  controller: HandleController,
+  bindings: {
+    handle: '='
+  }
 };

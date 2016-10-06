@@ -9,20 +9,7 @@
     <span class="handle__type handle__type--{{$ctrl.handle.meta.type}} badge">{{$ctrl.handle.meta.type | capitalize}}</span>
   </div><!-- /.handle__meta -->
 
-  <div class="handle__topics">
-    <span class="label handle__topic" ng-repeat="topic in $ctrl.handle.topics">
-      {{topic.name}}
-      <span class="handle__topic__delete" ng-click="$ctrl.deleteTopic(topic)"><i class="glyphicon glyphicon-remove"></i></span>
-    </span>
-
-    <div class="btn-group handle__add-topic-menu-group">
-      <select class="handle__add-topic-menu" ng-model="$ctrl.selectedTopicId" ng-change="$ctrl.addTopic()" data-none-selected-text="Select topic" data-live-search="true" data-style="btn-default btn-sm" ng-options="topic.id as topic.name for topic in $ctrl.availableTopics">
-      </select>
-      <button class="btn btn-default btn-sm handle__add-topic-menu-close" type="button"><i class="glyphicon glyphicon-remove"></i></button>
-    </div><!-- /.handle__add-topic-menu -->
-
-    <a href="#" class="handle__add-topic-button"> + add topic</a>
-  </div><!-- /.handle__topics -->
+  <handle-topics handle="$ctrl.handle"></handle-topics>
 
   <div class="handle__klout-score">
     Klout: <span class="handle__klout-score__score">{{handle.klout_score || 'N/A'}}</span>

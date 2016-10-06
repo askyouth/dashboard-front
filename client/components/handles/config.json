@@ -1,7 +1,8 @@
 {
   "cssClasses": {
     "IS_ADDING_TOPIC": "is-adding-topic",
-    "IS_REMOVING_HANDLE": "is-removing-handle"
+    "IS_REMOVING_HANDLE": "is-removing-handle",
+    "NO_AVAILABLE_TOPICS": "no-available-topics"
   },
 
   "selectors": {

@@ -2,6 +2,7 @@ $primary-color: #ED403B;
 $accent-color: #1B95E0;
 $policy-color: #f0ad4e;
 $youth-color: #5cb85c;
+$klout-color: #E04E1A;
 
 $success-color: #5cb85c;
 $error-color: #d9534f;
@@ -20,6 +21,7 @@ $tweet-button-border: #1b95e0;
 @import "components/tweet-modal/tweet-modal.scss";
 @import "components/shared/content-input.scss";
 @import "components/handles/handles.scss";
+@import "components/handle/handle.scss";
 @import "components/topic/topic.scss";
 @import "components/manage-topics/manage-topics.scss";
 @import "components/infographics/infographics.scss";
