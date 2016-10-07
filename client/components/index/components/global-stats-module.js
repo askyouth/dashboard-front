@@ -23,7 +23,7 @@ module.exports = {
         </div>
         <div class="col-sm-4 global-stats__item">
           <div class="global-stats__stat-value">12</div>
-          <div class="global-stats__stat-title">Policyu makers</div>
+          <div class="global-stats__stat-title">Policy makers</div>
         </div>
         <div class="col-sm-4 global-stats__item">
           <div class="global-stats__stat-value">771</div>

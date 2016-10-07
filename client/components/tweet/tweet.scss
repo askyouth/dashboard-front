@@ -209,6 +209,12 @@
   }
 }
 
+.tweet__action-reply {
+  .glyphicon {
+    transform: rotateY(180deg);
+  }
+}
+
 .tweet__action-retweet {
   a:hover,
   &.is-retweeted a {
