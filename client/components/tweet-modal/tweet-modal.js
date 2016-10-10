@@ -74,12 +74,12 @@ class TweetModalController {
         this.tweetReplies.push(tweet);
 
         if (this.tweetReplies.length < 5) {
-          this._$timeout(fetchReply, 1000);
+          this._$timeout(fetchReply, 100);
         }
       });
     };
 
-    this._$timeout(fetchReply, 1000);
+    this._$timeout(fetchReply, 100);
   }
 
 };

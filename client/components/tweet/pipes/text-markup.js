@@ -16,5 +16,13 @@ module.exports = function (content) {
     });
   });
 
+  if (content.entities.media.length > 0) {
+    angular.forEach(content.entities.media, function (media) {
+      textContent = textContent.replace(media.url, function () {
+        return `<a href="${media.url}" class="tweet__link" target="_blank">${media.url}</a>`;
+      });
+    });
+  }
+
   content.text_content = textContent;
 }

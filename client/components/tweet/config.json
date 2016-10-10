@@ -1,6 +1,8 @@
 {
   "cssClasses": {
-    "IS_SELECTED": "is-selected"
+    "IS_SELECTED": "is-selected",
+    "IS_DETAILS": "tweet--details",
+    "IS_REPLY": "tweet--reply-to"
   },
 
   "selectors": {

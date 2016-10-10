@@ -4,33 +4,38 @@
     <div class="tweet__inner">
       <div class="tweet__meta">
         <a ui-sref="handle({ id: $ctrl.tweet.user.id_str})" class="tweet__user">
-          <img src="https://pbs.twimg.com/profile_images/2903581807/b77cac936eefb40c416985abcc04a687_bigger.png" alt="Basketball HOF" class="tweet__avatar" />
-          <span class="tweet__user__name">Basketball HOF</span>
-          <span class="tweet__user__username">@Hoophall</span>
+          <img ng-src="{{$ctrl.tweet.user.profile_image_url}}" alt="{{$ctrl.tweet.user.name}}" class="tweet__avatar" />
+          <span class="tweet__user__name">{{$ctrl.tweet.user.name}}</span>
+          <span class="tweet__user__username">@{{$ctrl.tweet.user.screen_name}}</span>
         </a><!-- /.tweet__user -->
 
         <span class="tweet__short-date">• {{$ctrl.tweet.created_at | dateFilter:'MMM d'}}</span>
       </div><!-- /.tweet__meta -->
 
       <div class="tweet__text" ng-bind-html="$ctrl.tweet.text_content"></div><!-- /.tweet__text -->
+      <div class="tweet__media-entities" ng-if="$ctrl.tweet.entities.media.length">
+        <tweet-media tweet="$ctrl.tweet"></tweet-media>
+      </div><!-- /.tweet__entities -->
 
       <div class="tweet__date">{{$ctrl.tweet.created_at | dateFilter:'shortTime'}} - {{$ctrl.tweet.created_at | dateFilter:'d MMM yyyy'}}</div><!-- /.tweet__date -->
     </div>
 
     <div class="tweet__toolbar">
-      <div class="tweet__action tweet__action-reply">
-        <a href="#"><span class="glyphicon glyphicon-share-alt"></span></a>
+      <div class="tweet__action tweet__action-reply" title="Reply to tweet">
+        <a href="#" ng-click="$ctrl.replyToTweet()">
+          <span class="glyphicon glyphicon-share-alt"></span>
+        </a>
       </div>
 
-      <div class="tweet__action tweet__action-retweet">
-        <a href="#">
+      <div class="tweet__action tweet__action-retweet" title="Retweet this tweet">
+        <a href="#" ng-click="$ctrl.retweetTweet()">
           <span class="glyphicon glyphicon-retweet"></span>
           <span class="tweet__action-retweet-count"></span>
         </a>
       </div>
 
-      <div class="tweet__action tweet__action-like">
-        <a href="#">
+      <div class="tweet__action tweet__action-like" title="Like tweet">
+        <a href="#" ng-click="$ctrl.likeTweet()">
           <span class="glyphicon glyphicon-heart"></span>
           <span class="tweet__action-like-count"></span>
         </a>
@@ -52,12 +57,16 @@
       </div>
 
       <div class="tweet__ask-meta">
-        <div class="tweet__klout-score">
+        <div class="tweet__confirmed-conversation" title="Confirmed conversation">
+          <span>C</span>
+        </div><!-- /.tweet__confirmed-conversation -->
+
+        <div class="tweet__klout-score" title="Klout score">
           <span class="klout-logo klout-logo--tiny"></span>
           <span class="tweet__klout-value">100,00</span>
         </div><!-- /.klout-score -->
 
-        <div class="tweet__user-group">
+        <div class="tweet__user-group" title="User group">
           <span class="handle-group handle-group--youth">Youth</span>
         </div><!-- /.tweet__user-group -->
       </div><!-- /.tweet__ask-meta -->

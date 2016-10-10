@@ -5,29 +5,39 @@ const config = require('./config.json');
  * IndexController
  */
 class ComposeContentModalController {
-  constructor($element, TweetTimelineService) {
+  constructor($rootScope, $scope, $element, TweetTimelineService) {
     'ngInject';
-    this._element = $element[0]
+    this._$scope = $scope;
+    this._$rootScope = $rootScope;
     this._$element = $element;
     this.TweetService = new TweetTimelineService();
 
     this.tweetForm = {
       content: null
     };
+    this.replyTweet = null;
   }
 
   $onInit() {
-    this._element.querySelector(config.selectors.composeContentModal)
-      .addEventListener('hidden.bs.modal', this.onModalHide.bind(this));
+    this._$element.find(config.selectors.composeContentModal)
+      .on('hidden.bs.modal', this.onModalHide.bind(this));
+
+    this._$rootScope.$on('tweet:reply', (e, tweet) => {
+      this.replyTweet = tweet;
+
+      let mentions = [];
+      angular.forEach(tweet.entities.user_mentions, (userMention) => {
+        mentions.push(`@${userMention.screen_name}`);
+      });
+      this.tweetForm.content = mentions.join(' ')
+      this.tweetForm.content += ' ';
+      this.showModal()
+    });
   }
 
   $onDestroy() {
-    this._element.querySelector(config.selectors.composeContentModal)
-      .removeEventListener('hidden.bs.modal');
-  }
-
-  onModalHide() {
-    console.log('modal hide');
+    this._$element.find(config.selectors.composeContentModal)
+      .on('hidden.bs.modal');
   }
 
   submitContent() {
@@ -38,7 +48,22 @@ class ComposeContentModalController {
     this.onCreate($createdTweet);
 
     // Close modal
-    $(this._element.querySelector(config.selectors.composeContentModal)).modal('hide');
+    this._$element.find(config.selectors.composeContentModal).modal('hide');
+  }
+
+  showModal() {
+    this._$element.find(config.selectors.composeContentModal).modal('show');
+  }
+
+  hideModal() {
+    this._$element.find(config.selectors.composeContentModal).modal('hide');
+  }
+
+  onModalHide() {
+    this._$scope.$apply(() => {
+      this.replyTweet = null;
+      this.tweetForm.content = null;
+    });
   }
 };
 

@@ -27,27 +27,18 @@ module.exports = function TweetTimelineServiceFactory($q, $rootScope, $timeout) 
       return $serviceScope.$on(eventName, handler);
     };
 
-    this.broadcast = function () {
-      var eventName = Array.prototype.splice.call(arguments, 0, 1),
-          args = arguments;
-      return $serviceScope.$broadcast.apply($serviceScope, arguments);
-    };
-
-    this.emit = function () {
-      var eventName = Array.prototype.splice.call(arguments, 0, 1),
-          args = arguments;
-      return $serviceScope.$emit.apply($serviceScope, arguments);
-    };
-
     /**
      * @TODO: Remove after development
      */
 
     let simulateTwitterStream = () => {
       $serviceScope.$broadcast('tweet:interaction', transformContent());
-      // $timeout(simulateTwitterStream, 15000);
     }
 
+    $timeout(simulateTwitterStream, 100);
+    $timeout(simulateTwitterStream, 200);
+    $timeout(simulateTwitterStream, 300);
+    $timeout(simulateTwitterStream, 400);
     $timeout(simulateTwitterStream, 500);
   }
 

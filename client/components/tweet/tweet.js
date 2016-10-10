@@ -5,8 +5,9 @@ const config = require('./config.json');
  * TweetController
  */
 class TweetController {
-  constructor($element) {
+  constructor($rootScope, $element) {
     'ngInject';
+    this._$rootScope = $rootScope;
     this._element = $element[0];
     this._$element = $element;
     this._isMenuClick = false;
@@ -21,6 +22,14 @@ class TweetController {
 
     this._$element.find(config.selectors.TWEET_CONTENT).on('click', 'a', this.onTweetLinkClickBind);
     this._$element.find(config.selectors.TWEET_MENU).on('click', 'a', this.onTweetMenuClick);
+
+    if (this.tweetDetails) {
+      this._$element.addClass(config.cssClasses.IS_DETAILS);
+    }
+
+    if (this.tweetReply) {
+      this._$element.addClass(config.cssClasses.IS_REPLY);
+    }
   }
 
   $onDestroy() {
@@ -29,6 +38,14 @@ class TweetController {
 
     this._$element.find(config.selectors.TWEET_CONTENT).off('click', 'a', this.onTweetLinkClickBind);
     this._$element.find(config.selectors.TWEET_MENU).off('click', 'a', this.onTweetMenuClick);
+
+    if (this.tweetDetails) {
+      this._$element.removeClass(config.cssClasses.IS_DETAILS);
+    }
+
+    if (this.tweetReply) {
+      this._$element.removeClass(config.cssClasses.IS_REPLY);
+    }
   }
 
   onToolbarClick(e) {
@@ -42,6 +59,10 @@ class TweetController {
   onTweetMenuClick(e) {
     $(this).dropdown('toggle');
   }
+
+  replyToTweet() {
+    this._$rootScope.$emit('tweet:reply', this.tweet);
+  }
 };
 
 
@@ -50,6 +71,8 @@ module.exports = {
   controller: TweetController,
   bindings: {
     tweet: '=',
-    onSelect: '&'
+    onSelect: '&',
+    tweetDetails: '<',
+    tweetReply: '<'
   }
 };
