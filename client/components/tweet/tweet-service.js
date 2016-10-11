@@ -2,6 +2,8 @@ const transformContent = require('./tweet-transform.js');
 
 class TweetService {
   constructor(ApiService, SocketConnection) {
+    'ngInject';
+    
     this.ApiService = ApiService;
     this.SocketConnection = SocketConnection;
   }
