@@ -9,7 +9,7 @@ class ComposeContentController {
     'ngInject';
     this._element = $element[0];
     this._$element = $element;
-    this.TweetService = new TweetService();
+    this.TweetService = TweetService;
 
     this.tweetForm = {
       content: null

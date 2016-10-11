@@ -5,21 +5,24 @@ const config = require('./config.json');
  * TweetModalController
  */
 class TweetModalController {
-  constructor($scope, $element, $timeout, TweetTimelineService) {
+  constructor($scope, $element, $timeout, TweetService) {
     'ngInject';
 
     this._$scope = $scope;
     this._$timeout = $timeout;
     this._$element = $element;
-    this._element = $element[0];
-    this.TweetService = new TweetTimelineService();
-
-    this.tweetReplies = [];
-    this.fetchTweetReplies();
+    this.TweetService = TweetService;
   }
 
   $onInit() {
-    let $modal = $(this._element).find('.modal');
+    let $modal = this._$element.find('.modal');
+
+    this.loadTweet(this.tweetId).then((tweet) => {
+      // Open modal
+      this._$timeout(() => {
+        $modal.modal('show');
+      }, 10);
+    });
 
     // Bind modal events
     $modal.on('hidden.bs.modal', () => {
@@ -30,17 +33,11 @@ class TweetModalController {
   }
 
   $postLink() {
-    let $modal = $(this._element).find('.modal');
-
-    // Open modal
-    this._$timeout(() => {
-      $modal.modal('show');
-    }, 10);
+    let $modal = this._$element.find('.modal');
   }
 
   $onDestroy() {
-    console.log('destroy tweet-modal');
-    let $modal = $(this._element).find('.modal');
+    let $modal = this._$element.find('.modal');
 
     // Bind modal events
     (function () {
@@ -49,37 +46,32 @@ class TweetModalController {
     $modal.off('hidden.bs.modal');
   }
 
+  loadTweet(tweetId) {
+    return this.TweetService.find(tweetId).then((tweet) => {
+      console.log('tweet loaded', tweet.id);
+      
+      this.tweet = tweet;
+      this.parentTweet = tweet.parent;
+      this.tweetReplies = tweet.replies;
+
+      return tweet;
+    });
+  }
+
   onTweetReply(tweet) {
-    console.log(tweet);
+    
   }
 
   onReplySelect(tweet) {
     this.tweet = null;
+    this.parentTweet = null;
     this.tweetReplies.length = 0;
 
-    // For now, we simulate load from API
-    this._$timeout(() => {
-      this.tweet = tweet;
-      this.fetchTweetReplies();
-    }, 2000);
+    this.loadTweet(tweet.id);
   }
 
   onReplyToSelect(tweet) {
     this.onReplySelect(tweet);
-  }
-
-  fetchTweetReplies() {
-    let fetchReply = () => {
-      this.TweetService.createTweet().then((tweet) => {
-        this.tweetReplies.push(tweet);
-
-        if (this.tweetReplies.length < 5) {
-          this._$timeout(fetchReply, 100);
-        }
-      });
-    };
-
-    this._$timeout(fetchReply, 100);
   }
 
 };
@@ -89,7 +81,7 @@ module.exports = {
   templateUrl: 'views/tweet-modal/tweet-modal.html',
   controller: TweetModalController,
   bindings: {
-    tweet: '<',
+    tweetId: '=',
     onClose: '&'
   }
 };

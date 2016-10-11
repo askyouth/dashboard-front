@@ -12,7 +12,8 @@ const app = angular.module('ask-youth', [
   'ngTagsInput',
   'toastr',
   'wu.masonry',
-  'ngFileUpload'
+  'ngFileUpload',
+  'btford.socket-io'
 ]);
 
 // Configuration and router
@@ -60,7 +61,7 @@ app.directive('select', require('./components/shared/select.js'));
 app.directive('ngKeyupEnter', require('./components/shared/ng-keyup-enter.js'));
 
 // Services
-app.service('TweetTimelineService', require('./components/tweet/tweet-timeline-service.js'));
+app.service('TweetTimelineService', require('./components/timeline/timeline-service.js'));
 app.service('TweetService', require('./components/tweet/tweet-service.js'));
 app.service('TopicService', require('./components/topic/topic-service.js'));
 app.service('HandleService', require('./components/handles/handle-service.js'));
@@ -73,6 +74,7 @@ app.factory('SocketConnection', require('./components/shared/socket-connection.j
 // Filters
 app.filter('dateFilter', require('./components/shared/date-filter.js'));
 app.filter('capitalize', require('./components/shared/capitalize.js'));
+app.filter('userInitials', require('./components/shared/user-initials.js'));
 
 // Run application
 app.run(require('./roles.js')).run(function ($rootScope, $state) {

@@ -139,13 +139,44 @@
   }
 }
 
+.tweet__conversation-meta {
+  margin-bottom: 3px;
+}
+
+.tweet__reply-label {
+  font-size: 13px;
+  position: relative;
+
+  &, & a {
+    color: #8899a6;
+  }
+
+  .tweet__reply-label-icon {
+    left: -20px;
+    top: 2px;
+    transform: rotateY(180deg);
+    position: absolute;
+  }
+
+}
+
 .tweet__avatar {
-  border-radius: 5px;
+  background: transparent url(/images/empty-avatar.png) center center no-repeat;
+  background-size: 48px 48px;
+  color: #f0ad4e;
+  font-size: 20px;
+  font-weight: 400;
   height: 48px;
+  line-height: 44px;
   margin-top: 4px;
   margin-left: -58px;
   position: absolute;
+  text-align: center;
   width: 48px;
+
+  &[src] {
+    border-radius: 5px;
+  }
 }
 
 .tweet__user__name {

@@ -1,55 +1,34 @@
-module.exports = function TweetTimelineServiceFactory($q, $rootScope, $timeout) {
-  'ngInject';
+const transformContent = require('./tweet-transform.js');
 
-  return function TweetTimelineService(config) {
-    const $serviceScope = $rootScope.$new(true);
-    let service = this;
+class TweetService {
+  constructor(ApiService, SocketConnection) {
+    this.ApiService = ApiService;
+    this.SocketConnection = SocketConnection;
+  }
 
-    this.createTweet = (tweet) => {
-      let deferred = $q.defer();
-      let createdTweet = transformContent();
+  find(tweetId) {
+    return this.ApiService.get(`tweets/${tweetId}`).then((response) => {
+      let tweet = response.data;
+      transformContent(tweet);
 
-      $serviceScope.$broadcast('tweet:created', createdTweet);
-      deferred.resolve(createdTweet);
+      if (tweet.parent) {
+        transformContent(tweet.parent);
+      }
 
-      return deferred.promise;
-    };
+      if (tweet.replies) {
+        tweet.replies.map(function (replyTweet) {
+          transformContent(replyTweet);
+        })
+      }
 
-    this.subscribe = function (eventName, handler) {
-      return $serviceScope.$on(eventName, handler);
-    };
+      return tweet;
+    });
+  }
 
-    this.broadcast = function () {
-      var eventName = Array.prototype.splice.call(arguments, 0, 1),
-          args = arguments;
-      return $serviceScope.$broadcast.apply($serviceScope, arguments);
-    };
+  create(data) {
 
-    this.emit = function () {
-      var eventName = Array.prototype.splice.call(arguments, 0, 1),
-          args = arguments;
-      return $serviceScope.$emit.apply($serviceScope, arguments);
-    };
   }
 
 }
 
-function transformContent(tweet) {
-  let contentId = new Date().getTime();
-  let content = angular.copy(data[0]);
-
-  content.id = contentId;
-  content.id_str = contentId.toString();
-
-  if (tweet) {
-    content.text = tweet.text;
-  }
-
-  angular.forEach(pipes, function (pipe, name) {
-    if (angular.isFunction(pipe)) {
-      pipe(content);
-    }
-  });
-
-  return content;
-}
+module.exports = TweetService;

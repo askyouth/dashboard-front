@@ -1,10 +1,8 @@
-module.exports = function SocketConnectionFactory(socketFactory) {
+module.exports = function SocketConnectionFactory(socketFactory, ApiService) {
   'ngInject';
-  var myIoSocket = io.connect('/some/path');
+  let apiSocket = io.connect(ApiService.$url('/'));
 
-  mySocket = socketFactory({
-    ioSocket: myIoSocket
+  return socketFactory({
+    ioSocket: apiSocket
   });
-
-  return mySocket;
 }

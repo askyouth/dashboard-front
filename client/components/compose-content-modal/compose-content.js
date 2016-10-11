@@ -5,12 +5,12 @@ const config = require('./config.json');
  * IndexController
  */
 class ComposeContentModalController {
-  constructor($rootScope, $scope, $element, TweetTimelineService) {
+  constructor($rootScope, $scope, $element) {
     'ngInject';
     this._$scope = $scope;
     this._$rootScope = $rootScope;
     this._$element = $element;
-    this.TweetService = new TweetTimelineService();
+    // this.TweetService = new TweetTimelineService();
 
     this.tweetForm = {
       content: null
@@ -44,7 +44,7 @@ class ComposeContentModalController {
     this.tweetForm.content = null;
 
     let $createdTweet = { id: new Date().getTime() };
-    this.TweetService.createTweet($createdTweet);
+    // this.TweetService.createTweet($createdTweet);
     this.onCreate($createdTweet);
 
     // Close modal

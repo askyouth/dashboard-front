@@ -1,4 +1,5 @@
 'use strict';
+const config = require('./config.json');
 
 /**
  * TweetsController
@@ -15,8 +16,8 @@ class TweetsController {
     this.tweets = [];
     this.pendingTweets = [];
 
-    this.$onTweetCreated = this.TweetService.subscribe('tweet:created', this.onContentCreated.bind(this));
-    this.$onTweetInteraction = this.TweetService.subscribe('tweet:interaction', this.onContentCreated.bind(this));
+    this.$onTweetFetch = this.TweetService.subscribe(config.events.TWEETS_FETCH, this.onContentFetched.bind(this));
+    this.$onTweetNew = this.TweetService.subscribe(config.events.TWEETS_NEW, this.onContentCreated.bind(this));
 
     if (angular.isUndefined(this.composeContent)) {
       this.composeContent = true;
@@ -24,8 +25,8 @@ class TweetsController {
   }
 
   $onDestroy() {
-    this.$onTweetCreated();
-    this.$onTweetInteraction();
+    this.$onTweetFetch();
+    this.$onTweetNew();
   }
 
   selectTweet(tweet) {
@@ -55,8 +56,15 @@ class TweetsController {
     }
   }
 
+  onContentFetched(event, tweets) {
+    console.log(tweets)
+    tweets.map((tweet) => {
+      this.tweets.push(tweet);
+    });
+  }
+
   onContentCreated(event, tweet) {
-    this.pendingTweets.unshift(tweet);
+    this.pendingTweets.push(tweet);
   }
 };
 

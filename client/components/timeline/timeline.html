@@ -1,7 +1,7 @@
 <div class="timeline">
 
   <!-- Modal to show selected tweet -->
-  <tweet-modal tweet="$ctrl.selectedTweet" on-close="$ctrl.onTweetModalClose()" ng-if="$ctrl.selectedTweet"></tweet-modal>
+  <tweet-modal tweet-id="$ctrl.selectedTweet.id" on-close="$ctrl.onTweetModalClose()" ng-if="$ctrl.selectedTweet.id"></tweet-modal>
 
   <div class="tweets" ng-class="{ 'is-empty': !$ctrl.tweets.length }">
     <compose-content ng-if="$ctrl.composeContent"></compose-content>
@@ -14,7 +14,7 @@
     <!-- Message when not tweets are found. -->
     <div class="tweets__empty">No tweets found.</div><!-- /.tweets__empty -->
 
-    <tweet ng-repeat="tweet in $ctrl.tweets track by tweet.id_str" tweet="tweet" ng-click="$ctrl.selectTweet(tweet)">
+    <tweet ng-repeat="tweet in $ctrl.tweets track by $index" tweet="tweet" ng-click="$ctrl.selectTweet(tweet)">
     </tweet>
   </div><!-- /.tweets -->
 

@@ -1,4 +1,8 @@
 module.exports = function (content) {
+  if (!content) {
+    return false;
+  }
+
   var textContent = content.text;
 
   // Hashtags
@@ -16,7 +20,7 @@ module.exports = function (content) {
     });
   });
 
-  if (content.entities.media.length > 0) {
+  if (content.entities && content.entities.media && content.entities.media.length > 0) {
     angular.forEach(content.entities.media, function (media) {
       textContent = textContent.replace(media.url, function () {
         return `<a href="${media.url}" class="tweet__link" target="_blank">${media.url}</a>`;
