@@ -12,13 +12,13 @@
       </div><!-- /.tweet__conversation-meta -->
 
       <div class="tweet__meta">
-        <a ui-sref="handle({ id: $ctrl.tweet.user.id_str})" class="tweet__user">
+        <a class="tweet__user" href="https://twitter.com/{{$ctrl.tweet.user.screen_name}}" target="_blank">
           <img ng-src="{{$ctrl.tweet.user.profile_image_url}}" alt="{{$ctrl.tweet.user.name | userInitials}}" class="tweet__avatar" />
           <span class="tweet__user__name">{{$ctrl.tweet.user.name}}</span>&nbsp;
           <span class="tweet__user__username">@{{$ctrl.tweet.user.screen_name}}</span>
         </a><!-- /.tweet__user -->
 
-        <span class="tweet__short-date">• {{$ctrl.tweet.created_at | dateFilter:'MMM d'}}</span>
+        <span class="tweet__short-date">• {{$ctrl.tweet.created_at | tweetDate}}</span>
       </div><!-- /.tweet__meta -->
 
       <div class="tweet__text" ng-bind-html="$ctrl.tweet.text_content"></div><!-- /.tweet__text -->
@@ -76,7 +76,7 @@
         </div><!-- /.klout-score -->
 
         <div class="tweet__user-group" title="User group">
-          <span class="handle-group handle-group--youth">Youth</span>
+          <user-group group-id="$ctrl.tweet.camp_id"></user-group>
         </div><!-- /.tweet__user-group -->
       </div><!-- /.tweet__ask-meta -->
     </div><!-- /.tweet__toolbar -->

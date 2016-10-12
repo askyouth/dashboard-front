@@ -8,6 +8,13 @@ class TweetService {
     this.SocketConnection = SocketConnection;
   }
 
+  list(params) {
+    return this.ApiService.get(`tweets`, { params: params }).then((response) => {
+      let tweets = response.data;
+      return tweets.map(transformContent);
+    });
+  }
+
   find(tweetId) {
     return this.ApiService.get(`tweets/${tweetId}`).then((response) => {
       let tweet = response.data;

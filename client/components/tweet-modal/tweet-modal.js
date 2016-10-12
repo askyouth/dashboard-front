@@ -47,12 +47,10 @@ class TweetModalController {
   }
 
   loadTweet(tweetId) {
-    return this.TweetService.find(tweetId).then((tweet) => {
-      console.log('tweet loaded', tweet.id);
-      
+    return this.TweetService.find(tweetId).then((tweet) => {      
       this.tweet = tweet;
-      this.parentTweet = tweet.parent;
-      this.tweetReplies = tweet.replies;
+      this.parentTweet = !angular.equals(tweet.parent, {}) ? tweet.parent : null;
+      this.tweetReplies = tweet.replies || [];
 
       return tweet;
     });

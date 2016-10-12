@@ -1,9 +1,9 @@
 module.exports = function (content) {
-  if (!content) {
+  if (!content || angular.equals(content, {})) {
     return false;
   }
 
-  var textContent = content.text;
+  var textContent = content.text || '';
 
   // Hashtags
   textContent = textContent.replace(/(\B#[^ ]+)/g,
@@ -13,12 +13,14 @@ module.exports = function (content) {
   textContent = textContent.replace(/\B(@[^ ]+)/g,
     '<a href="#" class="tweet__handle">$1</a>');
 
-  // Links
-  angular.forEach(content.entities.urls, function (url) {
-    textContent = textContent.replace(url.url, function () {
-      return `<a href="${url.url}" class="tweet__link" target="_blank">${url.url}</a>`;
+  if (content.entities && content.entities.urls) {
+    // Links
+    angular.forEach(content.entities.urls, function (url) {
+      textContent = textContent.replace(url.url, function () {
+        return `<a href="${url.url}" class="tweet__link" target="_blank">${url.url}</a>`;
+      });
     });
-  });
+  }
 
   if (content.entities && content.entities.media && content.entities.media.length > 0) {
     angular.forEach(content.entities.media, function (media) {
@@ -27,6 +29,8 @@ module.exports = function (content) {
       });
     });
   }
+
+
 
   content.text_content = textContent;
 }

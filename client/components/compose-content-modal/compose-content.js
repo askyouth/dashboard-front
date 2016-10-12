@@ -25,12 +25,11 @@ class ComposeContentModalController {
     this._$rootScope.$on('tweet:reply', (e, tweet) => {
       this.replyTweet = tweet;
 
-      let mentions = [];
+      let mentions = [`@${tweet.user.screen_name}`];
       angular.forEach(tweet.entities.user_mentions, (userMention) => {
         mentions.push(`@${userMention.screen_name}`);
       });
-      this.tweetForm.content = mentions.join(' ')
-      this.tweetForm.content += ' ';
+      this.tweetForm.content = mentions.join(' ') + '&nbsp;';
       this.showModal()
     });
   }

@@ -138,4 +138,30 @@ handle-topics {
     background-color: $youth-color;
     color: #fff;
   }
+
+  &__name {
+    display: inline-block;
+  }
+
+  &__short-name {
+    display: none;
+  }
+
+  &--short {
+    .handle-group__name {
+      display: none;
+    }
+
+    .handle-group__short-name {
+      display: inline-block;
+    }
+  }
+}
+
+.handle__meta {
+  .handle-group {
+    font-size: 14px;
+    line-height: 18px;
+    padding: 0 6px;
+  }
 }

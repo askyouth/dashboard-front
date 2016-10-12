@@ -15,10 +15,6 @@ class ComposeContentController {
       content: null
     };
 
-    if (this.replyTo) {
-      this.tweetForm.content = '@' + this.replyTo.user.screen_name + '&nbsp;';
-    }
-
     this.onElementClickBind = this.onElementClick.bind(this);
     this.onElementKeydownBind = this.onElementKeydown.bind(this);
     this.onContentClickBind = this.onContentClick.bind(this);
@@ -34,6 +30,8 @@ class ComposeContentController {
     this._$element.on('keydown', this.onElementKeydownBind);
     $contentInput.on('click', this.onContentClickBind)
     $contentToolbar.on('click', this.onToolbarClickBind);
+
+    this.initializeReplyContent();
   }
 
   $onDestroy() {
@@ -45,6 +43,20 @@ class ComposeContentController {
     this._$element.off('keydown', this.onElementKeydownBind);
     $contentInput.off('click', this.onContentClickBind)
     $contentToolbar.off('click', this.onToolbarClickBind);
+  }
+
+  initializeReplyContent() {
+    if (this.replyTo) {
+      let mentions = [`@${this.replyTo.user.screen_name}`];
+
+      if (this.replyTo.entities && this.replyTo.entities.user_mentions) {
+        angular.forEach(this.replyTo.entities.user_mentions, function (userMention) {
+          mentions.push(`@${userMention.screen_name}`);
+        });
+      }
+
+      this.tweetForm.content = mentions.join(' ') + '&nbsp';
+    }
   }
 
   onElementClick(e) {

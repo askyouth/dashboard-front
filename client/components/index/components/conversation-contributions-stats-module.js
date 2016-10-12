@@ -29,7 +29,7 @@ module.exports = {
               <span class="tweet__user__username">@{{handle.username}}</span>
             </a>
 
-            <div class="conversation-contributions-stats__group handle-group handle-group--youth">Y</div>
+            <user-group group-id="handle.camp_id" class="conversation-contributions-stats__group" short-name></user-group>
             <div class="conversation-contributions-stats__score">
               <div class="conversation-contributions-stats__contributions">62</div>
             </div>

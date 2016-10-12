@@ -33,8 +33,8 @@
             <label for="filter__show-groups">Show groups</label>
             <select id="filter__show-groups" ng-model="$ctrl.filters.showGroups" ng-change="$ctrl.filterHandles()">
               <option value="both">Both groups</option>
-              <option value="1">Youth</option>
-              <option value="2">Policy makers</option>
+              <option value="1">Policy makers</option>
+              <option value="2">Youth</option>
             </select>
           </div><!-- /.form-group -->
         </div><!-- /.col-md-2 -->
@@ -54,8 +54,8 @@
           <div class="input-group">
             <div class="input-group-btn">
               <select ng-model="$ctrl.handleForm.type">
-                <option value="youth">Youth</option>
-                <option value="policy">Policy</option>
+                <option value="1">Policy makers</option>
+                <option value="2">Youth</option>
               </select>
             </div><!-- /.input-group-btn -->
             <input type="text" class="form-control" ng-model="$ctrl.handleForm.handle" ng-keyup="$ctrl.createHandle($event)" placeholder="Add handle">

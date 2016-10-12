@@ -20,7 +20,7 @@ class HandlesController {
     };
 
     this.handleForm = {
-      type: 'youth',
+      type: "1",
       handle: null
     };
   }
@@ -35,7 +35,7 @@ class HandlesController {
 
   createHandle($event) {
     if ($event.keyCode === 13) {
-      this.HandleService.create(this.handleForm.handle).then((handle) => {
+      this.HandleService.create(this.handleForm.handle, this.handleForm.type).then((handle) => {
         this.handleForm.handle = null;
         this.handles.push(handle);
       }).catch(() => {

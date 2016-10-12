@@ -6,7 +6,7 @@
       <span class="tweet__user__username">@{{$ctrl.handle.username}}</span>
     </a><!-- /.tweet__user -->
 
-    <span class="handle__type handle__type--{{$ctrl.handle.meta.type}} badge">{{$ctrl.handle.meta.type | capitalize}}</span>
+    <user-group group-id="$ctrl.handle.camp_id"></user-group>
   </div><!-- /.handle__meta -->
 
   <handle-topics handle="$ctrl.handle"></handle-topics>

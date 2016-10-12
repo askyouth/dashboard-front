@@ -9,15 +9,15 @@ class TweetsController {
     'ngInject';
     this._element = $element[0];
     this._$element = $element;
-    this.TweetService = new TweetTimelineService();
+    this.TweetTimelineService = new TweetTimelineService(this.config);
   }
 
   $onInit() {
     this.tweets = [];
     this.pendingTweets = [];
 
-    this.$onTweetFetch = this.TweetService.subscribe(config.events.TWEETS_FETCH, this.onContentFetched.bind(this));
-    this.$onTweetNew = this.TweetService.subscribe(config.events.TWEETS_NEW, this.onContentCreated.bind(this));
+    this.$onTweetFetch = this.TweetTimelineService.subscribe(config.events.TWEETS_FETCH, this.onContentFetched.bind(this));
+    this.$onTweetNew = this.TweetTimelineService.subscribe(config.events.TWEETS_NEW, this.onContentCreated.bind(this));
 
     if (angular.isUndefined(this.composeContent)) {
       this.composeContent = true;
@@ -30,20 +30,15 @@ class TweetsController {
   }
 
   selectTweet(tweet) {
-    console.log('select tweet');
     this.selectedTweet = tweet;
-  }
-
-  onTweetModalClose() {
-    console.log('modal close');
-    this.selectedTweet = null;
   }
 
   renderPendingTweets() {
     let renderLastTweet = () => {
       let tweet = this.pendingTweets.pop();
+
       if (tweet) {
-        this.tweets.push(tweet);
+        this.tweets.unshift(tweet);
       }
 
       if (this.pendingTweets.length) {
@@ -56,6 +51,18 @@ class TweetsController {
     }
   }
 
+  loadMoreTweets() {
+    let lastTweet = this.tweets[this.tweets.length - 1];
+
+    if (lastTweet) {
+      this.TweetTimelineService.loadMoreTweets({ maxId: lastTweet.id }).then((tweets) => {
+        tweets.map((tweet) => {
+          this.tweets.push(tweet);
+        });
+      })
+    }
+  }
+
   onContentFetched(event, tweets) {
     console.log(tweets)
     tweets.map((tweet) => {
@@ -64,7 +71,7 @@ class TweetsController {
   }
 
   onContentCreated(event, tweet) {
-    this.pendingTweets.push(tweet);
+    this.pendingTweets.unshift(tweet);
   }
 };
 
@@ -73,6 +80,7 @@ module.exports = {
   templateUrl: 'views/timeline/timeline.html',
   controller: TweetsController,
   bindings: {
+    config: '<',
     composeContent: '<'
   }
 };

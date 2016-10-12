@@ -1,7 +1,7 @@
 {
   "events": {
     "TWEETS_FETCH": "tweets:fetch",
-    "TWEETS_NEW": "tweet:new",
-    "TWEETS_GET": "tweets:get"
+    "TWEETS_GET":   "tweets:get",
+    "TWEETS_NEW":   "tweets:new"
   }
 }

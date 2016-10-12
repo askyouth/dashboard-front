@@ -59,6 +59,7 @@ app.directive('contenteditable', require('./components/shared/contenteditable.js
 app.directive('contentInput', require('./components/shared/content-input.js'));
 app.directive('select', require('./components/shared/select.js'));
 app.directive('ngKeyupEnter', require('./components/shared/ng-keyup-enter.js'));
+app.directive('userGroup', require('./components/shared/user-groups.js').directive);
 
 // Services
 app.service('TweetTimelineService', require('./components/timeline/timeline-service.js'));
@@ -75,6 +76,10 @@ app.factory('SocketConnection', require('./components/shared/socket-connection.j
 app.filter('dateFilter', require('./components/shared/date-filter.js'));
 app.filter('capitalize', require('./components/shared/capitalize.js'));
 app.filter('userInitials', require('./components/shared/user-initials.js'));
+app.filter('tweetDate', require('./components/tweet/tweet-date.js'));
+
+app.value('UserGroups', require('./components/shared/user-groups.js').groups);
+app.constant('USER_GROUPS', require('./components/shared/user-groups.js').constants);
 
 // Run application
 app.run(require('./roles.js')).run(function ($rootScope, $state) {

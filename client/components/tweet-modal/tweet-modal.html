@@ -11,7 +11,7 @@
       </div><!-- /.modal-header -->
 
       <div class="modal-body tweet-modal__body">
-        <compose-content reply-to="$ctrl.tweet" on-create="$ctrl.onTweetReply($createdTweet)"></compose-content>
+        <compose-content reply-to="$ctrl.tweet" on-create="$ctrl.onTweetReply($createdTweet)" ng-if="$ctrl.tweet"></compose-content>
       </div>
 
       <div class="modal-footer tweet-modal__footer" ng-if="$ctrl.tweetReplies.length">

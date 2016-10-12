@@ -16,6 +16,18 @@ class TweetsStack {
     return tweetExists;
   }
 
+  first() {
+    if (this._stack.length > 0) {
+      return this._stack[0];
+    }
+  }
+
+  last() {
+    if (this._stack.length > 0) {
+      return this._stack[this._stack.length - 1];
+    }
+  }
+
   push(tweet) {
     if (!this.exists(tweet)) {
       this._stack.push(tweet);

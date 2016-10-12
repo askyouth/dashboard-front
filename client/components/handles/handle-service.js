@@ -19,8 +19,8 @@ class HandleService {
     });
   }
 
-  create(username) {
-    return this.ApiService.post('handles', { username }).then(function (response) {
+  create(username, campId) {
+    return this.ApiService.post('handles', { username: username, camp_id: parseInt(campId, 10) }).then(function (response) {
       return response.data;
     });
   }

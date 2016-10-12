@@ -2,7 +2,7 @@ const config = require('./config.json');
 const TweetsStack = require('./tweets-stack.js');
 const transformContent = require('../tweet/tweet-transform.js');
 
-module.exports = function TweetTimelineServiceFactory($q, $rootScope, $timeout, SocketConnection) {
+module.exports = function TweetTimelineServiceFactory($q, $rootScope, $timeout, TweetService, SocketConnection) {
   'ngInject';
 
   return function TweetTimelineService(options) {
@@ -11,6 +11,20 @@ module.exports = function TweetTimelineServiceFactory($q, $rootScope, $timeout, 
 
     this.contentStorage = new TweetsStack();
     this.pendingContentStorage = new TweetsStack();
+
+    this.fetchTweets = function (opts) {
+      opts = angular.extend(opts, options);
+      return fetchTweets(opts);
+    };
+
+    this.loadMoreTweets = (params) => {
+      return TweetService.list(params).then((tweets) => {
+        return tweets.map((tweet) => {
+          this.contentStorage.push(tweet);
+          return tweet;
+        });
+      });
+    };
 
     this.createTweet = (tweet) => {
       let deferred = $q.defer();
@@ -31,12 +45,19 @@ module.exports = function TweetTimelineServiceFactory($q, $rootScope, $timeout, 
     };
 
     function initialize() {
-      SocketConnection.on('connect', function () {
+      if (SocketConnection.connected) {
+        SocketConnection.on('connect', function () {
+          SocketConnection.on(config.events.TWEETS_NEW, onNewTweetEvent);
+
+          // Load initial tweet set
+          fetchTweets();
+        });
+      } else {
         SocketConnection.on(config.events.TWEETS_NEW, onNewTweetEvent);
 
         // Load initial tweet set
         fetchTweets();
-      });
+      }
     }
 
     /**
@@ -44,9 +65,11 @@ module.exports = function TweetTimelineServiceFactory($q, $rootScope, $timeout, 
      * @param  {Object} config Stream configuration
      * @return {Promise}
      */
-    function fetchTweets() {
+    function fetchTweets(opts) {
+      opts = opts || options;
+
       var deferred = $q.defer();
-      SocketConnection.emit(config.events.TWEETS_FETCH, options, (tweets) => {
+      SocketConnection.emit(config.events.TWEETS_FETCH, opts, (tweets) => {
         tweets.map((tweet) => {
           service.contentStorage.push(tweet);
         })
@@ -81,9 +104,11 @@ module.exports = function TweetTimelineServiceFactory($q, $rootScope, $timeout, 
      * @return {void}
      */
     function onNewTweetEvent(tweet) {
-      tweet = filterTweets(tweet);
+      let tweets = filterTweets(tweet);
 
-      if (tweet) {
+      if (tweets && tweets[0]) {
+        let tweet = tweets[0];
+
         service.pendingContentStorage.push(tweet);
         $serviceScope.$emit(config.events.TWEETS_NEW, tweet);
       }
