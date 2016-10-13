@@ -18,6 +18,8 @@ module.exports = function TweetTimelineServiceFactory($q, $rootScope, $timeout, 
     };
 
     this.loadMoreTweets = (params) => {
+      params = angular.extend(options, params);
+
       return TweetService.list(params).then((tweets) => {
         return tweets.map((tweet) => {
           this.contentStorage.push(tweet);
@@ -67,6 +69,8 @@ module.exports = function TweetTimelineServiceFactory($q, $rootScope, $timeout, 
      */
     function fetchTweets(opts) {
       opts = opts || options;
+
+      console.log(opts);
 
       var deferred = $q.defer();
       SocketConnection.emit(config.events.TWEETS_FETCH, opts, (tweets) => {
