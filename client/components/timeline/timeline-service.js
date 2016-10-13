@@ -18,7 +18,7 @@ module.exports = function TweetTimelineServiceFactory($q, $rootScope, $timeout, 
     };
 
     this.loadMoreTweets = (params) => {
-      params = angular.extend(options, params);
+      params = angular.extend((options || {}), params);
 
       return TweetService.list(params).then((tweets) => {
         return tweets.map((tweet) => {
