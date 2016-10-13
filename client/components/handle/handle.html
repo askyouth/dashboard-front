@@ -14,9 +14,9 @@
           </div><!-- /.handle-profile__klout-score -->
 
           <div class="handle-profile__group">
-            <select ng-model="$ctrl.handle.camp_id" data-none-selected-text="Group">
-              <option value="1">Youth</option>
-              <option value="2">Policy</option>
+            <select data-none-selected-text="Group"
+              ng-model="$ctrl.handle.camp_id" ng-change="$ctrl.updateHandle()"
+              ng-options="group.id as group.name for group in $ctrl.UserGroups">
             </select>
           </div><!-- /.handle-profile__group -->
         </div><!-- /.handle-profile__meta -->

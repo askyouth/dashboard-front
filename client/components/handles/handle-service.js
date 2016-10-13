@@ -25,6 +25,12 @@ class HandleService {
     });
   }
 
+  update(handle, data) {
+    return this.ApiService.put(`handles/${handle.id}`, data).then(function (response) {
+      return response.data;
+    });
+  }
+
   remove(handle) {
     return this.ApiService.delete(`handles/${handle.id}`);
   }
