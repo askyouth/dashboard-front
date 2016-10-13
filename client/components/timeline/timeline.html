@@ -16,7 +16,7 @@
 
     <tweet ng-repeat="tweet in $ctrl.tweets track by $index" tweet="tweet" ng-click="$ctrl.selectTweet(tweet)"></tweet>
 
-    <a class="timeline__load-more" href="#" ng-if="!this.noMoreTweets" ng-click="$ctrl.loadMoreTweets()">Load more</a>
+    <a class="timeline__load-more" href="#" ng-if="$ctrl.tweets.length" ng-click="$ctrl.loadMoreTweets()">Load more</a>
   </div><!-- /.tweets -->
 
 </div><!-- /.timeline -->
