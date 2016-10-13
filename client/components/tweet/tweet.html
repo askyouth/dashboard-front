@@ -1,14 +1,12 @@
-<div class="tweet">
+<div id="tweet-{{$ctrl.tweet.id}}" class="tweet" data-tweet-id="{{$ctrl.tweet.id}}">
 
   <div class="tweet__content">
     <div class="tweet__inner">
       <div class="tweet__conversation-meta">
         <div class="tweet__reply-label" ng-if="$ctrl.tweet.in_reply_to_user_id">
             <span class="glyphicon glyphicon-share-alt tweet__reply-label-icon"></span>
-            <span>In reply to <a ui-sref="handle({ id: $ctrl.tweet.in_reply_to_user_id })">@{{$ctrl.tweet.in_reply_to_screen_name}}</a></span>
+            <span>In reply to <a href="https://twitter.com/{{$ctrl.tweet.in_reply_to_screen_name}}" target="_blank">@{{$ctrl.tweet.in_reply_to_screen_name}}</a></span>
         </div><!-- /.tweet__reply-label -->
-
-        <div class="tweet__retweet-label"></div><!-- /.tweet__retweet-label -->
       </div><!-- /.tweet__conversation-meta -->
 
       <div class="tweet__meta">
