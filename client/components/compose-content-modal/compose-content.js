@@ -5,12 +5,12 @@ const config = require('./config.json');
  * IndexController
  */
 class ComposeContentModalController {
-  constructor($rootScope, $scope, $element) {
+  constructor($rootScope, $scope, $element, AuthService, TweetService) {
     'ngInject';
     this._$scope = $scope;
     this._$rootScope = $rootScope;
     this._$element = $element;
-    // this.TweetService = new TweetTimelineService();
+    this.TweetService = TweetService;
 
     this.tweetForm = {
       content: null

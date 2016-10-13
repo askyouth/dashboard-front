@@ -1,9 +1,10 @@
 const transformContent = require('./tweet-transform.js');
 
 class TweetService {
-  constructor(ApiService, SocketConnection) {
+  constructor(Upload, ApiService, SocketConnection) {
     'ngInject';
     
+    this.Upload = Upload;
     this.ApiService = ApiService;
     this.SocketConnection = SocketConnection;
   }
@@ -35,7 +36,10 @@ class TweetService {
   }
 
   create(data) {
-
+    return this.Upload.upload({
+      url: this.ApiService.$url('tweets'),
+      data: data
+    });
   }
 
 }

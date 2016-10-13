@@ -5,15 +5,20 @@ const config = require('./config.json');
  * IndexController
  */
 class ComposeContentController {
-  constructor($element, TweetService) {
+  constructor($element, AuthService, TweetService, Notifications) {
     'ngInject';
     this._element = $element[0];
     this._$element = $element;
     this.TweetService = TweetService;
+    this.Notifications = Notifications;
 
     this.tweetForm = {
-      content: null
+      content: null,
+      image: null,
+      hasImage: false
     };
+
+    this.currentUser = AuthService.getUser();
 
     this.onElementClickBind = this.onElementClick.bind(this);
     this.onElementKeydownBind = this.onElementKeydown.bind(this);
@@ -94,14 +99,49 @@ class ComposeContentController {
     document.removeEventListener('click', this.onDocumentClickBind);
   }
 
-  submitContent() {
-    this.tweetForm.content = null;
-    this._$element.removeClass(config.cssClasses.IS_FOCUSED);
-    this._$element.removeClass(config.cssClasses.IS_DIRTY);
+  selectImage($file) {
+    if ($file) {
+      this.tweetForm.image = $file;
+      this.tweetForm.hasImage = true;
+    }
+  }
 
-    let $createdTweet = { text: this.tweetForm.content };
-    this.TweetService.createTweet($createdTweet);
-    this.onCreate($createdTweet);
+  removeImage() {
+    this.tweetForm.image = null;
+    this.tweetForm.hasImage = false;
+  }
+
+  submitContent($event) {
+    console.log('submit tweet')
+    if ($event) {
+      $event.preventDefault();
+    }
+
+    let tweetData = {
+      text: this.tweetForm.content
+    };
+
+    if (this.replyTo) {
+      tweetData.replyStatusId = this.replyTo.id;
+    }
+
+    if (this.tweetForm.image) {
+      tweetData.file = this.tweetForm.image; 
+    }
+
+    console.log(tweetData);
+
+    this.TweetService.create(tweetData).then((createdTweet) => {
+      this.Notifications.success('Tweet successfully posted');
+
+      this.tweetForm.content = null;
+      this._$element.removeClass(config.cssClasses.IS_FOCUSED);
+      this._$element.removeClass(config.cssClasses.IS_DIRTY);
+
+      this.onCreate(createdTweet);
+    }).catch(() => {
+      this.Notifications.error('Tweet post failed');
+    });
   }
 
 };

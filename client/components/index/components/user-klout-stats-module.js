@@ -31,7 +31,7 @@ module.exports = {
 
             <user-group group-id="handle.camp_id" class="user-klout-stats__group" short-name></user-group>
             <div class="user-klout-stats__score">
-              <div class="user-klout-stats__score-value">50.00</div>
+              <div class="user-klout-stats__score-value">{{handle.klout_score || 'N/A'}}</div>
               <div class="user-klout-stats__score-diff user-klout-stats__score-diff--positive">+ 5,2%</div>
             </div>
           </div>

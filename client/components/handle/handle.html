@@ -4,8 +4,8 @@
       <div class="panel-body">
         <img ng-src="{{$ctrl.profileImage($ctrl.handle.profile.image)}}" alt="{{$ctrl.handle.name}}" class="handle-profile__avatar img-thumbnail">
         <div class="handle-profile__user">
-          <div class="handle-profile__name">{{$ctrl.handle.name}}</div><!-- /.handle-profile__name -->
-          <div class="handle-profile__username">@{{$ctrl.handle.username}}</div><!-- /.handle-profile__username -->
+          <a href="https://twitter.com/{{$ctrl.handle.username}}" class="handle-profile__name" target="_blank">{{$ctrl.handle.name}}</a><!-- /.handle-profile__name -->
+          <a href="https://twitter.com/{{$ctrl.handle.username}}" class="handle-profile__username" target="_blank">@{{$ctrl.handle.username}}</a><!-- /.handle-profile__username -->
         </div><!-- /.handle-profile__meta -->
 
         <div class="handle-profile__meta">

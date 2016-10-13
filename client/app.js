@@ -62,6 +62,7 @@ app.directive('ngKeyupEnter', require('./components/shared/ng-keyup-enter.js'));
 app.directive('userGroup', require('./components/shared/user-groups.js').directive);
 
 // Services
+app.service('AuthService', require('./components/login/auth-service.js'));
 app.service('TweetTimelineService', require('./components/timeline/timeline-service.js'));
 app.service('TweetService', require('./components/tweet/tweet-service.js'));
 app.service('TopicService', require('./components/topic/topic-service.js'));

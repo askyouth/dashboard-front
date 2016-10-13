@@ -55,8 +55,8 @@
           </a>
 
           <ul class="dropdown-menu">
-            <li><a href="#">Block</a></li>
-            <li><a href="#">Report</a></li>
+            <li><a href="#">Add handle to <strong>Policy makers</strong></a></li>
+            <li><a href="#">Add handle to <strong>Youth</strong></a></li>
             <li role="separator" class="divider"></li><!-- /.separator -->
             <li><a href="#">Delete</a></li>
           </ul>
@@ -70,7 +70,7 @@
 
         <div class="tweet__klout-score" title="Klout score">
           <span class="klout-logo klout-logo--tiny"></span>
-          <span class="tweet__klout-value">100,00</span>
+          <span class="tweet__klout-value">{{tweet.user-klout_score || 'N/A'}}</span>
         </div><!-- /.klout-score -->
 
         <div class="tweet__user-group" title="User group">

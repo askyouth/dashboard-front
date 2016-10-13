@@ -28,6 +28,25 @@ compose-content {
   .tweet-form__content {
     min-height: 36px;
   }
+
+  &.has-media {
+    .compose-content__body {
+      padding-bottom: 2px;
+    }
+
+    .compose-content__footer {
+      display: block !important;
+      padding-bottom: 10px;
+    }
+
+    .tweet-form__content {
+      border: 1px solid #A7D4F2;
+      border-bottom: 0px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      min-height: 80px;
+    }
+  }
 }
 
 .compose-content__toolbar {
@@ -115,4 +134,41 @@ compose-content {
     left: 10px;
     right: 10px;
   }
+}
+
+.tweet-form__preview {
+  background-color: #f1f1f1;
+  border: 1px solid #A7D4F2;
+  border-top: 1px solid #ccd6dd;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  padding: 8px;
+}
+
+.tweet-form__preview-item {
+  border-radius: 5px;
+  display: inline-block;
+  float: left;
+  height: 113px;
+  margin-right: 10px;
+  overflow: hidden;
+  position: relative;
+  width: 113px;
+}
+
+.tweet-form__remove-preview-item {
+  background-color: #333;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  padding: 3px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.tweet-form__preview-image {
+  border-radius: 5px;
+  max-height: 113px;
+  margin-left: -33%;
 }

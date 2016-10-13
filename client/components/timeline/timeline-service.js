@@ -9,8 +9,8 @@ module.exports = function TweetTimelineServiceFactory($q, $rootScope, $timeout, 
     const $serviceScope = $rootScope.$new(true);
     let service = this;
 
-    this.contentStorage = new TweetsStack();
-    this.pendingContentStorage = new TweetsStack();
+    // this.contentStorage = new TweetsStack();
+    // this.pendingContentStorage = new TweetsStack();
 
     this.fetchTweets = function (opts) {
       opts = angular.extend(opts, options);
@@ -22,7 +22,6 @@ module.exports = function TweetTimelineServiceFactory($q, $rootScope, $timeout, 
 
       return TweetService.list(params).then((tweets) => {
         return tweets.map((tweet) => {
-          this.contentStorage.push(tweet);
           return tweet;
         });
       });
@@ -75,10 +74,6 @@ module.exports = function TweetTimelineServiceFactory($q, $rootScope, $timeout, 
       var deferred = $q.defer();
       SocketConnection.emit(config.events.TWEETS_FETCH, opts, (tweets) => {
         if (tweets.length) {
-          tweets.map((tweet) => {
-            service.contentStorage.push(tweet);
-          });
-
           $serviceScope.$emit(config.events.TWEETS_FETCH, tweets);
           deferred.resolve(filterTweets(tweets));
         } else {
@@ -117,8 +112,6 @@ module.exports = function TweetTimelineServiceFactory($q, $rootScope, $timeout, 
 
       if (tweets && tweets[0]) {
         let tweet = tweets[0];
-
-        service.pendingContentStorage.push(tweet);
         $serviceScope.$emit(config.events.TWEETS_NEW, tweet);
       }
     }
