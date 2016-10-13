@@ -70,11 +70,16 @@ module.exports = function TweetTimelineServiceFactory($q, $rootScope, $timeout, 
 
       var deferred = $q.defer();
       SocketConnection.emit(config.events.TWEETS_FETCH, opts, (tweets) => {
-        tweets.map((tweet) => {
-          service.contentStorage.push(tweet);
-        })
-        $serviceScope.$emit(config.events.TWEETS_FETCH, tweets);
-        deferred.resolve(filterTweets(tweets));
+        if (tweets.length) {
+          tweets.map((tweet) => {
+            service.contentStorage.push(tweet);
+          });
+
+          $serviceScope.$emit(config.events.TWEETS_FETCH, tweets);
+          deferred.resolve(filterTweets(tweets));
+        } else {
+          deferred.reject('No tweets loaded');
+        }
       });
       return deferred.promise;
     }
