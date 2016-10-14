@@ -49,6 +49,14 @@ class TweetService {
     return this.ApiService.post(`tweets/${tweet.id}/retweet`);
   }
 
+  like(tweet) {
+    return this.ApiService.post(`tweets/${tweet.id}/favorite`);
+  }
+
+  unlike(tweet) {
+    return this.ApiService.post(`tweets/${tweet.id}/unfavorite`);
+  }
+
 }
 
 module.exports = TweetService;

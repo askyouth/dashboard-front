@@ -17,13 +17,15 @@ class TweetController {
     this.onToolbarClickBind = this.onToolbarClick.bind(this);
     this.onTweetLinkClickBind = this.onTweetLinkClick.bind(this);
 
-    HandleService.handles().then((handles) => {
-      angular.forEach(handles, (handle) => {
-        if (handle.uid === this.tweet.user.id) {
-          this.handleUser = handle;
-        }
+    if (this.tweet) {
+      HandleService.handles().then((handles) => {
+        angular.forEach(handles, (handle) => {
+          if (handle.uid === this.tweet.user.id) {
+            this.handleUser = handle;
+          }
+        });
       });
-    });
+    }
   }
 
   $onInit() {
@@ -94,6 +96,28 @@ class TweetController {
     }).catch(() => {
       this.Notifications.error('Retweet failed');
     });
+  }
+
+  likeTweet($event) {
+    if ($event) {
+      $event.preventDefault();
+    }
+
+    if (this.tweet.favorited) {
+      this.TweetService.unlike(this.tweet).then(() => {
+        this.Notifications.success('Tweet unliked');
+        this.tweet.favorited = false;
+      }).catch(() => {
+        this.Notifications.error('Tweet unlike failed');
+      });
+    } else {
+      this.TweetService.like(this.tweet).then(() => {
+        this.Notifications.success('Tweet liked');
+        this.tweet.favorited = true;
+      }).catch(() => {
+        this.Notifications.error('Tweet like failed');
+      })
+    }
   }
 };
 

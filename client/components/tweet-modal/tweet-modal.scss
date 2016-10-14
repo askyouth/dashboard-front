@@ -4,7 +4,7 @@
   }
 
   .modal-content {
-    overflow: hidden;
+    // overflow: hidden;
   }
 }
 
@@ -47,6 +47,8 @@
 .tweet-modal__body {
   background-color: #E8F3FD;
   border-top: 1px solid #e5e5e5;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
   padding: 0 20px 0 24px;
 
   .compose-content {

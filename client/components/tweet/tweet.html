@@ -47,7 +47,7 @@
         </a>
       </div>
 
-      <div class="tweet__action tweet__action-like" title="Like tweet">
+      <div class="tweet__action tweet__action-like" title="Like tweet" ng-class="{'is-liked': $ctrl.tweet.favorited}">
         <a href="#" ng-click="$ctrl.likeTweet($event)">
           <span class="glyphicon glyphicon-heart"></span>
           <span class="tweet__action-like-count"></span>
