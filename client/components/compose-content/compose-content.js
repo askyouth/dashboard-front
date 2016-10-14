@@ -136,6 +136,9 @@ class ComposeContentController {
       this.Notifications.success('Tweet successfully posted');
 
       this.tweetForm.content = null;
+      this.tweetForm.image = null;
+      this.tweetForm.hasImage = false;
+      
       this._$element.removeClass(config.cssClasses.IS_FOCUSED);
       this._$element.removeClass(config.cssClasses.IS_DIRTY);
 

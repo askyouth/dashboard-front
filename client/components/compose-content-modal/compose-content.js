@@ -82,6 +82,8 @@ class ComposeContentModalController {
       this.Notifications.success('Tweet successfully posted');
 
       this.tweetForm.content = null;
+      this.tweetForm.image = null;
+      this.tweetForm.hasImage = false;
       this.hideModal();
       this.onCreate({ $createdTweet: createdTweet });
     }).catch(() => {
