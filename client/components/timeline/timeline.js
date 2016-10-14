@@ -5,10 +5,11 @@ const config = require('./config.json');
  * TweetsController
  */
 class TweetsController {
-  constructor($scope, $element, TweetTimelineService) {
+  constructor($scope, $element, TweetTimelineService, PageService) {
     'ngInject';
     this._element = $element[0];
     this._$element = $element;
+    this.PageService = PageService;
     this.TweetTimelineService = new TweetTimelineService(this.config);
   }
 
@@ -49,6 +50,8 @@ class TweetsController {
     if (this.pendingTweets.length) {
       renderLastTweet()
     }
+
+    this.PageService.updateTweetCount(0);
   }
 
   loadMoreTweets() {
@@ -72,6 +75,7 @@ class TweetsController {
 
   onContentCreated(event, tweet) {
     this.pendingTweets.unshift(tweet);
+    this.PageService.updateTweetCount(this.pendingTweets.length);
   }
 };
 
