@@ -118,7 +118,7 @@ module.exports = function ($stateProvider) {
     resolve: {
       topicModel: function ($stateParams, TopicService) {
         'ngInject';
-        return TopicService.find($stateParams.id);
+        return TopicService.find($stateParams.id, { related: '["handles"]' });
       }
     },
     onEnter: function (PageService, topicModel) {

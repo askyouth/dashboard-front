@@ -22,8 +22,8 @@ class TopicService {
     }
   }
 
-  find(topicId) {
-    return this.ApiService.get(`topics/${topicId}`).then(function (response) {
+  find(topicId, params) {
+    return this.ApiService.get(`topics/${topicId}`, { params }).then(function (response) {
       return response.data;
     });
   }
