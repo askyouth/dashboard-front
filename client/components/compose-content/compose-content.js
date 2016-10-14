@@ -56,7 +56,10 @@ class ComposeContentController {
 
       if (this.replyTo.entities && this.replyTo.entities.user_mentions) {
         angular.forEach(this.replyTo.entities.user_mentions, function (userMention) {
-          mentions.push(`@${userMention.screen_name}`);
+          let username = `@${userMention.screen_name}`;
+          if (mentions.indexOf(username) < 0) {
+            mentions.push(username);
+          }
         });
       }
 
@@ -129,8 +132,6 @@ class ComposeContentController {
       tweetData.file = this.tweetForm.image; 
     }
 
-    console.log(tweetData);
-
     this.TweetService.create(tweetData).then((createdTweet) => {
       this.Notifications.success('Tweet successfully posted');
 
@@ -138,7 +139,7 @@ class ComposeContentController {
       this._$element.removeClass(config.cssClasses.IS_FOCUSED);
       this._$element.removeClass(config.cssClasses.IS_DIRTY);
 
-      this.onCreate(createdTweet);
+      this.onCreate({ $createdTweet: createdTweet });
     }).catch(() => {
       this.Notifications.error('Tweet post failed');
     });

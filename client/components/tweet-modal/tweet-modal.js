@@ -57,7 +57,7 @@ class TweetModalController {
   }
 
   onTweetReply(tweet) {
-    
+    this.tweetReplies.push(tweet);
   }
 
   onReplySelect(tweet) {

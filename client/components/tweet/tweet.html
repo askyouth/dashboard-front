@@ -29,20 +29,20 @@
 
     <div class="tweet__toolbar">
       <div class="tweet__action tweet__action-reply" title="Reply to tweet">
-        <a href="#" ng-click="$ctrl.replyToTweet()">
+        <a href="#" ng-click="$ctrl.replyToTweet($event)">
           <span class="glyphicon glyphicon-share-alt"></span>
         </a>
       </div>
 
-      <div class="tweet__action tweet__action-retweet" title="Retweet this tweet">
-        <a href="#" ng-click="$ctrl.retweetTweet()">
+      <div class="tweet__action tweet__action-retweet" title="Retweet this tweet" ng-class="{'is-retweeted': $ctrl.tweet.retweeted}">
+        <a href="#" ng-click="$ctrl.retweetTweet($event)">
           <span class="glyphicon glyphicon-retweet"></span>
           <span class="tweet__action-retweet-count"></span>
         </a>
       </div>
 
       <div class="tweet__action tweet__action-like" title="Like tweet">
-        <a href="#" ng-click="$ctrl.likeTweet()">
+        <a href="#" ng-click="$ctrl.likeTweet($event)">
           <span class="glyphicon glyphicon-heart"></span>
           <span class="tweet__action-like-count"></span>
         </a>

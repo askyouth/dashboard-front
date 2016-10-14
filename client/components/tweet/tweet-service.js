@@ -39,7 +39,14 @@ class TweetService {
     return this.Upload.upload({
       url: this.ApiService.$url('tweets'),
       data: data
+    }).then(function (response) {
+      let tweet = response.data;
+      return transformContent(tweet);
     });
+  }
+
+  retweet(tweet) {
+    return this.ApiService.post(`tweets/${tweet.id}/retweet`);
   }
 
 }

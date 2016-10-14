@@ -16,14 +16,25 @@
         <div class="compose-content-modal__form tweet-form">
           <div class="tweet-form__content" contenteditable="true" ng-model="$ctrl.tweetForm.content" data-placeholder="Compose new Tweet" content-input></div>
           <!-- <textarea class="tweet-form__content" ng-model="$ctrl.tweetForm.content" placeholder="Compose new Tweet" content-input> -->
-
+          
+          <div class="tweet-form__preview clearfix" ng-if="$ctrl.tweetForm.image">
+            <div class="tweet-form__preview-item">
+              <img ngf-src="$ctrl.tweetForm.image" class="tweet-form__preview-image" />
+              <span class="tweet-form__remove-preview-item glyphicon glyphicon-remove" ng-click="$ctrl.removeImage()"></span>
+            </div><!-- /.tweet-form__preview-item -->
+          </div><!-- /.tweet-form__preview -->
         </div><!-- /.compose-content-modal__form tweet-form -->
       </div>
 
       <div class="modal-footer compose-content-modal__footer">
         <div class="compose-content-modal__toolbar">
-          <button class="btn btn-link compose-content-modal__button"><span class="glyphicon glyphicon-camera"></span></button>
-        </div><!-- /.compose-content-modal__toolbar -->
+          <button class="btn btn-link compose-content__button">
+            <label class="upload" ngf-select="$ctrl.selectImage($file)" ngf-pattern="'.png,.jpg'" ngf-max-files="1">
+              <input type="file" class="upload__input">
+              <span class="upload__icon glyphicon glyphicon-camera"></span>
+            </label>
+          </button>
+        </div>
 
         <span class="tweet-footer__counter">{{140 - $ctrl.tweetForm.content.length}}</span>
         <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->

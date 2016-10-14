@@ -5,8 +5,10 @@ const config = require('./config.json');
  * TweetController
  */
 class TweetController {
-  constructor($rootScope, $element) {
+  constructor($rootScope, $element, TweetService, Notifications) {
     'ngInject';
+    this.TweetService = TweetService;
+    this.Notifications = Notifications;
     this._$rootScope = $rootScope;
     this._element = $element[0];
     this._$element = $element;
@@ -60,8 +62,30 @@ class TweetController {
     $(this).dropdown('toggle');
   }
 
-  replyToTweet() {
+  replyToTweet($event) {
+    if ($event) {
+      $event.preventDefault();
+    }
+    
+    console.log('reply')
     this._$rootScope.$emit('tweet:reply', this.tweet);
+  }
+
+  retweetTweet($event) {
+    if ($event) {
+      $event.preventDefault();
+    }
+
+    if (this.tweet.retweeted) {
+      return false;
+    }
+
+    this.TweetService.retweet(this.tweet).then(() => {
+      this.Notifications.success('Tweet retweeted');
+      this.tweet.retweeted = true;
+    }).catch(() => {
+      this.Notifications.error('Retweet failed');
+    });
   }
 };
 
