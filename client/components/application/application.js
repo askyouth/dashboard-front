@@ -5,7 +5,7 @@ const config = require('./config.json');
  * IndexController
  */
 class ApplicationController {
-  constructor($scope, $element) {
+  constructor($scope, $element, HandleService) {
     'ngInject';
     this._$scope = $scope;
     this._$element = $element[0];

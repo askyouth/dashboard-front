@@ -63,7 +63,7 @@ class ComposeContentController {
         });
       }
 
-      this.tweetForm.content = mentions.join(' ') + '&nbsp';
+      this.tweetForm.content = mentions.join(' ') + '&nbsp;';
     }
   }
 

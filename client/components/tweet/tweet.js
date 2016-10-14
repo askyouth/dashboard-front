@@ -5,7 +5,7 @@ const config = require('./config.json');
  * TweetController
  */
 class TweetController {
-  constructor($rootScope, $element, TweetService, Notifications) {
+  constructor($rootScope, $element, TweetService, HandleService, Notifications) {
     'ngInject';
     this.TweetService = TweetService;
     this.Notifications = Notifications;
@@ -16,6 +16,14 @@ class TweetController {
 
     this.onToolbarClickBind = this.onToolbarClick.bind(this);
     this.onTweetLinkClickBind = this.onTweetLinkClick.bind(this);
+
+    HandleService.handles().then((handles) => {
+      angular.forEach(handles, (handle) => {
+        if (handle.uid === this.tweet.user.id) {
+          this.handleUser = handle;
+        }
+      });
+    });
   }
 
   $onInit() {

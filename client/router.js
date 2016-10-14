@@ -27,6 +27,12 @@ module.exports = function ($stateProvider) {
     url: '/',
     template: '<index-component></index-component>',
     data: { permissions: { only: ['user'], redirectTo: 'login' } },
+    resolve: {
+      cacheHandles: function (HandleService) {
+        'ngInject';
+        return HandleService.handles(true);
+      }
+    },
     onEnter: function (PageService) {
       'ngInject';
       PageService.setTitle('Home');
@@ -58,6 +64,10 @@ module.exports = function ($stateProvider) {
     template: '<handle-component handle="$resolve.handleModel"></handle-component>',
     data: { permissions: { only: ['user'], redirectTo: 'login' } },
     resolve: {
+      cacheHandles: function (HandleService) {
+        'ngInject';
+        return HandleService.handles(true);
+      },
       handleModel: function ($stateParams, HandleService) {
         'ngInject';
         return HandleService.find($stateParams.id, { related: '["topics"]' });
@@ -122,6 +132,10 @@ module.exports = function ($stateProvider) {
     template: '<topic-component topics="$resolve.topics" topic-cursors="$resolve.topicCursors"></topic-component>',
     data: { permissions: { only: ['user'], redirectTo: 'login' } },
     resolve: {
+      cacheHandles: function (HandleService) {
+        'ngInject';
+        return HandleService.handles(true);
+      },
       topics: function (TopicService) {
         'ngInject';
         return TopicService.list();
@@ -182,6 +196,10 @@ module.exports = function ($stateProvider) {
     template: '<conversation-component topics="$resolve.conversation"></conversation-component>',
     data: { permissions: { only: ['user'], redirectTo: 'login' } },
     resolve: {
+      cacheHandles: function (HandleService) {
+        'ngInject';
+        return HandleService.handles(true);
+      },
       conversation: function () {
         'ngInject';
         return { id: 1, handles: [] };

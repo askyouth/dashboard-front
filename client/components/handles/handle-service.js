@@ -7,6 +7,19 @@ class HandleService {
     this.ApiService = ApiService;
   }
 
+  handles(force) {
+    if (force || !this._handles) {
+      return this.ApiService.get('handles').then((response) => {
+        this._handles = response.data;
+        return response.data;
+      });
+    } else {
+      let deferred = this._$q.defer();
+      deferred.resolve(this._handles);
+      return deferred.promise;
+    }
+  }
+
   list(params) {
     return this.ApiService.get('handles', { params }).then(function (response) {
       return response.data;
