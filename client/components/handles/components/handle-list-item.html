@@ -13,7 +13,7 @@
 
   <div class="handle__klout-score">
     <span class="klout-logo klout-logo--small"></span>
-    <span class="handle__klout-score__score">{{handle.klout_score || 'N/A'}}</span>
+    <span class="handle__klout-score__score">{{($ctrl.handle.klout_score || 'N/A') | number:2}}</span>
   </div><!-- /.handle__klout-score -->
 
   <div class="handle__remove">
