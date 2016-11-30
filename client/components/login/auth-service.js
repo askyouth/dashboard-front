@@ -19,12 +19,50 @@ const user = {
 };
 
 class AuthService {
-  constructor() {
+  constructor($auth, ApiService, AppStore) {
     'ngInject';
+    this._profile = null;
+    this._$auth = $auth;
+    this._ApiService = ApiService;
+    this._AppStore = AppStore;
   }
 
   getUser() {
     return user;
+  }
+
+  currentProfile(profile) {
+    if (profile) {
+      this._AppStore.set('profile', profile);
+      this._profile = profile;
+    } else {
+      profile = this._AppStore.get('profile');
+      if (profile) {
+        this._profile = profile;
+      }
+    }
+    return this._profile;
+  }
+
+  isAuthenticated() {
+    return this._$auth.isAuthenticated();
+  }
+
+  login(data) {
+    return this._$auth.login(data).then((response) => {
+      var profile = response.data.user;
+      return this.currentProfile(profile);
+    });
+  }
+
+  signup(data) {
+    return this._ApiService.post('/signup', data);
+  }
+
+  logout() {
+    return this._$auth.logout().then(() => {
+      this._AppStore.remove('profile');
+    });
   }
 
 }

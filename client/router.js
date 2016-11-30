@@ -257,9 +257,11 @@ module.exports = function ($stateProvider) {
    $stateProvider.state('logout', {
      url: '/logout',
      template: '<div></div>',
-     controller: function ($state) {
+     controller: function ($state, AuthService) {
        'ngInject';
-       $state.go('login');
+       AuthService.logout().then(() => {
+        $state.go('login');
+      });
      },
      data: { permissions: { only: ['user'], redirectTo: 'login' } }
    })

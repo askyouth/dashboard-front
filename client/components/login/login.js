@@ -5,17 +5,31 @@ const config = require('./config.json');
  * IndexController
  */
 class LoginController {
-  constructor($element) {
+  constructor($element, $state, AuthService, Notifications) {
     'ngInject';
+    this._$state = $state;
     this._$element = $element;
+    this._AuthService = AuthService;
+    this._Notifications = Notifications;
+
+    this.loginForm = {
+      email: null,
+      password: null
+    };
   }
 
   auth() {
-    console.log('auth local');
+    this._AuthService.login(this.loginForm).then(() => {
+      this._Notifications.success('Login successfully done!');
+      console.log(this._AuthService.isAuthenticated());
+      this._$state.go('index');
+    }).catch(() => {
+      this._Notifications.error('Login failed');
+    });
   }
 
   authTwitter() {
-    console.log('auth twitter');
+
   }
 };
 

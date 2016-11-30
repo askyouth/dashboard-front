@@ -1,7 +1,7 @@
 'use strict';
 const config = require('../config');
 
-module.exports = function ($urlRouterProvider, $locationProvider, $compileProvider, $httpProvider, toastrConfig) {
+module.exports = function ($urlRouterProvider, $locationProvider, $compileProvider, $httpProvider, $authProvider, toastrConfig) {
   'ngInject';
   $urlRouterProvider.otherwise('/');
   $locationProvider.html5Mode(true);
@@ -13,4 +13,8 @@ module.exports = function ($urlRouterProvider, $locationProvider, $compileProvid
   angular.extend(toastrConfig, {
     
   });
+
+  $authProvider.baseUrl = config.get('api.domain');
+  $authProvider.loginUrl = '/login';
+  $authProvider.tokenName = 'auth';
 };

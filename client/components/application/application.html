@@ -3,7 +3,7 @@
     <div id="header-container" class="container-fluid">
       <a id="brand" ui-sref="index" class="navbar-brand">Ask Youth!</a>
 
-      <ul id="navigation" class="navigation nav navbar-nav">
+      <ul id="navigation" class="navigation nav navbar-nav" ng-if="$ctrl.isAuthenticated()">
         <li class="navigation__item">
           <a ui-sref="index" ui-sref-active="is-active">Home</a>
         </li><!-- /.navigation__item -->
@@ -24,11 +24,13 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <span id="header__user">Jane Doe</span> <span class="caret"></span>
+            <span id="header__user">{{$ctrl.currentProfile().name || 'Please login'}}</span> <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a ui-sref="profile">Account settings</a></li>
-            <li><a ui-sref="logout">Logout</a></li>
+            <li><a ui-sref="profile" ng-if="$ctrl.isAuthenticated()">Account settings</a></li>
+            <li><a ui-sref="logout" ng-if="$ctrl.isAuthenticated()">Logout</a></li>
+            
+            <li><a ui-sref="login" ng-if="!$ctrl.isAuthenticated()">Login</a></li>
           </ul><!-- /.dropdown-menu -->
         </li><!-- /.dropdown -->
       </ul><!-- /.nav.navbar-nav.navbar-right -->

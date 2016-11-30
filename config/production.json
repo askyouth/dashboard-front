@@ -1,5 +1,8 @@
 {
   "app": {
     "debug": false
+  },
+  "store": {
+    "key": "ask-youth.store"
   }
 }

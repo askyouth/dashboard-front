@@ -1,31 +1,27 @@
 <div class="login-component">
 
-  <div class="login-form">
+  <form ng-submit="$ctrl.auth()" class="login-form" novalidate>
 
     <div class="col-md-12">
       <div class="form-group">
         <label for="login-form__email">Email</label>
-        <input type="text" name="login__email" class="form-control" ng-model="ctrl.loginForm.email" placeholder="user@domain.com">
+        <input type="text" name="login__email" class="form-control" ng-model="$ctrl.loginForm.email" placeholder="user@domain.com">
       </div><!-- /.form-group -->
     </div><!-- /.col-md-12 -->
 
     <div class="col-md-12">
       <div class="form-group">
         <label for="login-form__password">Password</label>
-        <input type="password" name="login__password" class="form-control" ng-model="ctrl.loginForm.password" placeholder="•••••••••">
+        <input type="password" name="login__password" class="form-control" ng-model="$ctrl.loginForm.password" placeholder="•••••••••">
       </div><!-- /.form-group -->
     </div><!-- /.col-md-12 -->
 
     <div class="form-group">
-      <div class="col-md-6">
-        <button class="btn btn-primary btn-block" ng-click="$ctrl.auth()">Login</button>
-      </div><!-- /.col-md-6 -->
-
-      <div class="col-md-6">
-        <button class="btn btn-default btn-block btn-twitter" ng-click="$ctrl.authTwitter()">Login with Twitter</button>
+      <div class="col-md-12">
+        <button class="btn btn-primary btn-block" type="submit">Login</button>
       </div><!-- /.col-md-6 -->
     </div><!-- /.form-group -->
 
-  </div><!-- /.login-form -->
+  </form><!-- /.login-form -->
 
 </div><!-- /.login-component -->

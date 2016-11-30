@@ -13,7 +13,9 @@ const app = angular.module('ask-youth', [
   'toastr',
   'wu.masonry',
   'ngFileUpload',
-  'btford.socket-io'
+  'btford.socket-io',
+  'satellizer',
+  'angular-storage'
 ]);
 
 // Configuration and router
@@ -70,8 +72,8 @@ app.service('HandleService', require('./components/handles/handle-service.js'));
 app.service('PageService', require('./components/shared/page-service.js'));
 app.service('ApiService', require('./components/shared/api-service.js'));
 app.service('Notifications', require('./components/shared/notifications.js'));
+app.service('AppStore', require('./components/shared/store.js'));
 app.factory('SocketConnection', require('./components/shared/socket-connection.js'));
-
 
 // Filters
 app.filter('dateFilter', require('./components/shared/date-filter.js'));
