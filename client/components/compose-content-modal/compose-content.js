@@ -5,13 +5,15 @@ const config = require('./config.json');
  * IndexController
  */
 class ComposeContentModalController {
-  constructor($rootScope, $scope, $element, AuthService, TweetService, Notifications) {
+  constructor($rootScope, $scope, $element, AuthService, TweetService, HandleService, Notifications, USER_GROUPS) {
     'ngInject';
     this._$scope = $scope;
     this._$rootScope = $rootScope;
     this._$element = $element;
     this.TweetService = TweetService;
+    this.HandleService = HandleService;
     this.Notifications = Notifications;
+    this.USER_GROUPS = USER_GROUPS;
 
     this.tweetForm = {
       content: null,
@@ -30,6 +32,7 @@ class ComposeContentModalController {
 
     this._$rootScope.$on('tweet:reply', (e, tweet) => {
       this.replyTweet = tweet;
+      this.isHandle();
 
       let mentions = [`@${tweet.user.screen_name}`];
       angular.forEach(tweet.entities.user_mentions, (userMention) => {
@@ -61,7 +64,6 @@ class ComposeContentModalController {
   }
 
   submitContent($event) {
-    console.log('submit tweet')
     if ($event) {
       $event.preventDefault();
     }
@@ -104,6 +106,46 @@ class ComposeContentModalController {
       this.replyTweet = null;
       this.tweetForm.content = null;
     });
+  }
+
+  isHandle() {
+    if (this.replyTweet) {
+      let user = this.replyTweet.user;
+
+      this.HandleService.checkHandleUser(user).then(() => {
+        console.log('handle');
+        this._$element.removeClass(config.cssClasses.MISSING_HANDLE);
+      }).catch(() => {
+        console.log('not handle');
+        this._$element.addClass(config.cssClasses.MISSING_HANDLE);
+      });
+    }
+  }
+
+  addHandleAsYouth() {
+    if (this.replyTweet) {
+      this.HandleService.create(this.replyTweet.user.screen_name, this.USER_GROUPS.YOUTH).then(() => {
+        this.Notifications.success(`User ${this.replyTweet.user.name} added to "Youth".`);
+        this.discardHandleControls();
+      }).catch(() => {
+        this.Notifications.error(`Adding user ${this.replyTweet.user.name} to "Youth" failed.`);
+      });
+    }
+  }
+
+  addHandleAsPolicyMaker() {
+    if (this.replyTweet) {
+      this.HandleService.create(this.replyTweet.user.screen_name, this.USER_GROUPS.POLICY).then(() => {
+        this.Notifications.success(`User ${this.replyTweet.user.name} added to "Policy makers".`);
+        this.discardHandleControls();
+      }).catch(() => {
+        this.Notifications.error(`Adding user ${this.replyTweet.user.name} to "Policy makers" failed.`);
+      });
+    }
+  }
+
+  discardHandleControls() {
+    this._$element.removeClass(config.cssClasses.MISSING_HANDLE);
   }
 };
 

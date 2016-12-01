@@ -5,7 +5,7 @@ const config = require('./config.json');
  * IndexController
  */
 class ComposeContentController {
-  constructor($element, AuthService, TweetService, Notifications) {
+  constructor($scope, $element, AuthService, TweetService, Notifications) {
     'ngInject';
     this._element = $element[0];
     this._$element = $element;
@@ -37,6 +37,7 @@ class ComposeContentController {
     $contentToolbar.on('click', this.onToolbarClickBind);
 
     this.initializeReplyContent();
+    this.initializeInfographics();
   }
 
   $onDestroy() {
@@ -65,6 +66,14 @@ class ComposeContentController {
 
       this.tweetForm.content = mentions.join(' ') + '&nbsp;';
     }
+  }
+
+  initializeInfographics() {
+    if (!this.infographics) return false;
+
+    this.tweetForm.infographicId = this.infographics.id;
+    // this.tweetForm.image = this.infographics.url;
+    this.tweetForm.hasImage = true;
   }
 
   onElementClick(e) {
@@ -112,10 +121,13 @@ class ComposeContentController {
   removeImage() {
     this.tweetForm.image = null;
     this.tweetForm.hasImage = false;
+
+    if (this.infographics) {
+      this.infographics = null;
+    }
   }
 
   submitContent($event) {
-    console.log('submit tweet')
     if ($event) {
       $event.preventDefault();
     }
@@ -132,19 +144,30 @@ class ComposeContentController {
       tweetData.file = this.tweetForm.image; 
     }
 
+    if (this.tweetForm.infographicId) {
+      tweetData.infographicId = this.tweetForm.infographicId;
+      tweetData.file = undefined;
+    }
+
+    this._$element.addClass(config.cssClasses.IS_POSTING);
     this.TweetService.create(tweetData).then((createdTweet) => {
       this.Notifications.success('Tweet successfully posted');
 
       this.tweetForm.content = null;
-      this.tweetForm.image = null;
-      this.tweetForm.hasImage = false;
+
+      if (!this.tweetForm.infographicId) {
+        this.tweetForm.image = null;
+        this.tweetForm.hasImage = false;
+      }
       
       this._$element.removeClass(config.cssClasses.IS_FOCUSED);
       this._$element.removeClass(config.cssClasses.IS_DIRTY);
+      this._$element.removeClass(config.cssClasses.IS_POSTING);
 
       this.onCreate({ $createdTweet: createdTweet });
     }).catch(() => {
       this.Notifications.error('Tweet post failed');
+      this._$element.removeClass(config.cssClasses.IS_POSTING);
     });
   }
 
@@ -156,6 +179,7 @@ module.exports = {
   controller: ComposeContentController,
   bindings: {
     replyTo: '=',
+    infographics: '=',
     onCreate: '&'
   }
 };

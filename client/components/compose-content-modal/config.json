@@ -1,4 +1,8 @@
 {
+  "cssClasses": {
+    "IS_HANDLE": "compose-content-modal--is-handle",
+    "MISSING_HANDLE": "compose-content-modal--missing-handle"
+  },
   "selectors": {
     "composeContentModal": "#compose-content__modal"
   }

@@ -18,6 +18,12 @@ compose-content {
       min-height: 80px;
     }
   }
+
+  &.is-posting {
+    .compose-content__loader {
+      display: inline-block;
+    }
+  }
 }
 
 .compose-content {
@@ -94,6 +100,10 @@ compose-content {
   }
 }
 
+.compose-content__loader {
+  display: none;
+}
+
 .compose-content__counter {
   color: #8899a6;
   display: inline-block;
@@ -153,6 +163,7 @@ compose-content {
   margin-right: 10px;
   overflow: hidden;
   position: relative;
+  text-align: center;
   width: 113px;
 }
 

@@ -1,0 +1,9 @@
+.icon {
+  &--twitter-white {
+    background-image: url('/images/twitter-logo-white.svg');
+    background-repeat: no-repeat;
+    background-size: 24px;
+    background-position: left top;
+    display: inline-block;
+  }
+}

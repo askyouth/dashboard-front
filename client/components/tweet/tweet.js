@@ -76,8 +76,6 @@ class TweetController {
     if ($event) {
       $event.preventDefault();
     }
-    
-    console.log('reply')
     this._$rootScope.$emit('tweet:reply', this.tweet);
   }
 

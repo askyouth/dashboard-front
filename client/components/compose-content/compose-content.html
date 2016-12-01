@@ -9,9 +9,10 @@
 
         </div><!-- /.tweet-form__content -->
 
-        <div class="tweet-form__preview clearfix" ng-if="$ctrl.tweetForm.image">
+        <div class="tweet-form__preview clearfix" ng-if="$ctrl.tweetForm.image || $ctrl.infographics">
           <div class="tweet-form__preview-item">
-            <img ngf-src="$ctrl.tweetForm.image" class="tweet-form__preview-image" />
+            <img ngf-src="$ctrl.tweetForm.image" class="tweet-form__preview-image" ng-if="!$ctrl.infographics" />
+            <img ng-src="{{$ctrl.infographics.url}}" class="tweet-form__preview-image" ng-if="$ctrl.infographics" />
             <span class="tweet-form__remove-preview-item glyphicon glyphicon-remove" ng-click="$ctrl.removeImage()"></span>
           </div><!-- /.tweet-form__preview-item -->
         </div><!-- /.tweet-form__preview -->
@@ -27,6 +28,8 @@
           </label>
         </button>
       </div>
+
+      <img src="/images/tweet-loader.gif" alt="Posting tweet..." class="compose-content__loader" />
 
       <span class="tweet-footer__counter">{{140 - $ctrl.tweetForm.content.length}}</span>
 

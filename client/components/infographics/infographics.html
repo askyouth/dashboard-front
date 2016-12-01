@@ -6,8 +6,8 @@
       <div class="panel-heading">Infographics</div><!-- /.panel-heading -->
 
       <div class="list-group">
-        <a ui-sref="infographics({ start_date: month.start_date, end_date: month.end_date })" ui-sref-active="active" class="list-group-item" ng-repeat="month in $ctrl.months">
-          {{month.start_date | dateFilter:'MMMM yyyy'}}
+        <a ui-sref="infographics({ month: archive.month })" ui-sref-active="active" class="list-group-item" ng-repeat="archive in $ctrl.infographicsArchive">
+          {{archive.month | dateFilter:'MMMM yyyy'}}
         </a><!-- /.list-group-item -->
       </div><!-- /.list-group -->
     </div><!-- /.panel panel-default -->
@@ -24,7 +24,7 @@
       </label>
     </h1>
 
-    <infographics-wall images="$ctrl.images"></infographics-wall>
+    <infographics-wall infographics="$ctrl.infographics"></infographics-wall>
   </div><!-- /#infographics-page__content.col-md-9 -->
 
 </div><!-- /#infographics-page -->

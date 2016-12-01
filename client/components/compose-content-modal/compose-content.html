@@ -8,6 +8,16 @@
         <h4 class="modal-title compose-content-modal__title" ng-bind="$ctrl.replyTweet ? ('Reply to @' + $ctrl.replyTweet.user.screen_name) : 'Compose new Tweet'"></h4>
       </div>
 
+      <div class="modal-body compose-content-modal__body--handle-controls" ng-if="$ctrl.replyTweet">
+        <strong>{{$ctrl.replyTweet.user.name}}</strong> has not been added as a youth nor a policy maker. Do you wish to add them now? If you do, this interaction will count as contribution.
+
+        <div class="form-group compose-content-modal__form-group--handle-controls">
+          <button class="btn btn-primary" ng-click="$ctrl.addHandleAsYouth()">Add as youth</button>
+          <button class="btn btn-primary" ng-click="$ctrl.addHandleAsPolicyMaker()">Add as policy maker</button>
+          <button class="btn btn-link" ng-click="$ctrl.discardHandleControls()">Do not add</button>
+        </div>
+      </div><!-- /.modal-body compose-content-modal__body--handle-controls -->
+
       <div class="modal-body compose-content-modal__body--reply-tweet" ng-if="$ctrl.replyTweet">
         <tweet tweet="$ctrl.replyTweet" tweet-reply="true"></tweet>
       </div><!-- /.modal-body -->

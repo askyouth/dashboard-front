@@ -69,6 +69,7 @@ app.service('TweetTimelineService', require('./components/timeline/timeline-serv
 app.service('TweetService', require('./components/tweet/tweet-service.js'));
 app.service('TopicService', require('./components/topic/topic-service.js'));
 app.service('HandleService', require('./components/handles/handle-service.js'));
+app.service('InfographicsService', require('./components/infographics/infographics-service.js'));
 app.service('ProfileService', require('./components/profile/profile-service.js'));
 app.service('ProfileValidator', require('./components/profile/profile-validator.js').factory);
 app.service('PageService', require('./components/shared/page-service.js'));

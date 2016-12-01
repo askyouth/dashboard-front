@@ -2,19 +2,22 @@
   "cssClasses": {
     "IS_ZOOMED": "is-zoomed",
     "IS_INFO": "is-info",
-    "SHOW_LINK": "show-link"
+    "SHOW_LINK": "show-link",
+    "TWEET_INFOGRAPHICS": "tweet-infographics"
   },
 
   "selectors": {
     "WALL": ".infographics__wall",
     "INFOGRAPHICS_MODAL": ".infographics-modal",
     "ACTION_LINK": ".infographics-modal__action--link",
-    "ACTION_SHARE": ".infographics-modal__action--share",
+    "ACTION_TWEET": ".infographics-modal__action--tweet",
     "ACTION_ZOOM_IN": ".infographics-modal__action--zoom-in",
     "ACTION_ZOOM_OUT": ".infographics-modal__action--zoom-out",
     "ACTION_DOWNLOAD": ".infographics-modal__action--download",
     "ACTION_INFO": ".infographics-modal__action--info",
     "ACTION_DELETE": ".infographics-modal__action--delete",
-    "LINK_INPUT": ".infographics-modal__link-input"
+    "LINK_INPUT": ".infographics-modal__link-input",
+    "TWEET_MODAL": ".infographics-modal__tweet-modal",
+    "TWEET_MODAL_CLOSE": ".infographics-modal__tweet-modal-close"
   }
 }

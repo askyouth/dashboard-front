@@ -46,7 +46,7 @@ module.exports = function ($stateProvider) {
     resolve: {
       handles: function (HandleService) {
         'ngInject'
-        return HandleService.list({ sort: 'created_at', sortOrder: 'desc', related: '["topics"]' });
+        return HandleService.list({ sort: 'created_at', sortOrder: 'desc', related: '["topics"]' }, true);
       },
       topics: function (TopicService) {
         'ngInject';
@@ -212,20 +212,29 @@ module.exports = function ($stateProvider) {
   })
 
   $stateProvider.state('infographics', {
-    url: '/infographics/:start_date/:end_date',
-    // params: { start_date: null, end_date: null },
+    url: '/infographics/:month',
     template: '<infographics-component></infographics-component>',
     data: { permissions: { only: ['user'], redirectTo: 'login' } },
+    resolve: {
+      infographicsArchive: function (InfographicsService) {
+        'ngInject';
+        return InfographicsService.archive();
+      }
+    },
     onEnter: function ($state, $stateParams, $filter, PageService) {
       'ngInject';
 
-      if (!$stateParams.start_date && !$stateParams.end_date) {
+      if (!$stateParams.month) {
+        let currentDate = new Date();
+        let currentYear = currentDate.getFullYear();
+        let currentMonth = currentDate.getMonth() + 1;
+
         $state.go('infographics', {
-          start_date: '2016-10-01',
-          end_date: '2016-10-31'
+          month: [currentYear, currentMonth].join('-')
         }, { reload: true, location: true });
+
       } else {
-        PageService.setTitle($filter('dateFilter')($stateParams.start_date, 'MMMM yyyy') + ' infographics');
+        PageService.setTitle($filter('dateFilter')($stateParams.month, 'MMMM yyyy') + ' infographics');
       }
     }
   })
