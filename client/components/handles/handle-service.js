@@ -7,9 +7,9 @@ class HandleService {
     this.ApiService = ApiService;
   }
 
-  handles(force) {
+  handles(params, force) {
     if (force || !this._handles) {
-      return this.ApiService.get('handles').then((response) => {
+      return this.ApiService.get('handles', { params }).then((response) => {
         this._handles = response.data;
         return response.data;
       });
@@ -20,10 +20,8 @@ class HandleService {
     }
   }
 
-  list(params) {
-    return this.ApiService.get('handles', { params }).then(function (response) {
-      return response.data;
-    });
+  list(params, force) {
+    return this.handles(params, force);
   }
 
   find(id, params) {
@@ -33,8 +31,16 @@ class HandleService {
   }
 
   create(username, campId) {
-    return this.ApiService.post('handles', { username: username, camp_id: parseInt(campId, 10) }).then(function (response) {
-      return response.data;
+    return this.ApiService.post('handles', { username: username, camp_id: parseInt(campId, 10) }).then((response) => {
+      let handle = response.data;
+
+      if (this._handles) {
+        this._handles.push(handle);
+      } else {
+        this._handles = [handle];
+      }
+
+      return handle;
     });
   }
 
@@ -61,6 +67,31 @@ class HandleService {
   removeTopic(handleId, topicId) {
     return this.ApiService.delete(`handles/${handleId}/topics/${topicId}`);
   }
+
+  checkHandleUser(user) {
+    let deferred = this._$q.defer();
+    this.handles().then((handles) => {
+      let isHandleUser = false;
+      let handleUser = null;
+
+      angular.forEach(handles, (handle) => {
+        if (handle.id === user.id) {
+          isHandleUser = true;
+          handleUser = handle;
+        }
+      });
+
+      if (isHandleUser) {
+        deferred.resolve(handleUser);
+      } else {
+        deferred.reject();
+      }
+    }).catch(() => {
+      deferred.reject();
+    })
+    return deferred.promise;
+  }
 }
 
 module.exports = HandleService;
+  

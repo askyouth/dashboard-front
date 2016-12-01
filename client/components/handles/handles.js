@@ -62,7 +62,7 @@ class HandlesController {
 
     params.related = '["topics"]';
 
-    return this.HandleService.list(params).then((handles) => {
+    return this.HandleService.list(params, true).then((handles) => {
       this.handles = handles;
     }).catch((err) => {
       this.Notifications.error('Something bad happened');
