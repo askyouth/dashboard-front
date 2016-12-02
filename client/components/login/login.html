@@ -3,22 +3,24 @@
   <form ng-submit="$ctrl.auth()" class="login-form" novalidate>
 
     <div class="col-md-12">
+      <h2>Login</h2>
+
       <div class="form-group">
         <label for="login-form__email">Email</label>
-        <input type="text" name="login__email" class="form-control" ng-model="$ctrl.loginForm.email" placeholder="user@domain.com">
+        <input type="text" name="login__email" class="form-control" ng-model="$ctrl.loginForm.email" placeholder="user@domain.com" tabindex="1">
       </div><!-- /.form-group -->
     </div><!-- /.col-md-12 -->
 
     <div class="col-md-12">
       <div class="form-group">
-        <label for="login-form__password">Password</label>
-        <input type="password" name="login__password" class="form-control" ng-model="$ctrl.loginForm.password" placeholder="•••••••••">
+        <label for="login-form__password" class="login-form__password">Password <a ui-sref="forgotPassword" class="login-form__forgot-password">I forgot my password!</a></label>
+        <input type="password" name="login__password" class="form-control" ng-model="$ctrl.loginForm.password" placeholder="•••••••••" tabindex="2">
       </div><!-- /.form-group -->
     </div><!-- /.col-md-12 -->
 
     <div class="form-group">
       <div class="col-md-12">
-        <button class="btn btn-primary btn-block" type="submit">Login</button>
+        <button class="btn btn-primary btn-block" type="submit" tabindex="3">Login</button>
       </div><!-- /.col-md-6 -->
     </div><!-- /.form-group -->
 

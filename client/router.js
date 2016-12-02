@@ -274,4 +274,28 @@ module.exports = function ($stateProvider) {
      },
      data: { permissions: { only: ['user'], redirectTo: 'login' } }
    })
+
+   $stateProvider.state('forgotPassword', {
+     url: '/forgot-password',
+     template: '<forgot-password-component></forgot-password-component>',
+     data: { permissions: { only: ['guest'], redirectTo: 'index' } },
+     onEnter: function (PageService) {
+       'ngInject';
+       PageService.setTitle('I forgot my password!');
+     }
+   })
+
+  $stateProvider.state('resetPassword', {
+    url: '/reset-password?user_id&token',
+    template: '<reset-password-component></reset-password-component>',
+    data: { permissions: { only: ['guest'], redirectTo: 'index' } },
+    onEnter: function (PageService, $state, $stateParams) {
+      'ngInject';
+      if (!$stateParams.user_id || !$stateParams.token) {
+        return $state.go('login');
+      }
+
+      PageService.setTitle('Reset password');
+    }
+  })
 };

@@ -35,6 +35,8 @@ app.component('conversationComponent', require('./components/conversation/conver
 app.component('infographicsComponent', require('./components/infographics/infographics.js'))
 app.component('profileComponent', require('./components/profile/profile.js'))
 app.component('loginComponent', require('./components/login/login.js'))
+app.component('forgotPasswordComponent', require('./components/forgot-password/forgot-password.js'));
+app.component('resetPasswordComponent', require('./components/reset-password/reset-password.js'));
 
 // Inline components
 app.component('composeContentModal', require('./components/compose-content-modal/compose-content.js'));
@@ -72,6 +74,7 @@ app.service('HandleService', require('./components/handles/handle-service.js'));
 app.service('InfographicsService', require('./components/infographics/infographics-service.js'));
 app.service('ProfileService', require('./components/profile/profile-service.js'));
 app.service('ProfileValidator', require('./components/profile/profile-validator.js').factory);
+app.service('ResetPasswordValidator', require('./components/reset-password/reset-password-validator.js').factory);
 app.service('PageService', require('./components/shared/page-service.js'));
 app.service('ApiService', require('./components/shared/api-service.js'));
 app.service('Notifications', require('./components/shared/notifications.js'));

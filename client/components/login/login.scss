@@ -1,4 +1,12 @@
 .login-form {
   margin: 64px auto;
   max-width: 480px;
+
+  &__password {
+    display: block;
+  }
+
+  &__forgot-password {
+    float: right;
+  }
 }

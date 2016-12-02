@@ -19,12 +19,14 @@ const user = {
 };
 
 class AuthService {
-  constructor($auth, ApiService, AppStore) {
+  constructor($q, $auth, ApiService, AppStore, ResetPasswordValidator) {
     'ngInject';
     this._profile = null;
+    this._$q = $q;
     this._$auth = $auth;
     this._ApiService = ApiService;
     this._AppStore = AppStore;
+    this._ResetPasswordValidator = ResetPasswordValidator;
   }
 
   getUser() {
@@ -63,6 +65,22 @@ class AuthService {
     return this._$auth.logout().then(() => {
       this._AppStore.remove('profile');
     });
+  }
+
+  forgotPassword(email) {
+    return this._ApiService.post('/login/forgot', { email });
+  }
+
+  resetPassword(data) {
+    let validator = new this._ResetPasswordValidator(data);
+
+    if (validator.isValid()) {
+      return this._ApiService.post('/login/reset', data);
+    } else {
+      let deferred = this._$q.defer();
+      deferred.reject(validator.getMessages());
+      return deferred.promise;
+    }
   }
 
 }
