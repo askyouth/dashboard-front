@@ -55,20 +55,6 @@ application {
   }
 }
 
-.header-search {
-  text-align: right;
-  width: 330px;
-}
-
-.header-search__input {
-  transition: width .5s !important;
-  width: 200px !important;
-
-  &:focus {
-    width: 300px !important;
-  }
-}
-
 .upload {
   cursor: pointer;
 

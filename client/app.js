@@ -57,6 +57,7 @@ app.component('keywordStatsModule', require('./components/index/components/keywo
 app.component('mostTweetsStatsModule', require('./components/index/components/most-tweets-stats-module.js'));
 app.component('conversationStatsModule', require('./components/conversations/components/conversation-stats-module.js'));
 app.component('infographicsWall', require('./components/infographics/infographics-wall.js'));
+app.component('search', require('./components/search/search.js'));
 
 // Directives
 app.directive('contenteditable', require('./components/shared/contenteditable.js'));
@@ -75,6 +76,7 @@ app.service('InfographicsService', require('./components/infographics/infographi
 app.service('ProfileService', require('./components/profile/profile-service.js'));
 app.service('ProfileValidator', require('./components/profile/profile-validator.js').factory);
 app.service('ResetPasswordValidator', require('./components/reset-password/reset-password-validator.js').factory);
+app.service('SearchService', require('./components/search/search-service.js'));
 app.service('PageService', require('./components/shared/page-service.js'));
 app.service('ApiService', require('./components/shared/api-service.js'));
 app.service('Notifications', require('./components/shared/notifications.js'));

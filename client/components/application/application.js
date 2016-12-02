@@ -5,8 +5,9 @@ const config = require('./config.json');
  * IndexController
  */
 class ApplicationController {
-  constructor($scope, $element, HandleService, AuthService) {
+  constructor($rootScope, $scope, $element, HandleService, AuthService) {
     'ngInject';
+    this._$rootScope = $rootScope;
     this._$scope = $scope;
     this._$element = $element[0];
     this._AuthService = AuthService;
@@ -17,11 +18,13 @@ class ApplicationController {
   }
 
   $onInit() {
-
+    this.$tweetDetailsWatch = this._$rootScope.$on('tweet:details', (e, tweet) => {
+      this.tweetDetails = tweet;
+    });
   }
 
   $onDestroy() {
-
+    this.$tweetDetailsWatch();
   }
 
   isAuthenticated() {

@@ -165,3 +165,18 @@ handle-topics {
     padding: 0 6px;
   }
 }
+
+.handle--inline {
+  .tweet__avatar {
+    height: 24px;
+    position: relative;
+    margin-left: 0;
+    margin-top: -2px;
+    width: 24px;
+  }
+
+  .tweet__user {
+    display: inline-block;
+    line-height: 24px;
+  }
+}

@@ -16,4 +16,16 @@ module.exports = function (toastr) {
   this.error = function (message, title) {
     toastr.error(message, title);
   };
+
+  this.showList = function (type, messages) {
+    if (!angular.isArray(messages)) {
+      messages = [messages];
+    }
+
+    if (angular.isFunction(this[type])) {
+      angular.forEach(messages, (message) => {
+        this[type](message);
+      });
+    }
+  }
 }

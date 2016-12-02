@@ -35,13 +35,14 @@
         </li><!-- /.dropdown -->
       </ul><!-- /.nav.navbar-nav.navbar-right -->
 
-      <div id="compose-content" class="navbar-form navbar-right">
+      <div id="compose-content" class="navbar-form navbar-right" ng-if="$ctrl.isAuthenticated()">
         <button id="compose-content__button" class="btn btn-primary"
           data-toggle="modal" data-target="#compose-content__modal">Compose new Tweet</button>
       </div><!-- /#compose-content.compose-content -->
 
-      <div id="search" class="header-search navbar-form navbar-right">
-        <input type="text" class="form-control header-search__input" placeholder="Search anything" />
+      <div id="search" class="header-search navbar-form navbar-right" ng-if="$ctrl.isAuthenticated()">
+        <!-- <input type="text" class="form-control header-search__input" placeholder="Search anything" /> -->
+        <search></search>
       </div><!-- /#search.search -->
 
     </div><!-- /#header-container.container-fluid -->
@@ -52,4 +53,9 @@
   </div><!-- /#container.container-fluid -->
 
   <compose-content-modal></compose-content-modal>
+  <tweet-modal 
+    tweet-id="$ctrl.tweetDetails.id" 
+    on-close="$ctrl.tweetDetails = null" 
+    ng-if="$ctrl.tweetDetails.id">    
+  </tweet-modal>
 </div><!-- /#application -->
