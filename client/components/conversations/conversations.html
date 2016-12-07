@@ -2,7 +2,7 @@
 
   <div class="row conversations-navigation">
     <div class="col-md-4 conversations-navigation__previous">
-      <a ui-sref="topic_conversations({ topic_id: $ctrl.topicCursors.previousTopic.id })" class="btn btn-link" ng-if="$ctrl.topicCursors.previousTopic">
+      <a ng-click="$ctrl.changeTopic($ctrl.topicCursors.previousTopic.id)" class="btn btn-link" ng-if="$ctrl.topicCursors.previousTopic">
         <i class="glyphicon glyphicon-menu-left"></i>
         <span>{{$ctrl.topicCursors.previousTopic.name}}</span>
       </a>
@@ -10,13 +10,15 @@
 
     <div class="col-md-4 conversations-navigation__current">
       <select id="filters__topic" name="filters__topic" placeholder="All topics"
-        data-none-selected-text="All topics" ng-model="$ctrl.selectedTopicId" ng-change="$ctrl.changeTopic()">
+        data-none-selected-text="All topics" 
+        ng-model="$ctrl.selectedTopicId" 
+        ng-change="$ctrl.changeTopic($ctrl.selectedTopicId)">
           <option value="{{topic.id}}" ng-repeat="topic in $ctrl.topics">{{topic.name}}</option>
-        </select>
+      </select>
     </div><!-- /.conversations-navigation__current -->
 
     <div class="col-md-4 conversations-navigation__next">
-      <a ui-sref="topic_conversations({ topic_id: $ctrl.topicCursors.nextTopic.id })" class="btn btn-link" ng-if="$ctrl.topicCursors.nextTopic">
+      <a ng-click="$ctrl.changeTopic($ctrl.topicCursors.nextTopic.id)" class="btn btn-link" ng-if="$ctrl.topicCursors.nextTopic">
         <span>{{$ctrl.topicCursors.nextTopic.name}}</span>
         <i class="glyphicon glyphicon-menu-right"></i>
       </a>
@@ -27,7 +29,8 @@
     <div class="col-md-3">
       <div class="conversations-count">
         <div class="conversations-count__value">771</div><!-- /.conversations-count__value -->
-        <div class="conversations-count__title">Brokered conversations</div><!-- /.conversations-count__title -->
+        <div class="conversations-count__title">Brokered contributions</div><!-- /.conversations-count__title -->
+        <button class="btn btn-link" ng-click="$ctrl.detailsContributions()">Detailed contributions</button>
       </div><!-- /.conversations-count -->
     </div><!-- /.col-md-3 -->
 
@@ -35,9 +38,9 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
-            <label for="filters__group">Show conversations</label>
-            <select id="filters__group" name="filters__group" placeholder="Started from either group" ng-model="$ctrl.filters.groupFilter">
-              <option value="both">Started from either group</option>
+            <label for="filters__group">Show contributions</label>
+            <select id="filters__group" name="filters__group" placeholder="Started from either group" ng-model="$ctrl.queryParams.filter.campId" ng-change="$ctrl.listConversations()">
+              <option value="3">Started from either group</option>
               <option value="1">Started from youth</option>
               <option value="2">Started from policy makers</option>
             </select>
@@ -48,7 +51,7 @@
           <div class="form-group">
             <div class="checkbox">
               <label class="label--checkbox">
-                <input type="checkbox" ng-model="$ctrl.filters.bothGroupsInvolved" value="true">
+                <input type="checkbox" ng-model="$ctrl.queryParams.filter.conversationsOnly" value="true" ng-change="$ctrl.listConversations()">
                 <span>Both groups got involved</span>
               </label>
             </div><!-- /.checkbox -->
@@ -59,24 +62,25 @@
       <div class="row">
         <div class="col-md-12 form-inline">
           <div class="form-group">
-            <label>Show conversations with</label>
+            <label>Show contributions with</label>
 
             <div class="conversations-filter__content">
-              <select ng-model="$ctrl.filters.participantsNumberType" class="conversations-filter__participants-number-type">
-                <option value="at_least">At least</option>
-                <option value="at_most">At most</option>
-                <option value="exactly">Exactly</option>
+              <select ng-model="$ctrl.queryParams.filter.contributorsCondition" ng-change="$ctrl.listConversations()" class="conversations-filter__participants-number-type">
+                <option value="min">At least</option>
+                <option value="max">At most</option>
+                <option value="eq">Exactly</option>
               </select>
 
-              <input type="number" ng-model="$ctrl.filters.participantsNumber" class="form-control conversations-filter__participants-number-type">
+              <input type="number" ng-model="$ctrl.queryParams.filter.contributors" ng-change="$ctrl.listConversations()" class="form-control conversations-filter__participants-number-type">
               <span>&nbsp;participants, and &nbsp;</span>
 
-              <select ng-model="$ctrl.filters.tweetCountType" class="conversations-filter__tweet-count-type">
-                <option value="at_least">At least</option>
-                <option value="at_most">At most</option>
-                <option value="exactly">Exactly</option>
+              <select ng-model="$ctrl.queryParams.filter.tweetsCondition" ng-change="$ctrl.listConversations()" class="conversations-filter__tweet-count-type">
+                <option value="min">At least</option>
+                <option value="max">At most</option>
+                <option value="eq">Exactly</option>
               </select>
-              <input type="number" ng-model="$ctrl.filters.tweetCount" class="form-control conversations-filter__tweet-count-type">
+              <input type="number" ng-model="$ctrl.queryParams.filter.tweets" ng-change="$ctrl.listConversations()" class="form-control conversations-filter__tweet-count-type">
+              <span>&nbsp;tweets</span>
             </div>
           </div><!-- /.form-group -->
         </div><!-- /.col-md-12 -->
@@ -86,7 +90,7 @@
         <div class="col-md-12">
           <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-            <input type="text" class="form-control" ng-model="$ctrl.filters.search" placeholder="Find conversations">
+            <input type="text" class="form-control" ng-model="$ctrl.queryParams.filter.search" ng-model-options="{debounce: 500}" ng-change="$ctrl.listConversations()" placeholder="Find conversations">
           </div><!-- /.input-group -->
         </div><!-- /.col-md-12 -->
       </div>
@@ -95,16 +99,25 @@
   </div><!-- /.row.conversations-filters -->
 
   <div class="row conversations-content">
-    <div class="col-md-3">
-      <div class="panel panel-default">
-        <div class="panel-heading">Conversations</div><!-- /.panel-heading -->
-        <div class="list-group">
-          <a class="list-group-item" ui-sref="topic_conversations.topic_conversation({ id: conversation.id })" ui-sref-active="active" ng-repeat="conversation in $ctrl.conversations">{{$ctrl.generateConversationTitle(conversation)}}</a><!-- /.list-group-item -->
-        </div><!-- /.list-group -->
-      </div><!-- /.panel -->
-    </div><!-- /.col-md-3 -->
 
-    <div class="col-md-9" ui-view></div><!-- /.col-md-9 -->
+    <div class="col-md-6 col-md-offset-3">
+      
+      <div class="conversation tweets" ng-repeat="conversation in $ctrl.ConversationsTimeline.conversations">
+        <div class="conversation__title">
+          {{$ctrl.generateConversationTitle(conversation)}}
+
+          <select class="conversation__topic-menu" data-style="btn-default btn-sm"
+            ng-model="conversation.topic_id" 
+            ng-options="topic.id as topic.name for topic in $ctrl.topics" 
+            ng-change="$ctrl.updateConversation(conversation)">
+          </select>
+        </div><!-- /.conversation__header -->
+
+        <tweet tweet="conversation.tweet" ng-click="$ctrl.selectConversation(conversation)"></tweet>
+      </div><!-- /.conversation -->
+
+    </div><!-- /.col-md-12 -->
+
   </div><!-- /.row.conversations-content -->
 
 </div><!-- /#conversations-page -->

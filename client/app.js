@@ -76,6 +76,9 @@ app.service('InfographicsService', require('./components/infographics/infographi
 app.service('ProfileService', require('./components/profile/profile-service.js'));
 app.service('ProfileValidator', require('./components/profile/profile-validator.js').factory);
 app.service('ResetPasswordValidator', require('./components/reset-password/reset-password-validator.js').factory);
+app.service('AnalyticsService', require('./components/shared/analytics-service.js'));
+app.service('ConversationsService', require('./components/conversations/conversations-service.js'));
+app.service('ConversationsTimeline', require('./components/conversations/conversations-timeline.js'));
 app.service('SearchService', require('./components/search/search-service.js'));
 app.service('PageService', require('./components/shared/page-service.js'));
 app.service('ApiService', require('./components/shared/api-service.js'));

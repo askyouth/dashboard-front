@@ -4,12 +4,14 @@
  * IndexController
  */
 class ConversationContributionsStatsModuleController {
-  constructor($element, HandleService) {
+  constructor($element, AnalyticsService) {
     'ngInject';
     this._$element = $element;
+    this._AnalyticsService = AnalyticsService;
 
-    HandleService.list().then((handles) => {
-      this.handles = handles;
+    this._AnalyticsService.topContributors().then((contributors) => {
+      this.handles = contributors;
+      console.log(contributors);
     });
   }
 };
@@ -17,7 +19,7 @@ class ConversationContributionsStatsModuleController {
 
 module.exports = {
   template: `
-    <div class="module conversation-contributions-stats">
+    <div class="module conversation-contributions-stats" ng-if="$ctrl.handles.length">
       <div class="module__title">Conversation contributions</div>
 
       <div class="conversation-contributions-stats__list">
@@ -31,7 +33,7 @@ module.exports = {
 
             <user-group group-id="handle.camp_id" class="conversation-contributions-stats__group" short-name></user-group>
             <div class="conversation-contributions-stats__score">
-              <div class="conversation-contributions-stats__contributions">62</div>
+              <div class="conversation-contributions-stats__contributions">{{handle.tweets}}</div>
             </div>
           </div>
         </div>

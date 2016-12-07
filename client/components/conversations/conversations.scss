@@ -58,3 +58,32 @@
 .conversations-navigation__next a {
   text-align: right;
 }
+
+.conversation {
+  border-radius: 6px;
+  margin-bottom: 10px;
+
+  .tweet {
+    border-radius: 5px;
+  }
+}
+
+.conversation__topic-menu {
+  float: right !important;
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  width: 150px !important;
+}
+
+.conversation__title {
+  background-color: #f5f8fa;
+  border-bottom: 1px solid #e1e8ed;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  color: #1B95E0;
+  cursor: pointer;
+  display: block;
+  padding: 10px;
+  position: relative;
+}

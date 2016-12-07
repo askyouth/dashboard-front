@@ -4,11 +4,12 @@
  * IndexController
  */
 class UserKloutStatsModuleController {
-  constructor($element, HandleService) {
+  constructor($element, AnalyticsService) {
     'ngInject';
     this._$element = $element;
+    this._AnalyticsService = AnalyticsService;
 
-    HandleService.list().then((handles) => {
+    this._AnalyticsService.kloutChange().then((handles) => {
       this.handles = handles;
     });
   }
@@ -17,7 +18,7 @@ class UserKloutStatsModuleController {
 
 module.exports = {
   template: `
-    <div class="module user-klout-stats">
+    <div class="module user-klout-stats" ng-if="$ctrl.handles.length">
       <div class="module__title">Klout score change</div>
 
       <div class="user-klout-stats__list">
@@ -31,8 +32,9 @@ module.exports = {
 
             <user-group group-id="handle.camp_id" class="user-klout-stats__group" short-name></user-group>
             <div class="user-klout-stats__score">
-              <div class="user-klout-stats__score-value">{{handle.klout_score || 'N/A'}}</div>
-              <div class="user-klout-stats__score-diff user-klout-stats__score-diff--positive">+ 5,2%</div>
+              <div class="user-klout-stats__score-value">{{handle.klout_score || 'N/A' | number:2}}</div>
+              <div class="user-klout-stats__score-diff" 
+                ng-class="{'user-klout-stats__score-diff--positive': handle.klout_delta >= 0, 'user-klout-stats__score-diff--negative': handle.klout_delta < 0}">{{handle.klout_delta | number:2}}%</div>
             </div>
           </div>
         </div>

@@ -153,7 +153,7 @@ module.exports = {
                 <button class="btn infographics-modal__action infographics-modal__action--tweet"><i class="icon icon--twitter-white"></i></button>
                 <button class="btn infographics-modal__action infographics-modal__action--zoom-in"><i class="glyphicon glyphicon-zoom-in"></i></button>
                 <button class="btn infographics-modal__action infographics-modal__action--zoom-out"><i class="glyphicon glyphicon-zoom-out"></i></button>
-                <button class="btn infographics-modal__action infographics-modal__action--download"><i class="glyphicon glyphicon-download-alt"></i></button>
+                <a href="/infographics/{{$ctrl.selectedInfographic.id}}/download" class="btn infographics-modal__action infographics-modal__action--download"><i class="glyphicon glyphicon-download-alt"></i></a>
                 <button class="btn infographics-modal__action infographics-modal__action--info"><i class="glyphicon glyphicon-info-sign"></i></button>
                 <button class="btn infographics-modal__action infographics-modal__action--delete" ng-click="$ctrl.deleteInfographics()"><i class="glyphicon glyphicon-trash"></i></button>
               </div>

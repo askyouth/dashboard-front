@@ -69,8 +69,6 @@ module.exports = function TweetTimelineServiceFactory($q, $rootScope, $timeout, 
     function fetchTweets(opts) {
       opts = opts || options;
 
-      console.log(opts);
-
       var deferred = $q.defer();
       SocketConnection.emit(config.events.TWEETS_FETCH, opts, (tweets) => {
         if (tweets.length) {

@@ -2,7 +2,9 @@
   "cssClasses": {
     "IS_SELECTED": "is-selected",
     "IS_DETAILS": "tweet--details",
-    "IS_REPLY": "tweet--reply-to"
+    "IS_REPLY": "tweet--reply-to",
+    "IS_HANDLE": "tweet--is-handle",
+    "MISSING_HANDLE": "tweet--missing-handle"
   },
 
   "selectors": {

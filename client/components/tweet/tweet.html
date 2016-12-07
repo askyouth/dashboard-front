@@ -35,36 +35,34 @@
 
     <div class="tweet__toolbar">
       <div class="tweet__action tweet__action-reply" title="Reply to tweet">
-        <a href="#" ng-click="$ctrl.replyToTweet($event)">
+        <button class="btn btn-link" ng-click="$ctrl.replyToTweet($event)">
           <span class="glyphicon glyphicon-share-alt"></span>
-        </a>
+        </button>
       </div>
 
       <div class="tweet__action tweet__action-retweet" title="Retweet this tweet" ng-class="{'is-retweeted': $ctrl.tweet.retweeted}">
-        <a href="#" ng-click="$ctrl.retweetTweet($event)">
+        <button class="btn btn-link" ng-click="$ctrl.retweetTweet($event)">
           <span class="glyphicon glyphicon-retweet"></span>
           <span class="tweet__action-retweet-count"></span>
-        </a>
+        </button>
       </div>
 
       <div class="tweet__action tweet__action-like" title="Like tweet" ng-class="{'is-liked': $ctrl.tweet.favorited}">
-        <a href="#" ng-click="$ctrl.likeTweet($event)">
+        <button class="btn btn-link" ng-click="$ctrl.likeTweet($event)">
           <span class="glyphicon glyphicon-heart"></span>
           <span class="tweet__action-like-count"></span>
-        </a>
+        </button>
       </div>
 
       <div class="tweet__action tweet__action-more">
         <div class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <button class="dropdown-toggle btn btn-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <span class="glyphicon glyphicon-option-horizontal"></span>
-          </a>
+          </button>
 
           <ul class="dropdown-menu">
-            <li><a href="#">Add handle to <strong>Policy makers</strong></a></li>
-            <li><a href="#">Add handle to <strong>Youth</strong></a></li>
-            <li role="separator" class="divider"></li><!-- /.separator -->
-            <li><a href="#">Delete</a></li>
+            <li class="tweet__action--add-to-policy"><a ng-click="$ctrl.addToPolicyMakers()">Add handle to <strong>Policy makers</strong></a></li>
+            <li class="tweet__action--add-to-youth"><a ng-click="$ctrl.addToYouth()">Add handle to <strong>Youth</strong></a></li>
           </ul>
         </div>
       </div>

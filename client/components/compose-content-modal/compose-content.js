@@ -113,10 +113,8 @@ class ComposeContentModalController {
       let user = this.replyTweet.user;
 
       this.HandleService.checkHandleUser(user).then(() => {
-        console.log('handle');
         this._$element.removeClass(config.cssClasses.MISSING_HANDLE);
       }).catch(() => {
-        console.log('not handle');
         this._$element.addClass(config.cssClasses.MISSING_HANDLE);
       });
     }

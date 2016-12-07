@@ -57,6 +57,13 @@
   &:hover {
     background-color: #f5f8fa;
   }
+
+  &--missing-handle {
+    .tweet__action--add-to-policy,
+    .tweet__action--add-to-youth {
+      display: block;
+    }
+  }
 }
 
 .tweet__ask-meta {
@@ -244,7 +251,7 @@
   font-size: 16px;
   width: 70px;
 
-  a {
+  a, button {
     color: #aab8c2;
     text-decoration: none;
 
@@ -263,14 +270,14 @@
 
 .tweet__action-retweet {
   a:hover,
-  &.is-retweeted a {
+  &.is-retweeted button {
     color: #19cf86;
   }
 }
 
 .tweet__action-like {
   a:hover,
-  &.is-liked a {
+  &.is-liked button {
     color: #E2264D;
   }
 }
@@ -286,6 +293,11 @@
 .tweet__more-replies {
   display: block;
   margin: 10px 0 2px;
+}
+
+.tweet__action--add-to-policy,
+.tweet__action--add-to-youth {
+  display: none;
 }
 
 .tweet-media {

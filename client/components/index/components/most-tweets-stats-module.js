@@ -4,12 +4,14 @@
  * IndexController
  */
 class MostTweetsStatsModuleController {
-  constructor($element, HandleService) {
+  constructor($element, AnalyticsService) {
     'ngInject';
     this._$element = $element;
+    this._AnalyticsService = AnalyticsService;
 
-    HandleService.list().then((handles) => {
-      this.handles = handles;
+    this._AnalyticsService.topTweeters().then((tweeters) => {
+      this.handles = tweeters;
+      console.log(tweeters);
     });
   }
 };
@@ -17,7 +19,7 @@ class MostTweetsStatsModuleController {
 
 module.exports = {
   template: `
-    <div class="module most-tweets-stats">
+    <div class="module most-tweets-stats" ng-if="$ctrl.handles.length">
       <div class="module__title">Most tweets</div>
 
       <div class="most-tweets-stats__list">
@@ -30,7 +32,7 @@ module.exports = {
             </a>
 
             <user-group group-id="handle.camp_id" class="most-tweets-stats__group" short-name></user-group>
-            <div class="most-tweets-stats__tweets-count">62</div>
+            <div class="most-tweets-stats__tweets-count">{{handle.tweets}}</div>
           </div>
         </div>
       </div>

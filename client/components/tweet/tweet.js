@@ -5,7 +5,7 @@ const config = require('./config.json');
  * TweetController
  */
 class TweetController {
-  constructor($rootScope, $element, TweetService, HandleService, Notifications) {
+  constructor($rootScope, $element, TweetService, HandleService, Notifications, USER_GROUPS) {
     'ngInject';
     this.TweetService = TweetService;
     this.Notifications = Notifications;
@@ -13,6 +13,8 @@ class TweetController {
     this._element = $element[0];
     this._$element = $element;
     this._isMenuClick = false;
+    this.HandleService = HandleService;
+    this.USER_GROUPS = USER_GROUPS;
 
     this.onToolbarClickBind = this.onToolbarClick.bind(this);
     this.onTweetLinkClickBind = this.onTweetLinkClick.bind(this);
@@ -32,8 +34,9 @@ class TweetController {
     let $tweetToolbar = this._element.querySelector(config.selectors.TWEET_TOOLBAR);
     $tweetToolbar.addEventListener('click', this.onToolbarClickBind);
 
-    this._$element.find(config.selectors.TWEET_CONTENT).on('click', 'a', this.onTweetLinkClickBind);
-    this._$element.find(config.selectors.TWEET_MENU).on('click', 'a', this.onTweetMenuClick);
+    this._$element.find(config.selectors.TWEET_CONTENT).on('click', 'button', this.onTweetLinkClickBind);
+    // this._$element.find(config.selectors.TWEET_MENU).on('click', 'button', this.onTweetMenuClick);
+    this._$element.find(config.selectors.TWEET_MENU).find('.dropdown-toggle').dropdown();
 
     if (this.tweetDetails) {
       this._$element.addClass(config.cssClasses.IS_DETAILS);
@@ -42,14 +45,16 @@ class TweetController {
     if (this.tweetReply) {
       this._$element.addClass(config.cssClasses.IS_REPLY);
     }
+
+    this.isHandle();
   }
 
   $onDestroy() {
     let $tweetToolbar = this._element.querySelector(config.selectors.TWEET_TOOLBAR);
     $tweetToolbar.removeEventListener('click', this.onToolbarClickBind);
 
-    this._$element.find(config.selectors.TWEET_CONTENT).off('click', 'a', this.onTweetLinkClickBind);
-    this._$element.find(config.selectors.TWEET_MENU).off('click', 'a', this.onTweetMenuClick);
+    this._$element.find(config.selectors.TWEET_CONTENT).off('click', 'button', this.onTweetLinkClickBind);
+    // this._$element.find(config.selectors.TWEET_MENU).off('click', 'button', this.onTweetMenuClick);
 
     if (this.tweetDetails) {
       this._$element.removeClass(config.cssClasses.IS_DETAILS);
@@ -66,6 +71,7 @@ class TweetController {
 
   onTweetLinkClick(e) {
     e.stopPropagation();
+    e.stopImmediatePropagation();
   }
 
   onTweetMenuClick(e) {
@@ -116,6 +122,36 @@ class TweetController {
         this.Notifications.error('Tweet like failed');
       })
     }
+  }
+
+  isHandle() {
+    if (this.tweet) {
+      let user = this.tweet.user;
+
+      this.HandleService.checkHandleUser(user).then(() => {
+        this._$element.removeClass(config.cssClasses.MISSING_HANDLE);
+      }).catch(() => {
+        this._$element.addClass(config.cssClasses.MISSING_HANDLE);
+      });
+    }
+  }
+
+  addToPolicyMakers() {
+    this.HandleService.create(this.tweet.user.screen_name, this.USER_GROUPS.POLICY).then(() => {
+      this.Notifications.success(`User ${this.tweet.user.name} added to "Policy makers".`);
+      this._$element.removeClass(config.cssClasses.MISSING_HANDLE);
+    }).catch(() => {
+      this.Notifications.error(`Adding user ${this.tweet.user.name} to "Policy makers" failed.`);
+    });
+  }
+
+  addToYouth() {
+    this.HandleService.create(this.tweet.user.screen_name, this.USER_GROUPS.YOUTH).then(() => {
+      this.Notifications.success(`User ${this.tweet.user.name} added to "Youth".`);
+      this._$element.removeClass(config.cssClasses.MISSING_HANDLE);
+    }).catch(() => {
+      this.Notifications.error(`Adding user ${this.tweet.user.name} to "Youth" failed.`);
+    });
   }
 };
 

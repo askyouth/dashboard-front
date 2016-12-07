@@ -67,7 +67,6 @@ class TweetsController {
   }
 
   onContentFetched(event, tweets) {
-    console.log(tweets)
     tweets.map((tweet) => {
       this.tweets.push(tweet);
     });
