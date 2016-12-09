@@ -1,5 +1,6 @@
 class AnalyticsService {
   constructor(ApiService) {
+    'ngInject';
     this._ApiService = ApiService;
   }
 

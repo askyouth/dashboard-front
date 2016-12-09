@@ -21,7 +21,6 @@ class LoginController {
   auth() {
     this._AuthService.login(this.loginForm).then(() => {
       this._Notifications.success('Login successfully done!');
-      console.log(this._AuthService.isAuthenticated());
       this._$state.go('index');
     }).catch(() => {
       this._Notifications.error('Login failed');

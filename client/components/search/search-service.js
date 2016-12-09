@@ -1,5 +1,6 @@
 class SearchService {
   constructor(ApiService) {
+    'ngInject';
     this._ApiService = ApiService;
   }
 
