@@ -22,6 +22,8 @@ const app = angular.module('ask-youth', [
 app.config(require('./config.js'))
     .config(require('./router.js'))
 
+app.run(require('./roles.js'))
+
 // Route components
 app.component('application', require('./components/application/application.js'))
 app.component('indexComponent', require('./components/index/index.js'))
@@ -91,12 +93,13 @@ app.filter('dateFilter', require('./components/shared/date-filter.js'));
 app.filter('capitalize', require('./components/shared/capitalize.js'));
 app.filter('userInitials', require('./components/shared/user-initials.js'));
 app.filter('tweetDate', require('./components/tweet/tweet-date.js'));
+app.filter('fileSize', require('./components/shared/file-size-filter.js'));
 
 app.value('UserGroups', require('./components/shared/user-groups.js').groups);
 app.constant('USER_GROUPS', require('./components/shared/user-groups.js').constants);
 
 // Run application
-app.run(require('./roles.js')).run(function ($rootScope, $state) {
+app.run(function ($rootScope, $state) {
   'ngInject';
 
   $rootScope.$on('$stateChangeStart', function () {

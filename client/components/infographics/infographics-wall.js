@@ -1,5 +1,6 @@
 'use strict';
 const config = require('./config.json');
+const appConfig = require('../../../config');
 
 /**
  * IndexController
@@ -14,6 +15,8 @@ class InfographicsWallController {
     this._InfographicsService = InfographicsService;
     this._Notifications = Notifications;
     this.title = config.title;
+
+    this.apiDomain = appConfig.get('api.domain');
   }
 
   $onInit() {
@@ -84,9 +87,10 @@ class InfographicsWallController {
 
     return this._InfographicsService.remove(this.selectedInfographic).then(() => {
       this._$element.find(config.selectors.INFOGRAPHICS_MODAL).modal('hide');
-      this.selectedInfographic = null;
 
       this._Notifications.success('Infographic deleted');
+      this._$scope.$emit('infographics:deleted', this.selectedInfographic);
+      this.selectedInfographic = null;
     }).catch(() => {
       this._Notifications.error('Infographics delete failed');
     });
@@ -153,7 +157,7 @@ module.exports = {
                 <button class="btn infographics-modal__action infographics-modal__action--tweet"><i class="icon icon--twitter-white"></i></button>
                 <button class="btn infographics-modal__action infographics-modal__action--zoom-in"><i class="glyphicon glyphicon-zoom-in"></i></button>
                 <button class="btn infographics-modal__action infographics-modal__action--zoom-out"><i class="glyphicon glyphicon-zoom-out"></i></button>
-                <a href="/infographics/{{$ctrl.selectedInfographic.id}}/download" class="btn infographics-modal__action infographics-modal__action--download"><i class="glyphicon glyphicon-download-alt"></i></a>
+                <a ng-href="{{$ctrl.apiDomain}}/infographics/{{$ctrl.selectedInfographic.id}}/download" target="_blank" class="btn infographics-modal__action infographics-modal__action--download"><i class="glyphicon glyphicon-download-alt"></i></a>
                 <button class="btn infographics-modal__action infographics-modal__action--info"><i class="glyphicon glyphicon-info-sign"></i></button>
                 <button class="btn infographics-modal__action infographics-modal__action--delete" ng-click="$ctrl.deleteInfographics()"><i class="glyphicon glyphicon-trash"></i></button>
               </div>
@@ -188,15 +192,11 @@ module.exports = {
                 </tr>
                 <tr>
                   <th>Size</th>
-                  <td>3.14 MB</td>
-                </tr>
-                <tr>
-                  <th>Resolution</th>
-                  <td>1920 × 1080</td>
+                  <td>{{$ctrl.selectedInfographic.file_size | fileSize}}</td>
                 </tr>
                 <tr>
                   <th>Uploaded</th>
-                  <td>12/01/2016</td>
+                  <td>{{$ctrl.selectedInfographic.file_size | date:'MMM d, yyyy hh:mm'}}</td>
                 </tr>
               </tbody>
             </table>
