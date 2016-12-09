@@ -5,11 +5,12 @@ const config = require('./config.json');
  * TweetController
  */
 class TweetController {
-  constructor($rootScope, $element, TweetService, HandleService, Notifications, USER_GROUPS) {
+  constructor($rootScope, $scope, $element, TweetService, HandleService, Notifications, USER_GROUPS) {
     'ngInject';
     this.TweetService = TweetService;
     this.Notifications = Notifications;
     this._$rootScope = $rootScope;
+    this._$scope = $scope;
     this._element = $element[0];
     this._$element = $element;
     this._isMenuClick = false;
@@ -46,6 +47,18 @@ class TweetController {
       this._$element.addClass(config.cssClasses.IS_REPLY);
     }
 
+    this._$tweetWatcher = this._$scope.$watch('$ctrl.tweet', (newVal, oldVal) => {
+      if (newVal) {
+        if (oldVal) {
+          if (newVal.id !== oldVal.id) {
+            this.isHandle()
+          }
+        } else {
+          this.isHandle()
+        }
+      }
+    });
+
     this.isHandle();
   }
 
@@ -63,6 +76,8 @@ class TweetController {
     if (this.tweetReply) {
       this._$element.removeClass(config.cssClasses.IS_REPLY);
     }
+
+    this._$tweetWatcher();
   }
 
   onToolbarClick(e) {
