@@ -5,17 +5,12 @@ const config = require('./config.json');
  * IndexController
  */
 class IndexController {
-  constructor($element, AnalyticsService) {
+  constructor($element) {
     'ngInject';
     this._$element = $element;
-    this._AnalyticsService = AnalyticsService;
   }
 
   $onInit() {
-
-    this._AnalyticsService.topTweeters().then((tweeters) => {
-      console.log('tt', tweeters);
-    });
     
   }
 
@@ -24,7 +19,7 @@ class IndexController {
   }
 
   selectTweet() {
-    console.log('tweet selected');
+
   }
 };
 

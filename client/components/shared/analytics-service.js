@@ -4,6 +4,12 @@ class AnalyticsService {
     this._ApiService = ApiService;
   }
 
+  globalStats() {
+    return this._ApiService.get('/account').then((response) => {
+      return response.data;
+    });
+  }
+
   kloutChange() {
     return this._ApiService.get('/analytics/klout').then((response) => {
       return response.data;
