@@ -1,5 +1,6 @@
 class ProfileService {
   constructor($q, ApiService, ProfileValidator) {
+    'ngInject';
     this._$q = $q;
     this.ApiService = ApiService;
     this.ProfileValidator = ProfileValidator;
