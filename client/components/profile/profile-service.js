@@ -15,7 +15,7 @@ class ProfileService {
         data.confirmPassword = undefined;
       }
 
-      return this.ApiService.post('/account', data);
+      return this.ApiService.post('/profile', data);
     } else {
       let deferred = this._$q.defer();
       deferred.reject(validator.getMessages());
