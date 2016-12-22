@@ -1,5 +1,6 @@
 class ConversationsService {
   constructor(ApiService) {
+    'ngInject';
     this._ApiService = ApiService;
   }
 
