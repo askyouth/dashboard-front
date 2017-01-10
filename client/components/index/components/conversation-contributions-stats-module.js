@@ -11,7 +11,6 @@ class ConversationContributionsStatsModuleController {
 
     this._AnalyticsService.topContributors().then((contributors) => {
       this.handles = contributors;
-      console.log(contributors);
     });
   }
 };

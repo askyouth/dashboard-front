@@ -11,7 +11,6 @@ class MostTweetsStatsModuleController {
 
     this._AnalyticsService.topTweeters().then((tweeters) => {
       this.handles = tweeters;
-      console.log(tweeters);
     });
   }
 };
