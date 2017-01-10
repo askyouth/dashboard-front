@@ -17,6 +17,11 @@ switch (process.env.NODE_ENV) {
     break;
 }
 
+if (process.env.API_DOMAIN) {
+  if (!config.api) config.api = {};
+  config.api.domain = process.env.API_DOMAIN;
+}
+
 exports.get = function (path) {
   var segmentList = path.split('.'),
       dest = config,
