@@ -21,16 +21,19 @@ const user = {
 class AuthService {
   constructor($q, $auth, ApiService, AppStore, ResetPasswordValidator) {
     'ngInject';
+    this._twitterUser = null;
     this._profile = null;
     this._$q = $q;
     this._$auth = $auth;
     this._ApiService = ApiService;
     this._AppStore = AppStore;
     this._ResetPasswordValidator = ResetPasswordValidator;
+
+    this.loadTwitterUser()
   }
 
   getUser() {
-    return user;
+    return this._twitterUser;
   }
 
   currentProfile(profile) {
@@ -53,7 +56,10 @@ class AuthService {
   login(data) {
     return this._$auth.login(data).then((response) => {
       var profile = response.data.user;
-      return this.currentProfile(profile);
+      
+      return this.loadTwitterUser().then(() => {
+        return this.currentProfile(profile);
+      });
     });
   }
 
@@ -62,8 +68,10 @@ class AuthService {
   }
 
   logout() {
-    return this._$auth.logout().then(() => {
-      this._AppStore.remove('profile');
+    return this._ApiService.delete('/logout').then(() => {
+      return this._$auth.logout().then(() => {
+        this._AppStore.remove('profile');
+      });
     });
   }
 
@@ -81,6 +89,16 @@ class AuthService {
       deferred.reject(validator.getMessages());
       return deferred.promise;
     }
+  }
+
+  loadTwitterUser() {
+    if (!this.isAuthenticated()) return this._$q.resolve();
+
+    return this._ApiService.get('/account').then((response) => {
+      this._twitterUser = response.data;
+      this._twitterUser.handle = this._twitterUser.handle[0];
+      return this._twitterUser;
+    })
   }
 
 }

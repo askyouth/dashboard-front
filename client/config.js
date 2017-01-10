@@ -7,6 +7,7 @@ module.exports = function ($urlRouterProvider, $locationProvider, $compileProvid
   $locationProvider.html5Mode(true);
   $compileProvider.debugInfoEnabled(config.get('app.debug'));
 
+  $httpProvider.interceptors.push('RequestInterceptor');
   $httpProvider.defaults.withCredentials = false;
   delete $httpProvider.defaults.headers.common["X-Requested-With"];
 

@@ -87,6 +87,7 @@ app.service('ApiService', require('./components/shared/api-service.js'));
 app.service('Notifications', require('./components/shared/notifications.js'));
 app.service('AppStore', require('./components/shared/store.js'));
 app.factory('SocketConnection', require('./components/shared/socket-connection.js'));
+app.factory('RequestInterceptor', require('./components/shared/request-interceptor.js'));
 
 // Filters
 app.filter('dateFilter', require('./components/shared/date-filter.js'));
@@ -99,8 +100,10 @@ app.value('UserGroups', require('./components/shared/user-groups.js').groups);
 app.constant('USER_GROUPS', require('./components/shared/user-groups.js').constants);
 
 // Run application
-app.run(function ($rootScope, $state) {
+app.run(function ($rootScope, $state, AuthService) {
   'ngInject';
+
+  AuthService.loadTwitterUser()
 
   $rootScope.$on('$stateChangeStart', function () {
     angular.element('.modal-backdrop').remove();
