@@ -39,9 +39,10 @@
     "a0-angular-storage": "^0.0.15"
   },
   "resolutions": {
-    "masonry": "^4.1.1",
-    "jquery": "^3.1.1",
-    "outlayer": "^2.1.0"
+    "masonry": "4.1.1",
+    "jquery": "3.1.1",
+    "outlayer": "2.1.0",
+    "angular": "1.5.8"
   },
   "overrides": {
     "At.js": {
