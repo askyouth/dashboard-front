@@ -248,7 +248,7 @@ module.exports = function ($stateProvider) {
       if (!$stateParams.month) {
         let currentDate = new Date();
         let currentYear = currentDate.getFullYear();
-        let currentMonth = currentDate.getMonth() + 1;
+        let currentMonth = ('0' + (currentDate.getMonth() + 1)).substr(-2);
 
         $state.go('infographics', {
           month: [currentYear, currentMonth].join('-')

@@ -1,9 +1,9 @@
 {
-  "name": "project-boilerplate",
-  "description": "Basic project boilerplate for server and client app",
+  "name": "ask-youth",
+  "description": "Ask youth social project",
   "main": "index.js",
   "authors": [
-    "Davor Grubelić <davor.grubelic@gmail.com>"
+    "UX Passion <zagreb@uxpassion.com>"
   ],
   "license": "ISC",
   "moduleType": [
@@ -42,7 +42,9 @@
     "masonry": "4.1.1",
     "jquery": "3.1.1",
     "outlayer": "2.1.0",
-    "angular": "1.5.8"
+    "angular": "1.5.8",
+    "angular-sanitize": "1.5.8",
+    "angular-animate": "1.5.8"
   },
   "overrides": {
     "At.js": {
