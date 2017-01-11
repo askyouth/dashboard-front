@@ -31,18 +31,16 @@ class SearchController {
   }
 
   onSearchChange($event) {
-    console.log(this.searchForm);
+    if (!this.searchForm.query) return false;
 
-    this._SearchService.search(this.searchForm.query).then((results) => {
-      console.log(results);
-
+    return this._SearchService.search(this.searchForm.query).then((results) => {
       this.searchResults.handles = results.handles;
       this.searchResults.topics = results.topics;
       this.searchResults.tweets = results.tweets;
       this.hasResults();
 
     }).catch((err) => {
-      console.log(err);
+      
     })
   }
 

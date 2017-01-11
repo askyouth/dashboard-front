@@ -43,7 +43,6 @@ class HandleTopicsController {
   }
 
   addTopic() {
-    console.log('add topic')
     if (!angular.isArray(this.handle.topics)) {
       this.handle.topics = [];
     };

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "DEBUG=app:* parallelshell \"./node_modules/.bin/gulp build\" \"node index.js\"",
+    "start": "NODE_ENV=production parallelshell \"./node_modules/.bin/gulp build\" \"node index.js\"",
     "dev": "DEBUG=app:* parallelshell \"node-dev index.js\" \"./node_modules/.bin/gulp dev\"",
     "dev.spa": "DEBUG=app:* parallelshell \"node-dev server.spa.js\" \"./node_modules/.bin/gulp dev\"",
     "postinstall": "./node_modules/.bin/bower install && ./node_modules/.bin/gulp build"

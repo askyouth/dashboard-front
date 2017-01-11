@@ -5,7 +5,6 @@ class SearchService {
   }
 
   search(query) {
-    console.log(query);
     return this._ApiService.get('/search', { params: { q: query } }).then((response) => {
       return response.data;
     });
