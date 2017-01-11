@@ -2,6 +2,9 @@
   "app": {
     "debug": false
   },
+  "api": {
+    "domain": "https://ask-dashboard-api.uxpassion.co"
+  },
   "store": {
     "key": "ask-youth.store"
   }

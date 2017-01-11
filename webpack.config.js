@@ -25,6 +25,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.EnvironmentPlugin(['API_DOMAIN'])
+    new webpack.EnvironmentPlugin(['NODE_ENV', 'API_DOMAIN'])
   ]
 };
