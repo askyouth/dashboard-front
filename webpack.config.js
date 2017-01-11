@@ -1,3 +1,5 @@
+const webpack = require('webpack');
+
 module.exports = {
   entry: {
     app: './client/app.js'
@@ -21,5 +23,8 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.EnvironmentPlugin(['API_DOMAIN'])
+  ]
 };
