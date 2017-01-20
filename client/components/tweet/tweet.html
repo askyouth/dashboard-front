@@ -10,13 +10,13 @@
       </div><!-- /.tweet__conversation-meta -->
 
       <div class="tweet__meta">
-        <a class="tweet__user" href="https://twitter.com/{{$ctrl.tweet.user.screen_name}}" target="_blank" ng-if="!$ctrl.handleUser">
+        <a class="tweet__user" href="https://twitter.com/{{$ctrl.tweet.user.screen_name}}" ng-click="$ctrl.goToTwitterProfile($event)" target="_blank" ng-if="!$ctrl.handleUser">
           <img ng-src="{{$ctrl.tweet.user.profile_image_url}}" alt="{{$ctrl.tweet.user.name | userInitials}}" class="tweet__avatar" />
           <span class="tweet__user__name">{{$ctrl.tweet.user.name}}</span>&nbsp;
           <span class="tweet__user__username">@{{$ctrl.tweet.user.screen_name}}</span>
         </a><!-- /.tweet__user -->
 
-        <a class="tweet__user" ui-sref="handle({ id: $ctrl.handleUser.id })" ng-if="$ctrl.handleUser">
+        <a class="tweet__user" ng-click="$ctrl.goToHandle($ctrl.handleUser, $event)" ng-if="$ctrl.handleUser">
           <img ng-src="{{$ctrl.tweet.user.profile_image_url}}" alt="{{$ctrl.tweet.user.name | userInitials}}" class="tweet__avatar" />
           <span class="tweet__user__name">{{$ctrl.tweet.user.name}}</span>&nbsp;
           <span class="tweet__user__username">@{{$ctrl.tweet.user.screen_name}}</span>

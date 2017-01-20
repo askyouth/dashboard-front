@@ -5,12 +5,13 @@ const config = require('./config.json');
  * TweetController
  */
 class TweetController {
-  constructor($rootScope, $scope, $element, TweetService, HandleService, Notifications, USER_GROUPS) {
+  constructor($rootScope, $scope, $state, $element, TweetService, HandleService, Notifications, USER_GROUPS) {
     'ngInject';
     this.TweetService = TweetService;
     this.Notifications = Notifications;
     this._$rootScope = $rootScope;
     this._$scope = $scope;
+    this._$state = $state;
     this._element = $element[0];
     this._$element = $element;
     this._isMenuClick = false;
@@ -29,8 +30,6 @@ class TweetController {
         });
       });
     }
-
-    console.log(this.tweet)
   }
 
   $onInit() {
@@ -145,8 +144,9 @@ class TweetController {
     if (this.tweet) {
       let user = this.tweet.user;
 
-      this.HandleService.checkHandleUser(user).then(() => {
+      this.HandleService.checkHandleUser(user).then((handle) => {
         this._$element.removeClass(config.cssClasses.MISSING_HANDLE);
+        this.handleUser = handle;
       }).catch(() => {
         this._$element.addClass(config.cssClasses.MISSING_HANDLE);
       });
@@ -169,6 +169,23 @@ class TweetController {
     }).catch(() => {
       this.Notifications.error(`Adding user ${this.tweet.user.name} to "Youth" failed.`);
     });
+  }
+
+  goToHandle(handle, $event) {
+    if ($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      $event.stopImmediatePropagation();
+    }
+
+    return this._$state.go('handles', { id: handle.id });
+  }
+
+  goToTwitterProfile($event) {
+    if ($event) {
+      $event.stopPropagation();
+      $event.stopImmediatePropagation();
+    }
   }
 };
 
