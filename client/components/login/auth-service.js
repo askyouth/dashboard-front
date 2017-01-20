@@ -53,6 +53,11 @@ class AuthService {
     return this._$auth.isAuthenticated();
   }
 
+  getToken() {
+    let token = this._$auth.getToken();
+    return token.split(' ')[1];
+  }
+
   login(data) {
     return this._$auth.login(data).then((response) => {
       var profile = response.data.user;
@@ -83,7 +88,9 @@ class AuthService {
     let validator = new this._ResetPasswordValidator(data);
 
     if (validator.isValid()) {
-      return this._ApiService.post('/login/reset', data);
+      return this._ApiService.post('/login/reset', data).catch((res) => {
+        return res.data.message;
+      });
     } else {
       let deferred = this._$q.defer();
       deferred.reject(validator.getMessages());

@@ -6,17 +6,19 @@ const appConfig = require('../../../config');
  * IndexController
  */
 class InfographicsWallController {
-  constructor($scope, $element, $timeout, InfographicsService, Notifications) {
+  constructor($scope, $element, $timeout, AuthService, InfographicsService, Notifications) {
     'ngInject';
     this._$scope = $scope;
     this._element = $element[0];
     this._$element = $element;
     this._$timeout = $timeout;
+    this._AuthService = AuthService;
     this._InfographicsService = InfographicsService;
     this._Notifications = Notifications;
     this.title = config.title;
 
     this.apiDomain = appConfig.get('api.domain');
+    this.reqToken = this._AuthService.getToken();
   }
 
   $onInit() {
@@ -157,7 +159,7 @@ module.exports = {
                 <button class="btn infographics-modal__action infographics-modal__action--tweet"><i class="icon icon--twitter-white"></i></button>
                 <button class="btn infographics-modal__action infographics-modal__action--zoom-in"><i class="glyphicon glyphicon-zoom-in"></i></button>
                 <button class="btn infographics-modal__action infographics-modal__action--zoom-out"><i class="glyphicon glyphicon-zoom-out"></i></button>
-                <a ng-href="{{$ctrl.apiDomain}}/infographics/{{$ctrl.selectedInfographic.id}}/download" target="_blank" class="btn infographics-modal__action infographics-modal__action--download"><i class="glyphicon glyphicon-download-alt"></i></a>
+                <a ng-href="{{$ctrl.apiDomain}}/infographics/{{$ctrl.selectedInfographic.id}}/download?token={{$ctrl.reqToken}}" target="_blank" class="btn infographics-modal__action infographics-modal__action--download"><i class="glyphicon glyphicon-download-alt"></i></a>
                 <button class="btn infographics-modal__action infographics-modal__action--info"><i class="glyphicon glyphicon-info-sign"></i></button>
                 <button class="btn infographics-modal__action infographics-modal__action--delete" ng-click="$ctrl.deleteInfographics()"><i class="glyphicon glyphicon-trash"></i></button>
               </div>
