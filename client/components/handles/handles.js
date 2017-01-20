@@ -5,7 +5,7 @@ const config = require('./config.json');
  * IndexController
  */
 class HandlesController {
-  constructor($element, HandleService, Notifications) {
+  constructor($element, $stateParams, HandleService, Notifications) {
     'ngInject';
     this._$element = $element;
     this.HandleService = HandleService;
@@ -15,7 +15,7 @@ class HandlesController {
 
     this.filters = {
       arrangeBy: 'created_at-desc',
-      showGroups: 'both',
+      showGroups: $stateParams.group ? $stateParams.group : 'both',
       topicFilter: 'all'
     };
 

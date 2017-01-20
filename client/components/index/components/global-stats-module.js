@@ -24,18 +24,18 @@ module.exports = {
       <div class="logo global-stats__logo"></div>
 
       <div class="row global-stats__list">
-        <div class="col-sm-4 global-stats__item">
+        <a ui-sref="handles({ group: 2})" class="col-sm-4 global-stats__item">
           <div class="global-stats__stat-value">{{$ctrl.globalStats.youthHandles}}</div>
           <div class="global-stats__stat-title">Young people</div>
-        </div>
-        <div class="col-sm-4 global-stats__item">
+        </a>
+        <a ui-sref="handles({ group: 1})" class="col-sm-4 global-stats__item">
           <div class="global-stats__stat-value">{{$ctrl.globalStats.policyMakerHandles}}</div>
           <div class="global-stats__stat-title">Policy makers</div>
-        </div>
-        <div class="col-sm-4 global-stats__item">
+        </a>
+        <a ui-sref="conversations" class="col-sm-4 global-stats__item">
           <div class="global-stats__stat-value">{{$ctrl.globalStats.contributions}}</div>
           <div class="global-stats__stat-title">Contributions</div>
-        </div>
+        </a>
       </div>
     </div>
   `,

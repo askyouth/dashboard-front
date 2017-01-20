@@ -10,6 +10,11 @@
 
   &__item {
     text-align: center;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   &__stat-value {

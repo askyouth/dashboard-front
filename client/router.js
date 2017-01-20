@@ -40,13 +40,18 @@ module.exports = function ($stateProvider) {
   })
 
   $stateProvider.state('handles', {
-    url: '/handles',
+    url: '/handles?group',
     template: '<handles-component handles="$resolve.handles" topics="$resolve.topics"></handles-component>',
     data: { permissions: { only: ['user'], redirectTo: 'login' } },
     resolve: {
-      handles: function (HandleService) {
+      handles: function ($stateParams, HandleService) {
         'ngInject'
-        return HandleService.list({ sort: 'created_at', sortOrder: 'desc', related: '["topics"]' }, true);
+        let filter = null;
+        if ($stateParams.group) {
+          filter = { camp: $stateParams.group };
+        }
+
+        return HandleService.list({ filter: filter, sort: 'created_at', sortOrder: 'desc', related: '["topics"]' }, true);
       },
       topics: function (TopicService) {
         'ngInject';
