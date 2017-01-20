@@ -29,6 +29,8 @@ class TweetController {
         });
       });
     }
+
+    console.log(this.tweet)
   }
 
   $onInit() {

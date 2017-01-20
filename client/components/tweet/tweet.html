@@ -68,13 +68,13 @@
       </div>
 
       <div class="tweet__ask-meta">
-        <div class="tweet__confirmed-conversation" title="Confirmed conversation">
+        <div class="tweet__confirmed-conversation" title="Confirmed conversation" ng-if="$ctrl.tweet.contribution_id !== null">
           <span>C</span>
         </div><!-- /.tweet__confirmed-conversation -->
 
-        <div class="tweet__klout-score" title="Klout score">
+        <div class="tweet__klout-score" title="Klout score" ng-if="$ctrl.tweet.handle.klout_score">
           <span class="klout-logo klout-logo--tiny"></span>
-          <span class="tweet__klout-value">{{tweet.user-klout_score || 'N/A'}}</span>
+          <span class="tweet__klout-value">{{$ctrl.tweet.handle.klout_score | number:2}}</span>
         </div><!-- /.klout-score -->
 
         <div class="tweet__user-group" title="User group">
