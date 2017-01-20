@@ -89,7 +89,7 @@ class AuthService {
 
     if (validator.isValid()) {
       return this._ApiService.post('/login/reset', data).catch((res) => {
-        return res.data.message;
+        return this._$q.reject(res.data.message);
       });
     } else {
       let deferred = this._$q.defer();
