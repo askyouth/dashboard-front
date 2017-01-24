@@ -6,12 +6,19 @@ module.exports = function (content) {
   var textContent = content.text || '';
 
   // Hashtags
-  textContent = textContent.replace(/(\B#[^ ]+)/g,
-    '<a class="tweet__hashtag">$1</a>');
+  textContent = textContent.replace(/\S*#\S+/gi,
+    function (hashtag) {
+      let query = encodeURIComponent(hashtag);
+      return `<a href="https://twitter.com/search?q=${query}" class="tweet__hashtag" target="_blank">${hashtag}</a>`;
+    });
 
   // User mentions
-  textContent = textContent.replace(/\B(@[^ ]+)/g,
-    '<a href="#" class="tweet__handle">$1</a>');
+  textContent = textContent.replace(/(^|[^@\w])@(\w{1,15})\b/g,
+    function (handle) {
+      handle = handle.trim();
+      let twitterHandle = handle.substr(1);
+      return `<a href="https://twitter.com/${twitterHandle}" class="tweet__handle" target="_blank">${handle}</a>`;
+    });
 
   if (content.entities && content.entities.urls) {
     // Links

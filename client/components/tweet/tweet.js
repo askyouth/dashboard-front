@@ -18,6 +18,7 @@ class TweetController {
     this.HandleService = HandleService;
     this.USER_GROUPS = USER_GROUPS;
 
+    this.onLinksClickBind = this.onLinksClick.bind(this);
     this.onToolbarClickBind = this.onToolbarClick.bind(this);
     this.onTweetLinkClickBind = this.onTweetLinkClick.bind(this);
 
@@ -39,6 +40,12 @@ class TweetController {
     this._$element.find(config.selectors.TWEET_CONTENT).on('click', 'button', this.onTweetLinkClickBind);
     // this._$element.find(config.selectors.TWEET_MENU).on('click', 'button', this.onTweetMenuClick);
     this._$element.find(config.selectors.TWEET_MENU).find('.dropdown-toggle').dropdown();
+
+    this._$element.on([
+      '.tweet__handle',
+      '.tweet__hashtag',
+      '.tweet__link'
+    ].join(',')).on('click', this.onLinksClickBind);
 
     if (this.tweetDetails) {
       this._$element.addClass(config.cssClasses.IS_DETAILS);
@@ -70,6 +77,12 @@ class TweetController {
     this._$element.find(config.selectors.TWEET_CONTENT).off('click', 'button', this.onTweetLinkClickBind);
     // this._$element.find(config.selectors.TWEET_MENU).off('click', 'button', this.onTweetMenuClick);
 
+    this._$element.on([
+      '.tweet__handle',
+      '.tweet__hashtag',
+      '.tweet__link'
+    ].join(',')).off('click', this.onLinksClickBind);
+
     if (this.tweetDetails) {
       this._$element.removeClass(config.cssClasses.IS_DETAILS);
     }
@@ -83,6 +96,11 @@ class TweetController {
 
   onToolbarClick(e) {
     e.stopPropagation();
+  }
+
+  onLinksClick(e) {
+    e.stopPropagation();
+    e.stopImmediatePropagation();
   }
 
   onTweetLinkClick(e) {
