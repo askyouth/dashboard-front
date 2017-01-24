@@ -55,6 +55,10 @@ class ConversationsController {
       params.filter.topicId = this.selectedTopicId;
     }
 
+    if (params.filter.campId === 'both') {
+      params.filter.campId = undefined;
+    }
+
     return this.ConversationsTimeline.listConversations(params).then((conversations) => {
       if (conversations.length > 0) {
         let firstConversation = conversations[0];

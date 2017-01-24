@@ -40,9 +40,9 @@
           <div class="form-group">
             <label for="filters__group">Show contributions</label>
             <select id="filters__group" name="filters__group" placeholder="Started from either group" ng-model="$ctrl.queryParams.filter.campId" ng-change="$ctrl.listConversations()">
-              <option value="3">Started from either group</option>
-              <option value="1">Started from youth</option>
-              <option value="2">Started from policy makers</option>
+              <option value="both">Started from either group</option>
+              <option value="1">Started from policy makers</option>
+              <option value="2">Started from youth</option>
             </select>
           </div><!-- /.form-group -->
         </div><!-- /.col-md-6 -->
