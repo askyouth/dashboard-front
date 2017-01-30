@@ -5,9 +5,12 @@ const config = require('./config.json');
  * SearchController
  */
 class SearchController {
-  constructor($rootScope, $element, $state, SearchService) {
+  constructor($rootScope, $scope, $timeout, $document, $element, $state, SearchService) {
     'ngInject';
     this._$rootScope = $rootScope;
+    this._$scope = $scope;
+    this._$timeout = $timeout;
+    this._$document = $document;
     this._$element = $element;
     this._$state = $state;
     this._SearchService = SearchService;
@@ -24,6 +27,9 @@ class SearchController {
       topics:   [],
       tweets:   []
     };
+
+    this.onSearchResultsWindowClickBind = this.onSearchResultsWindowClick.bind(this);
+    this.onDocumentClickBind = this.onDocumentClick.bind(this);
   }
 
   $onDestroy() {
@@ -39,23 +45,43 @@ class SearchController {
       this.searchResults.tweets = results.tweets;
       this.hasResults();
 
+      if (this.searchForm.hasResults) {
+        document.addEventListener('click', this.onDocumentClickBind);
+
+        this._$timeout(() => {
+          this._$element[0].querySelector('.main-search__results').addEventListener('click', this.onSearchResultsWindowClickBind);
+        }, 10);
+      }
+
     }).catch((err) => {
       
     })
   }
 
+  onDocumentClick(e) {
+    e.stopPropagation()
+    document.removeEventListener('click', this.onDocumentClickBind);
+    this._$scope.$apply(() => {
+      this.resetSearch()
+    })
+  }
+
+  onSearchResultsWindowClick(e) {
+    e.stopPropagation();
+  }
+
   hasResults() {
     let hasResults = false;
 
-    if (this.searchResults.handles.length > 0) {
+    if (this.searchResults.handles && this.searchResults.handles.length > 0) {
       hasResults = true;
     }
 
-    if (this.searchResults.topics.length > 0) {
+    if (this.searchResults.topics && this.searchResults.topics.length > 0) {
       hasResults = true;
     }
 
-    if (this.searchResults.tweets.length > 0) {
+    if (this.searchResults.tweets && this.searchResults.tweets.length > 0) {
       hasResults = true;
     }
 
@@ -64,21 +90,23 @@ class SearchController {
   }
 
   resetSearch() {
-    this.searchResults.handles.length = 0
-    this.searchResults.topics.length = 0;
-    this.searchResults.tweets.length = 0;
+    document.removeEventListener('click', this.onDocumentClickBind);
+    
+    this.searchResults.handles = null;
+    this.searchResults.topics = null;
+    this.searchResults.tweets = null;
     this.searchForm.query = null;
     this.hasResults();
   }
 
   goToHandle(handle) {
-    this._$state.go('handle', { id: handle.id });
     this.resetSearch();
+    this._$state.go('handle', { id: handle.id });
   }
 
   goToTopic(topic) {
-    this._$state.go('topic', { id: topic.id });
     this.resetSearch();
+    this._$state.go('topic', { id: topic.id });
   }
 
   showTweetDetails(tweet) {
