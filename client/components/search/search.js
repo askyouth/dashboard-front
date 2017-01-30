@@ -28,12 +28,13 @@ class SearchController {
       tweets:   []
     };
 
+    this.onSearchInputClickBind = this.onSearchInputClick.bind(this);
     this.onSearchResultsWindowClickBind = this.onSearchResultsWindowClick.bind(this);
     this.onDocumentClickBind = this.onDocumentClick.bind(this);
   }
 
   $onDestroy() {
-
+    this._$element[0].querySelector('.main-search__input').removeEventListener('click', this.onSearchInputClickBind);
   }
 
   onSearchChange($event) {
@@ -47,6 +48,8 @@ class SearchController {
 
       if (this.searchForm.hasResults) {
         document.addEventListener('click', this.onDocumentClickBind);
+
+        this._$element[0].querySelector('.main-search__input').addEventListener('click', this.onSearchInputClickBind);
 
         this._$timeout(() => {
           this._$element[0].querySelector('.main-search__results').addEventListener('click', this.onSearchResultsWindowClickBind);
@@ -64,6 +67,10 @@ class SearchController {
     this._$scope.$apply(() => {
       this.resetSearch()
     })
+  }
+
+  onSearchInputClick(e) {
+    e.stopPropagation();
   }
 
   onSearchResultsWindowClick(e) {
