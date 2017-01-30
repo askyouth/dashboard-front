@@ -59,6 +59,12 @@
   text-align: right;
 }
 
+.conversations-navigation__current {
+  .bootstrap-select>.dropdown-toggle.bs-placeholder, .bootstrap-select>.dropdown-toggle.bs-placeholder:hover, .bootstrap-select>.dropdown-toggle.bs-placeholder:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder:active {
+    color: inherit;
+  }
+}
+
 .conversation {
   border-radius: 6px;
   margin-bottom: 10px;
