@@ -29,12 +29,18 @@ class SearchController {
     };
 
     this.onSearchInputClickBind = this.onSearchInputClick.bind(this);
+    this.onSearchInputFocusBind = this.onSearchInputFocus.bind(this);
+    this.onSearchInputBlurBind = this.onSearchInputBlur.bind(this);
     this.onSearchResultsWindowClickBind = this.onSearchResultsWindowClick.bind(this);
     this.onDocumentClickBind = this.onDocumentClick.bind(this);
+
+    this._$element.find('.main-search__input').on('click', this.onSearchInputClickBind);
+    this._$element.find('.main-search__input').on('focus', this.onSearchInputFocusBind);
+    this._$element.find('.main-search__input').on('blur', this.onSearchInputBlurBind);
   }
 
   $onDestroy() {
-    this._$element[0].querySelector('.main-search__input').removeEventListener('click', this.onSearchInputClickBind);
+    this._$element.find('.main-search__input').off('click', this.onSearchInputClickBind);
   }
 
   onSearchChange($event) {
@@ -49,10 +55,8 @@ class SearchController {
       if (this.searchForm.hasResults) {
         document.addEventListener('click', this.onDocumentClickBind);
 
-        this._$element[0].querySelector('.main-search__input').addEventListener('click', this.onSearchInputClickBind);
-
         this._$timeout(() => {
-          this._$element[0].querySelector('.main-search__results').addEventListener('click', this.onSearchResultsWindowClickBind);
+          this._$element.find('.main-search__results').on('click', this.onSearchResultsWindowClickBind);
         }, 10);
       }
 
@@ -67,6 +71,17 @@ class SearchController {
     this._$scope.$apply(() => {
       this.resetSearch()
     })
+  }
+
+  onSearchInputFocus(e) {
+    this._$element.find('.main-search__input').addClass('is-dirty');
+  }
+
+  onSearchInputBlur(e) {
+    let $input = this._$element.find('.main-search__input');
+    if (!$input.val()) {
+      $input.removeClass('is-dirty');
+    }
   }
 
   onSearchInputClick(e) {
@@ -98,6 +113,7 @@ class SearchController {
 
   resetSearch() {
     document.removeEventListener('click', this.onDocumentClickBind);
+    this._$element.find('.main-search__input').removeClass('is-dirty');
     
     this.searchResults.handles = null;
     this.searchResults.topics = null;

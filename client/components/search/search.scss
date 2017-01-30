@@ -8,7 +8,8 @@
   transition: width .5s !important;
   width: 200px;
 
-  &:focus {
+  &:focus,
+  &.is-dirty {
     width: 330px;
   }
 }
