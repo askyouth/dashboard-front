@@ -40,8 +40,8 @@ class HandlesController {
         this.filterHandles()
 
         this.Notifications.success('Handle created successfully');
-      }).catch(() => {
-        this.Notifications.error('Handle create failed');
+      }).catch((err) => {
+        this.Notifications.error(err.data.message);
       });
     }
   }

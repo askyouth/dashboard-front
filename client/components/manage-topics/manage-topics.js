@@ -58,8 +58,8 @@ class ManageTopicsController {
         this.Notifications.success('Topic created');
 
         this.topics.push(response.data);
-      }).catch(() => {
-        this.Notifications.error('Topic create failed');
+      }).catch((err) => {
+        this.Notifications.error(err.data.message);
       });
     }
   }

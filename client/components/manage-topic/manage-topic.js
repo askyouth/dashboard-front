@@ -26,8 +26,8 @@ class ManageTopicController {
     this.tagsToKeywords();
     this.TopicService.update(this.topic).then((response) => {
       this.Notifications.success('Topic updated');
-    }).catch(() => {
-      this.Notifications.error('Topic update failed');
+    }).catch((err) => {
+      this.Notifications.error(err.data.message);
     });
   }
 
@@ -35,8 +35,8 @@ class ManageTopicController {
     this.TopicService.remove(this.topic).then((response) => {
       this.Notifications.success('Topic deleted');
       this._$state.go('manage_topics', null, { reload: true });
-    }).catch(() => {
-      this.Notifications.error('Topic delete failed');
+    }).catch((err) => {
+      this.Notifications.error(err.data.message);
     });
   }
 
