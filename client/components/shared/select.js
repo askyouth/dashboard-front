@@ -49,7 +49,12 @@ module.exports = function BootstrapSelect($document, $timeout) {
       });
     });
 
-    function refresh(newVal) {
+    function refresh(newVal, oldVal) {
+
+      if (angular.isArray(newVal)) {
+        newVal = oldVal
+      }
+
       // update model if select is within child scope (e.g. inside ng-if)
       if (scope.$parent[attrs.ngModel] !== undefined && scope.$parent[attrs.ngModel] !== newVal) {
         scope.$parent[attrs.ngModel] = newVal;

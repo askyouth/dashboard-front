@@ -67,6 +67,7 @@ app.directive('contentInput', require('./components/shared/content-input.js'));
 app.directive('select', require('./components/shared/select.js'));
 app.directive('ngKeyupEnter', require('./components/shared/ng-keyup-enter.js'));
 app.directive('userGroup', require('./components/shared/user-groups.js').directive);
+app.directive('pagination', require('./components/shared/pagination.js'));
 
 // Services
 app.service('AuthService', require('./components/login/auth-service.js'));

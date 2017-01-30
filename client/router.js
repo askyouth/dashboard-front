@@ -40,18 +40,21 @@ module.exports = function ($stateProvider) {
   })
 
   $stateProvider.state('handles', {
-    url: '/handles?group',
+    url: '/handles?group&page&pageSize',
     template: '<handles-component handles="$resolve.handles" topics="$resolve.topics"></handles-component>',
     data: { permissions: { only: ['user'], redirectTo: 'login' } },
     resolve: {
       handles: function ($stateParams, HandleService) {
         'ngInject'
-        let filter = null;
+        let filter = {};
+        let page = $stateParams.page ? parseInt($stateParams.page) : 1;
+        let pageSize = $stateParams.pageSize ? parseInt($stateParams.pageSize) : 10;
+
         if ($stateParams.group) {
-          filter = { camp: $stateParams.group };
+          filter.camp = $stateParams.group;
         }
 
-        return HandleService.list({ filter: filter, sort: 'created_at', sortOrder: 'desc', related: '["topics"]' }, true);
+        return HandleService.list({ page: page, pageSize: pageSize, filter: filter, sort: 'created_at', sortOrder: 'desc', related: '["topics"]' }, true);
       },
       topics: function (TopicService) {
         'ngInject';

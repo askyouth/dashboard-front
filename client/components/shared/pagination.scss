@@ -1,0 +1,23 @@
+.pagination-container {
+  height: 40px;
+}
+
+.pagination,
+.pagination-controls {
+  float: left;
+  margin: 0;
+}
+
+.pagination {
+  margin-right: 32px;
+}
+
+.pagination-controls {
+  display: inline;
+
+  select,
+  .bootstrap-select {
+    color: inherit;
+    width: 100px !important;
+  }
+}

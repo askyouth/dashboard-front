@@ -77,6 +77,9 @@
 
             </div><!-- /.list-group-item -->
           </div><!-- /.list-group -->
+
+          <pagination page="$ctrl.filters.page" page-size="$ctrl.filters.pageSize" total="$ctrl.handlesCount" on-page-change="$ctrl.filterHandles()"></pagination>
+
         </div><!-- /.col-md-12 -->
       </div><!-- /.row handles-list-row -->
 

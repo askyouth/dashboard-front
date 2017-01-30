@@ -11,12 +11,15 @@ class HandlesController {
     this.HandleService = HandleService;
     this.Notifications = Notifications;
 
-    this.handles = this.handles || [];
+    this.handlesCount = this.handles.count;
+    this.handles = this.handles.handles || [];
 
     this.filters = {
       arrangeBy: 'created_at-desc',
       showGroups: $stateParams.group ? $stateParams.group : 'both',
-      topicFilter: 'all'
+      topicFilter: 'all',
+      page: parseInt($stateParams.page, 10) || 1,
+      pageSize: parseInt($stateParams.pageSize) || 10
     };
 
     this.handleForm = {
@@ -63,9 +66,12 @@ class HandlesController {
     }
 
     params.related = '["topics"]';
+    params.page = this.filters.page;
+    params.pageSize = this.filters.pageSize;
 
-    return this.HandleService.list(params, true).then((handles) => {
-      this.handles = handles;
+    return this.HandleService.list(params, true).then((response) => {
+      this.handlesCount = response.count;
+      this.handles = response.handles;
     }).catch((err) => {
       this.Notifications.error('Something bad happened');
     });

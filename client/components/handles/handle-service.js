@@ -10,8 +10,12 @@ class HandleService {
   handles(params, force) {
     if (force || !this._handles) {
       return this.ApiService.get('handles', { params }).then((response) => {
-        this._handles = response.data;
-        return response.data;
+        if (params.page) {
+          return response.data;
+        } else {
+          this._handles = response.data.handles;
+          return response.data.handles;
+        }
       });
     } else {
       let deferred = this._$q.defer();
