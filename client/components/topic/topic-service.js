@@ -10,16 +10,18 @@ class TopicService {
   }
 
   list(force) {
-    if ((this.topics === null) || force) {
-      return this.ApiService.get('topics').then((response) => {
-        this.topics = response.data;
-        return this.topics;
-      });
-    } else {
-      let deferred = this._$q.defer();
-      deferred.resolve(this.topics);
-      return deferred.promise;
-    }
+    return this.ApiService.get('topics').then((response) => {
+      this.topics = response.data;
+      return this.topics;
+    });
+    
+    // if ((this.topics === null) || force) {
+      
+    // } else {
+    //   let deferred = this._$q.defer();
+    //   deferred.resolve(this.topics);
+    //   return deferred.promise;
+    // }
   }
 
   find(topicId, params) {

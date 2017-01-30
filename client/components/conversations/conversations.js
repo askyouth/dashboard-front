@@ -44,6 +44,7 @@ class ConversationsController {
 
   listTopics() {
     this.TopicService.list().then((topics) => {
+      topics = angular.copy(topics);
       topics.unshift({ id: null, name: 'All topics' });
       this.topics = topics;
     });
