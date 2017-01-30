@@ -41,7 +41,7 @@ class TweetController {
     // this._$element.find(config.selectors.TWEET_MENU).on('click', 'button', this.onTweetMenuClick);
     this._$element.find(config.selectors.TWEET_MENU).find('.dropdown-toggle').dropdown();
 
-    this._$element.on([
+    this._$element.find([
       '.tweet__handle',
       '.tweet__hashtag',
       '.tweet__link'
@@ -77,7 +77,7 @@ class TweetController {
     this._$element.find(config.selectors.TWEET_CONTENT).off('click', 'button', this.onTweetLinkClickBind);
     // this._$element.find(config.selectors.TWEET_MENU).off('click', 'button', this.onTweetMenuClick);
 
-    this._$element.on([
+    this._$element.find([
       '.tweet__handle',
       '.tweet__hashtag',
       '.tweet__link'
