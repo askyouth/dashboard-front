@@ -22,33 +22,49 @@ class ComposeContentModalController {
     };
 
     this.replyTweet = null;
+    this.tweetModalOpen = false;
 
     this.currentUser = AuthService.getUser();
   }
 
   $onInit() {
     this._$element.find(config.selectors.composeContentModal)
+      .on('show.bs.modal', this.onModalShow.bind(this));
+
+    this._$element.find(config.selectors.composeContentModal)
       .on('hidden.bs.modal', this.onModalHide.bind(this));
 
     this._$rootScope.$on('tweet:reply', (e, tweet) => {
       this.replyTweet = tweet;
-      this.isHandle();
-
-      let mentions = [`@${tweet.user.screen_name}`];
-      angular.forEach(tweet.entities.user_mentions, (userMention) => {
-        let username = `@${userMention.screen_name}`;
-        if (mentions.indexOf(username) < 0) {
-          mentions.push(username);
-        }
-      });
-      this.tweetForm.content = mentions.join(' ') + '&nbsp;';
-      this.showModal()
+      this.initialize().then(() => {
+        this.tweetModalOpen = true;
+        this.showModal()
+      })
     });
   }
 
   $onDestroy() {
     this._$element.find(config.selectors.composeContentModal)
       .on('hidden.bs.modal');
+  }
+
+  initialize() {
+    return this.HandleService.list({ pageSize: 2147483647}, true).then((handles) => {
+      this.isHandle();
+
+      if (this.replyTweet) {
+        let mentions = [`@${this.replyTweet.user.screen_name}`];
+        angular.forEach(this.replyTweet.entities.user_mentions, (userMention) => {
+          let username = `@${userMention.screen_name}`;
+          if (mentions.indexOf(username) < 0) {
+            mentions.push(username);
+          }
+        });
+        this.tweetForm.content = mentions.join(' ') + '&nbsp;';
+      }
+
+      this.tweetModalOpen = true;
+    })
   }
 
   selectImage($file) {
@@ -101,10 +117,17 @@ class ComposeContentModalController {
     this._$element.find(config.selectors.composeContentModal).modal('hide');
   }
 
+  onModalShow() {
+    this._$scope.$apply(() => {
+      this.initialize()
+    });
+  }
+
   onModalHide() {
     this._$scope.$apply(() => {
       this.replyTweet = null;
       this.tweetForm.content = null;
+      this.tweetModalOpen = false;
     });
   }
 

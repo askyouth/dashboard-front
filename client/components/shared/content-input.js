@@ -6,15 +6,14 @@ const handleScheme = {
   avatar: 'profile.image'
 };
 
-module.exports = function ContentInput($timeout, ApiService) {
+module.exports = function ContentInput($timeout, ApiService, HandleService) {
   'ngInject';
 
   return {
     restrict: "A",
     require: '?ngModel',
     link: function(scope, element, attrs, ngModel) {
-      ApiService.get('handles').then(function (response) {
-        let handles = response.data;
+      HandleService.list({ pageSize: 2147483647 }, true).then(function (handles) {
         initializeEditor(element, transformHandles(handles));
       });
 
