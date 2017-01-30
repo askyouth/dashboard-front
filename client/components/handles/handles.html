@@ -51,6 +51,7 @@
 
       <div class="row add-handle-row">
         <div class="col-md-6">
+          <label>Add new handle</label>
           <div class="input-group">
             <div class="input-group-btn">
               <select ng-model="$ctrl.handleForm.type">
@@ -58,7 +59,7 @@
                 <option value="2">Youth</option>
               </select>
             </div><!-- /.input-group-btn -->
-            <input type="text" class="form-control" ng-model="$ctrl.handleForm.handle" ng-keyup="$ctrl.createHandle($event)" placeholder="Add handle">
+            <input type="text" class="form-control" ng-model="$ctrl.handleForm.handle" ng-keyup="$ctrl.createHandle($event)" placeholder="Enter Twitter handle...">
             <div class="input-group-btn">
               <button class="btn btn-default" type="button" ng-disabled="!$ctrl.handleForm.handle">
                 <i class="glyphicon glyphicon-remove"></i></button>
