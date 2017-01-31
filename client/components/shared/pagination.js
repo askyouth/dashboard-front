@@ -24,7 +24,7 @@ function Pagination($timeout, $state) {
           Show 
           <select ng-model="pageSize" ng-change="changePageSize(pageSize)"
             ng-options="item as item for item in countList track by item">
-          </select> per page ({{totalItems}} / {{pageSize}})
+          </select> per page
         </div>
       </div>
     `,
@@ -90,6 +90,7 @@ function Pagination($timeout, $state) {
         // scope.page = 1;
         $state.go('.', { page: scope.page, pageSize: scope.pageSize }, {notify: false});
         scope.pages = calculatePages(scope);
+        scope.onPageChange();
       };
 
       var $pageWatcher = scope.$watch('page', () => {
