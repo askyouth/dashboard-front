@@ -49,7 +49,9 @@ class HandlesController {
     }
   }
 
-  filterHandles() {
+  filterHandles(page, pageSize) {
+    console.log('filter handles')
+
     let [sort, sortOrder] = this.filters.arrangeBy.split('-');
     let params = { sort, sortOrder, filter: {} };
 
@@ -66,8 +68,8 @@ class HandlesController {
     }
 
     params.related = '["topics"]';
-    params.page = this.filters.page;
-    params.pageSize = this.filters.pageSize;
+    params.page = page || this.filters.page;
+    params.pageSize = pageSize || this.filters.pageSize;
 
     return this.HandleService.list(params, true).then((response) => {
       this.handlesCount = response.count;

@@ -18,7 +18,7 @@ class HandleTopicsController {
     this.availableTopics = [];
     this.checkAvailableTopics();
 
-    TopicService.list().then((topics) => {
+    TopicService.list(true).then((topics) => {
       this.topics = topics;
       this.checkAvailableTopics();
     });

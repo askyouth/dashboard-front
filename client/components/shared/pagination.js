@@ -45,25 +45,18 @@ function Pagination($timeout, $state) {
         scope.pageSize = 10;
       }
 
+      scope.countList = [10, 25, 50, 100];
+
       scope.page = parseInt(scope.page, 10);
       scope.pageSize = parseInt(scope.pageSize, 10);
-
-      scope.countList = [10, 25, 50, 100];
-      
-      // scope.countList = [
-      //   { count: 10 },
-      //   { count: 25 },
-      //   { count: 50 },
-      //   { count: 100 }
-      // ];
-
       scope.pages = calculatePages(scope);
 
       scope.previousPage = ($event) => {
         if ($event) {
           $event.preventDefault();
         }
-        scope.page = scope.page - 1;
+        let page = scope.page - 1;
+        scope.changePage(page, $event);
       };
 
       scope.changePage = (page, $event) => {
@@ -81,16 +74,16 @@ function Pagination($timeout, $state) {
         if ($event) {
           $event.preventDefault();
         }
-        scope.page = scope.page + 1;
+        let page = scope.page + 1;
+        scope.changePage(page, $event);
       };
 
       scope.changePageSize = (pageSize) => {
+        scope.page = 1;
         scope.pageSize = parseInt(pageSize, 10);
 
-        // scope.page = 1;
         $state.go('.', { page: scope.page, pageSize: scope.pageSize }, {notify: false});
         scope.pages = calculatePages(scope);
-        scope.onPageChange();
       };
 
       var $pageWatcher = scope.$watch('page', () => {
@@ -99,7 +92,16 @@ function Pagination($timeout, $state) {
         scope.pageSize = parseInt(scope.pageSize, 10);
         $state.go('.', { page: scope.page, pageSize: scope.pageSize }, {notify: false});
 
-        scope.onPageChange();
+        scope.onPageChange({ page: scope.page, pageSize: scope.pageSize });
+      });
+
+      var $pageWatcher = scope.$watch('pageSize', () => {
+        scope.page = parseInt(scope.page, 10);
+        scope.pageSize = parseInt(scope.pageSize, 10);
+        scope.pages = calculatePages(scope);
+        $state.go('.', { page: scope.page, pageSize: scope.pageSize }, {notify: false});
+
+        scope.onPageChange({ page: scope.page, pageSize: scope.pageSize });
       });
 
       scope.$on('$destroy', () => {

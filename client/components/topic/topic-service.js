@@ -6,22 +6,20 @@ class TopicService {
     'ngInject';
     this._$q = $q;
     this.ApiService = ApiService;
-    this.topics = null;
+    this._cachedTopics = null;
   }
 
-  list(force) {
-    return this.ApiService.get('topics').then((response) => {
-      this.topics = response.data;
-      return this.topics;
-    });
-    
-    // if ((this.topics === null) || force) {
-      
-    // } else {
-    //   let deferred = this._$q.defer();
-    //   deferred.resolve(this.topics);
-    //   return deferred.promise;
-    // }
+  list(cached) {    
+    if (!cached) {
+      return this.ApiService.get('topics').then((response) => {
+        this._cachedTopics = response.data;
+        return this._cachedTopics;
+      });
+    } else {
+      let deferred = this._$q.defer();
+      deferred.resolve(this._cachedTopics);
+      return deferred.promise;
+    }
   }
 
   find(topicId, params) {
