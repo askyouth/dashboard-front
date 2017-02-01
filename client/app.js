@@ -24,6 +24,9 @@ app.config(require('./config.js'))
 
 app.run(require('./roles.js'))
 
+// Layouts
+app.component('accountSettingsLayout', require('./components/layouts/account-settings-layout.js'));
+
 // Route components
 app.component('application', require('./components/application/application.js'))
 app.component('indexComponent', require('./components/index/index.js'))
@@ -39,6 +42,8 @@ app.component('profileComponent', require('./components/profile/profile.js'))
 app.component('loginComponent', require('./components/login/login.js'))
 app.component('forgotPasswordComponent', require('./components/forgot-password/forgot-password.js'));
 app.component('resetPasswordComponent', require('./components/reset-password/reset-password.js'));
+app.component('usersComponent', require('./components/users/users.js'));
+app.component('listsComponent', require('./components/lists/lists.js'));
 
 // Inline components
 app.component('composeContentModal', require('./components/compose-content-modal/compose-content.js'));
@@ -71,6 +76,7 @@ app.directive('pagination', require('./components/shared/pagination.js'));
 app.directive('revealPassword', require('./components/shared/reveal-password.js'));
 
 // Services
+app.service('SettingsService', require('./components/shared/settings-service.js'))
 app.service('AuthService', require('./components/login/auth-service.js'));
 app.service('TweetTimelineService', require('./components/timeline/timeline-service.js'));
 app.service('TweetService', require('./components/tweet/tweet-service.js'));
@@ -88,6 +94,7 @@ app.service('PageService', require('./components/shared/page-service.js'));
 app.service('ApiService', require('./components/shared/api-service.js'));
 app.service('Notifications', require('./components/shared/notifications.js'));
 app.service('AppStore', require('./components/shared/store.js'));
+app.service('UserService', require('./components/users/user-service.js'));
 app.factory('SocketConnection', require('./components/shared/socket-connection.js'));
 app.factory('RequestInterceptor', require('./components/shared/request-interceptor.js'));
 

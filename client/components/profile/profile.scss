@@ -1,4 +1,12 @@
+.profile-component {
+  &__enable-signup {
+    @media screen and (max-width: 992px) {
+      padding-top: 32px;
+    }
+  }
+}
+
 .profile-form {
-  margin: 64px auto;
-  max-width: 480px;
+  margin: 0 32px;
+  // max-width: 480px;
 }

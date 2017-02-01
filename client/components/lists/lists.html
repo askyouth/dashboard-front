@@ -1,0 +1,21 @@
+<div class="lists-component">
+  
+  <div class="col-sm-12">
+    <h2>Lists</h2>
+  </div><!-- /.col-sm-12 -->
+
+  <div class="col-sm-12">
+    <div class="form-group">
+      <label>Sync <strong>Youth</strong> handles with this Twitter list</label>
+      <select ng-model="$ctrl.youthListId" ng-options="list.id as list.name for list in $ctrl.lists" ng-change="$ctrl.updateLists()"></select>
+    </div><!-- /.form-group -->
+  </div><!-- /.col-6 -->
+
+  <div class="col-sm-12">
+    <div class="form-group">
+      <label>Sync <strong>Policy Makers</strong> handles with this Twitter list</label>
+      <select ng-model="$ctrl.policyListId" ng-options="list.id as list.name for list in $ctrl.lists" ng-change="$ctrl.updateLists()"></select>
+    </div><!-- /.form-group -->
+  </div><!-- /.col-12 -->
+
+</div><!-- /.lists-component -->

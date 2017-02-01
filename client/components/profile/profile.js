@@ -5,12 +5,15 @@ const config = require('./config.json');
  * ProfileController
  */
 class ProfileController {
-  constructor($element, AuthService, ProfileService, Notifications) {
+  constructor($element, AuthService, ProfileService, SettingsService, Notifications) {
     'ngInject';
     this._$element = $element;
     this._AuthService = AuthService;
     this._ProfileService = ProfileService;
+    this._SettingsService = SettingsService;
     this._Notifications = Notifications;
+
+    this.enableSignup = this.settings.settings['signup.enabled'];
   }
 
   $onInit() {
@@ -42,6 +45,20 @@ class ProfileController {
     });
   }
 
+  updateSettings() {
+    this.settings.settings['signup.enabled'] = this.enableSignup;
+
+    this._SettingsService.updateSettings(this.settings.settings).then(() => {
+      if (this.enableSignup) {
+        this._Notifications.success('Signup enabled');
+      } else {
+        this._Notifications.success('Signup disabled');
+      }
+    }).catch((err) => {
+      this._Notifications.error(err.data.message);
+    })
+  }
+
   _resetProfileForm() {
     this.profileForm.currentPassword = null;
     this.profileForm.password = null;
@@ -52,5 +69,8 @@ class ProfileController {
 
 module.exports = {
   templateUrl: 'views/profile/profile.html',
-  controller: ProfileController
+  controller: ProfileController,
+  bindings: {
+    settings: '='
+  }
 };

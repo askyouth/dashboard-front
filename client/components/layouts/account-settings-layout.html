@@ -1,0 +1,18 @@
+<div class="account-settings-layout layout">
+  <!-- Sidebar -->
+  <aside class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">Manage account</div><!-- /.panel-heading -->
+
+      <div class="list-group">
+        <a ui-sref="profile" ui-sref-active="active" class="list-group-item">Account settings</a>
+        <a ui-sref="users" ui-sref-active="active" class="list-group-item">Users</a>
+        <a ui-sref="lists" ui-sref-active="active" class="list-group-item">Lists</a>
+      </div><!-- /.list-group -->
+
+    </div><!-- /.panel panel-default -->
+  </aside>
+
+  <!-- Content -->
+  <div class="col-md-9 account-settings-layout__content" ui-view></div>
+</div><!-- /.account-settings-layout layout -->

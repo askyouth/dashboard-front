@@ -7,6 +7,12 @@ a {
   color: $accent-color;
 }
 
+hr {
+  &.empty {
+    border-color: transparent;
+  }
+}
+
 application {
   display: block;
 }
@@ -138,6 +144,10 @@ form.ng-submitted {
       }
     }
   }
+}
+
+.table-controls {
+  margin: 16px 0;
 }
 
 .btn-twitter {

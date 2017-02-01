@@ -1,0 +1,99 @@
+<div class="users-component">
+  <h2>Users</h2>
+
+  <div class="table-controls">
+    <button class="btn btn-default" data-toggle="modal" data-target="#invite-user-modal">Invite user</button>
+  </div><!-- /.table-controls -->
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Full name</th>
+        <th>Email</th>
+        <th>Added</th>
+        <th>Last login</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="user-row" ng-repeat="user in $ctrl.users">
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.created_at | date}}</td>
+        <td>{{user.last_login_at | date}}</td>
+        <td>
+          <div class="user-row__actions" ng-if="!$ctrl.isCurrentUser(user)">
+            <a href="#" data-toggle="modal" data-target="#delete-user-modal" ng-click="$ctrl.selectedUser = user">Delete</button>
+          </div><!-- /.user__actions -->
+        </td>
+      </tr>
+    </tbody>
+  </table><!-- /.table table-hover table-striped -->
+
+  <pagination page="$ctrl.filters.page" page-size="$ctrl.filters.pageSize" total="$ctrl.usersCount" on-page-change="$ctrl.filterUsers(page, pageSize)"></pagination>
+
+  <div class="table-controls">
+    <button class="btn btn-default" data-toggle="modal" data-target="#invite-user-modal">Invite user</button>
+  </div><!-- /.table-controls -->
+
+  <!-- INVITE USER MODAL -->
+  <div id="invite-user-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" dole="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Invite new user</h4>
+        </div><!-- /.modal-header -->
+
+        <form name="form" ng-submit="$ctrl.inviteUser(form, $event)" novalidate>
+
+          <div class="modal-body">
+            <div class="col-12">
+              <div class="form-group" ng-class="{'has-error': form.invite__name.$error.required}">
+                <label>Full name</label>
+                <input type="text" ng-model="$ctrl.inviteForm.name" name="invite__name" class="form-control" placeholder="John Doe" required />
+              </div><!-- /.form-group -->
+
+              <div class="form-group" ng-class="{'has-error': form.invite__email.$error.required}">
+                <label>Email</label>
+                <input type="email" ng-model="$ctrl.inviteForm.email" name="invite__email" class="form-control" placeholder="user@domain.com" required />
+              </div><!-- /.form-group -->
+            </div><!-- /.col-12 -->
+          </div><!-- /.modal-body -->
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Invite</button>
+          </div><!-- /.modal-footer -->
+        </form>
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /#invite-user-modal.modal fade -->
+
+  <!-- DELETE USER MODAL -->
+  <div id="delete-user-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" dole="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Delete user</h4>
+        </div><!-- /.modal-header -->
+
+        <form name="inviteForm" ng-submit="$ctrl.inviteUser(inviteForm, $event)">
+
+          <div class="modal-body">
+            Do you with to delete <strong>{{$ctrl.selectedUser.name}}</strong>?
+          </div><!-- /.modal-body -->
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-link" data-dismiss="modal" type="button">Cancel</button>
+            <button type="button" class="btn btn-danger" ng-click="$ctrl.deleteUser($ctrl.selectedUser, $event)">Delete user</button>
+          </div><!-- /.modal-footer -->
+        </form>
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /#delete-user-modal.modal fade -->
+
+</div><!-- /.users-component -->

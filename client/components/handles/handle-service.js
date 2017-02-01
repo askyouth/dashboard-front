@@ -10,7 +10,7 @@ class HandleService {
   handles(params, force) {
     if (force || !this._handles) {
       return this.ApiService.get('handles', { params }).then((response) => {
-        if (params.page) {
+        if (params && params.page) {
           return response.data;
         } else {
           this._handles = response.data.handles;

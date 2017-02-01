@@ -161,46 +161,6 @@ module.exports = function ($stateProvider) {
     }
   })
 
-  // $stateProvider.state('conversations', {
-  //   url: '/conversations',
-  //   templaate: '<div></div>',
-  //   data: { permissions: { only: ['user'], redirectTo: 'login' } },
-  //   onEnter: function ($state, TopicService) {
-  //     'ngInject';
-  //     TopicService.findFirst().then(function (topic) {
-  //       if (topic) {
-  //         return $state.go('topic_conversations', { topic_id: topic.id });
-  //       }
-  //     });
-  //   }
-  // });
-
-  // $stateProvider.state('topic_conversations', {
-  //   url: '/topic/:topic_id/conversations',
-  //   template: '<conversations-component topics="$resolve.topics" topic-cursors="$resolve.topicCursors" conversations="$resolve.conversations"></conversations-component>',
-  //   data: { permissions: { only: ['user'], redirectTo: 'login' } },
-  //   resolve: {
-  //     topics: function (TopicService) {
-  //       'ngInject';
-  //       return TopicService.list();
-  //     },
-  //     topicCursors: function ($stateParams, TopicService) {
-  //       'ngInject';
-  //       return TopicService.find($stateParams.topic_id).then(function (topicModel) {
-  //         return TopicService.getCursors(topicModel);
-  //       });
-  //     },
-  //     conversations: function ($stateParams, ConversationsService) {
-  //       'ngInject';
-  //       return ConversationsService.list();
-  //     }
-  //   },
-  //   onEnter: function (PageService) {
-  //     'ngInject';
-  //     PageService.setTitle('Conversations');
-  //   }
-  // })
-
   $stateProvider.state('conversations', {
     url: '/conversations',
     template: '<conversations-component topics="$resolve.topics"></conversations-component>',
@@ -271,48 +231,113 @@ module.exports = function ($stateProvider) {
   /**
    * Auth routes
    */
+  
+  $stateProvider.state('account_settings', {
+    abstract: true,
+    // template: '<account-settings-layout></account-settings-layout>'
+    templateUrl: 'views/layouts/account-settings-layout.html'
+  });
 
-   $stateProvider.state('profile', {
-     url: '/profile',
-     template: '<profile-component></profile-component>',
-     data: { permissions: { only: ['user'] } },
-     onEnter: function (PageService) {
-       'ngInject';
-       PageService.setTitle('Profile');
-     }
-   })
+  $stateProvider.state('profile', {
+    parent: 'account_settings',
+    url: '/profile',
+    template: '<profile-component settings="$resolve.settings"></profile-component>',
+    data: { permissions: { only: ['user'] } },
 
-   $stateProvider.state('login', {
-     url: '/login',
-     template: '<login-component></login-component>',
-     data: { permissions: { only: ['guest'], redirectTo: 'index' } },
-     onEnter: function (PageService) {
-       'ngInject';
-       PageService.setTitle('Login');
-     }
-   })
+    resolve: {
+      settings: function (SettingsService) {
+        'ngInject';
+        return SettingsService.getSettings();
+      }
+    },
 
-   $stateProvider.state('logout', {
-     url: '/logout',
-     template: '<div></div>',
-     controller: function ($state, AuthService) {
-       'ngInject';
-       AuthService.logout().then(() => {
+    onEnter: function (PageService) {
+      'ngInject';
+      PageService.setTitle('Profile');
+    }
+  })
+
+  $stateProvider.state('users', {
+    parent: 'account_settings',
+    url: '/users?page&pageSize',
+    template: '<users-component users="$resolve.users"></users-component>',
+    data: { permissions: { only: ['user'] } },
+
+    resolve: {
+      users: function (UserService, $stateParams) {
+        'ngInject';
+        var page = 1, pageSize = 10;
+        if ($stateParams.page) page = $stateParams.page;
+        if ($stateParams.pageSize) pageSize = $stateParams.pageSize;
+
+        return UserService.users({ page, pageSize });
+      }
+    },
+
+    onEnter: function (PageService) {
+      'ngInject';
+      PageService.setTitle('Users');
+    }
+  })
+
+  $stateProvider.state('lists', {
+    parent: 'account_settings',
+    url: '/lists',
+    template: '<lists-component settings="$resolve.settings"></lists-component>',
+    data: { permissions: { only: ['user'] } },
+
+    resolve: {
+      settings: function (SettingsService) {
+        'ngInject';
+        return SettingsService.getSettings();
+      }
+    },
+
+    onEnter: function (PageService) {
+      'ngInject';
+      PageService.setTitle('Lists');
+    }
+  })
+
+  $stateProvider.state('login', {
+    url: '/login',
+    template: '<login-component config="$resolve.config"></login-component>',
+    data: { permissions: { only: ['guest'], redirectTo: 'index' } },
+
+    resolve: {
+      config: function (SettingsService) {
+        'ngInject';
+        return SettingsService.getConfig();
+      }
+    },
+
+    onEnter: function (PageService) {
+      'ngInject';
+      PageService.setTitle('Login');
+    }
+  })
+
+  $stateProvider.state('logout', {
+    url: '/logout',
+    template: '<div></div>',
+    controller: function ($state, AuthService) {
+      'ngInject';
+      AuthService.logout().then(() => {
         $state.go('login');
       });
-     },
-     data: { permissions: { only: ['user'], redirectTo: 'login' } }
-   })
+    },
+    data: { permissions: { only: ['user'], redirectTo: 'login' } }
+  })
 
-   $stateProvider.state('forgotPassword', {
-     url: '/forgot-password',
-     template: '<forgot-password-component></forgot-password-component>',
-     data: { permissions: { only: ['guest'], redirectTo: 'index' } },
-     onEnter: function (PageService) {
-       'ngInject';
-       PageService.setTitle('I forgot my password!');
-     }
-   })
+  $stateProvider.state('forgotPassword', {
+    url: '/forgot-password',
+    template: '<forgot-password-component></forgot-password-component>',
+    data: { permissions: { only: ['guest'], redirectTo: 'index' } },
+    onEnter: function (PageService) {
+      'ngInject';
+      PageService.setTitle('I forgot my password!');
+    }
+  })
 
   $stateProvider.state('resetPassword', {
     url: '/reset-password?user_id&token',
@@ -321,7 +346,7 @@ module.exports = function ($stateProvider) {
     onEnter: function (PageService, $state, $stateParams) {
       'ngInject';
       if (!$stateParams.user_id || !$stateParams.token) {
-        return $state.go('login');
+      return $state.go('login');
       }
 
       PageService.setTitle('Reset password');

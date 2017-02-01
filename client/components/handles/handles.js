@@ -24,7 +24,8 @@ class HandlesController {
 
     this.handleForm = {
       type: "1",
-      handle: null
+      handle: null,
+      follow: true
     };
   }
 

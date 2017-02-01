@@ -1,51 +1,49 @@
 <div id="profile-component" class="profile-component">
   
-  <form ng-submit="$ctrl.updateProfile()" class="profile-form" novalidate>
-    
-    <div class="col-md-12">
+  <form ng-submit="$ctrl.updateProfile()" class="profile-form" novalidate>     
+    <div class="col-md-6">
+      <h3>Account settings</h3>
+
       <div class="form-group">
         <label for="profile-form__name">Name</label>
         <input type="text" id="profile-form__name" class="form-control" ng-model="$ctrl.profileForm.name" />
       </div><!-- /.form-group -->
-    </div><!-- /.col-md-12 -->
 
-    <div class="col-md-12">
       <div class="form-group">
         <label for="profile-form__name">Email</label>
         <input type="text" id="profile-form__name" class="form-control" value="{{$ctrl.currentProfile.email}}" disabled readonly />
       </div><!-- /.form-group -->
-    </div><!-- /.col-md-12 -->
 
-    <div class="col-md-12">
-      <hr />
-    </div><!-- /.col-md-12 -->
+      <hr class="empty" />
 
-    <div class="col-md-12">
       <h4>Update password</h4>
 
       <div class="form-group">
         <label for="profile-form__current-password">Current password</label>
         <input type="password" id="profile-form__current-password" class="form-control" ng-model="$ctrl.profileForm.currentPassword" />
       </div><!-- /.form-group -->
-    </div><!-- /.col-md-12 -->
 
-    <div class="col-md-12">
       <div class="form-group">
         <label for="profile-form__new-password">New password</label>
         <input type="password" id="profile-form__new-password" class="form-control" ng-model="$ctrl.profileForm.password" />
       </div><!-- /.form-group -->
-    </div><!-- /.col-md-12 -->
 
-    <div class="col-md-12">
       <div class="form-group">
         <label for="profile-form__confirm-password">Confirm password</label>
         <input type="password" id="profile-form__confirm-password" class="form-control" ng-model="$ctrl.profileForm.confirmPassword" />
       </div><!-- /.form-group -->
-    </div><!-- /.col-md-12 -->
 
-    <div class="col-md-12">
       <button class="btn btn-block btn-primary" type="submit">Update profile</button>
-    </div><!-- /.col-md-12 -->
+    </div>
+
+    <div class="col-md-5 col-md-offset-1 profile-component__enable-signup">
+      <h3>Sign up control</h3>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="$ctrl.enableSignup" ng-change="$ctrl.updateSettings()" /> Enable other users to signup without invitation
+        </label>
+      </div><!-- /.checkbox -->
+    </div><!-- /.col-md-6 -->
 
   </form><!-- /.profile-form -->
 

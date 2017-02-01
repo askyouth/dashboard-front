@@ -1,5 +1,10 @@
 <div class="handle">
   <div class="handle__meta">
+    <div class="handle__follow">
+      <button class="btn btn-link" ng-click="$ctrl.followOnTwitter($event)" ng-if="!$ctrl.handle.following">Follow</button>
+      <button class="btn btn-link" ng-click="$ctrl.unfollowOnTwitter($event)" ng-if="$ctrl.handle.following">Following</button>
+    </div><!-- /.handle__follow -->
+
     <a ui-sref="handle({ id: $ctrl.handle.id })" class="tweet__user">
       <img ng-src="{{$ctrl.handle.profile.image}}" alt="" class="tweet__avatar">
       <span class="tweet__user__name">{{$ctrl.handle.name}}</span>

@@ -9,7 +9,7 @@ function Pagination($timeout, $state) {
 
     template: `
       <div class="pagination-container" aria-label="Page navigation">
-        <ul class="pagination" ng-if="totalItems >= pageSize">
+        <ul class="pagination">
           <li class="pagination__page" ng-click="previousPage($event)" ng-if="hasPrevious">
             <a href="#">Previous</a>
           </li>
@@ -68,6 +68,9 @@ function Pagination($timeout, $state) {
           return false;
         }
         scope.page = page;
+        scope.pages = calculatePages(scope)
+
+        scope.onPageChange({ page: scope.page, pageSize: scope.pageSize });
       };
 
       scope.nextPage = ($event) => {
@@ -84,29 +87,9 @@ function Pagination($timeout, $state) {
 
         $state.go('.', { page: scope.page, pageSize: scope.pageSize }, {notify: false});
         scope.pages = calculatePages(scope);
+
+        scope.onPageChange({ page: scope.page, pageSize: scope.pageSize });
       };
-
-      var $pageWatcher = scope.$watch('page', () => {
-        scope.pages = calculatePages(scope);
-        scope.page = parseInt(scope.page, 10);
-        scope.pageSize = parseInt(scope.pageSize, 10);
-        $state.go('.', { page: scope.page, pageSize: scope.pageSize }, {notify: false});
-
-        scope.onPageChange({ page: scope.page, pageSize: scope.pageSize });
-      });
-
-      var $pageWatcher = scope.$watch('pageSize', () => {
-        scope.page = parseInt(scope.page, 10);
-        scope.pageSize = parseInt(scope.pageSize, 10);
-        scope.pages = calculatePages(scope);
-        $state.go('.', { page: scope.page, pageSize: scope.pageSize }, {notify: false});
-
-        scope.onPageChange({ page: scope.page, pageSize: scope.pageSize });
-      });
-
-      scope.$on('$destroy', () => {
-        $pageWatcher();
-      });
     }
   }
 }

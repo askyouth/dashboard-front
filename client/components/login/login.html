@@ -1,6 +1,6 @@
 <div class="login-component">
     
-    <div class="col-md-5">
+    <div class="" ng-class="{'col-md-5': $ctrl.signupEnabled, 'col-md-6 col-md-offset-3': !$ctrl.signupEnabled}">
       <form ng-submit="$ctrl.auth(loginForm, $event)" name="loginForm" class="login-form" novalidate>
         <h2>Login</h2>
 
@@ -21,7 +21,7 @@
     </div><!-- /.col-md-14 -->
 
     <!-- SIGN UP FORM -->
-    <div class="col-md-5 col-md-offset-2">
+    <div class="col-md-5 col-md-offset-2" ng-if="$ctrl.signupEnabled">
       <form ng-submit="$ctrl.signup(signupForm, $event)" name="signupForm" class="signup-form" novalidate>
         <h2>Sign up</h2>
 

@@ -22,11 +22,12 @@ class LoginController {
       email: null,
       password: null
     };
+
+    this.signupEnabled = this.config['signup.enabled'];
   }
 
   auth(form, $event) {
     if ($event) $event.preventDefault();
-
 
     if (form.$valid) {
       this._AuthService.login(this.loginForm).then(() => {
@@ -42,6 +43,7 @@ class LoginController {
 
   signup(form, $event) {
     if ($event) $event.preventDefault()
+    if (!this.signupEnabled) return false;
 
     if (form.$valid) {
       this.signupForm.confirmPassword = this.signupForm.password;
@@ -65,5 +67,8 @@ class LoginController {
 
 module.exports = {
   templateUrl: 'views/login/login.html',
-  controller: LoginController
+  controller: LoginController,
+  bindings: {
+    config: '='
+  }
 };
