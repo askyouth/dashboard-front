@@ -88,7 +88,10 @@ class AuthService {
     let validator = new this._ResetPasswordValidator(data);
 
     if (validator.isValid()) {
-      return this._ApiService.post('/login/reset', data).catch((res) => {
+      return this._ApiService.post('/login/reset', data).then((res) => {
+        this._$auth.setToken(res.data.auth);
+        return res;
+      }).catch((res) => {
         return this._$q.reject(res.data.message);
       });
     } else {

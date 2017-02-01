@@ -31,7 +31,7 @@ class ResetPasswordController {
       this.resetPasswordForm.confirmPassword = null;
 
       this._Notifications.success('Password successfully changed');
-      this._$state.go('login');
+      this._$state.go('index');
     }).catch((err) => {
       this._Notifications.showList('error', err);
     })
