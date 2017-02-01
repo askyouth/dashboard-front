@@ -50,8 +50,6 @@ class HandlesController {
   }
 
   filterHandles(page, pageSize) {
-    console.log('filter handles')
-
     let [sort, sortOrder] = this.filters.arrangeBy.split('-');
     let params = { sort, sortOrder, filter: {} };
 
