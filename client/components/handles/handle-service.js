@@ -58,6 +58,14 @@ class HandleService {
     return this.ApiService.delete(`handles/${handle.id}`);
   }
 
+  followHandle(handle) {
+    return this.ApiService.post(`handles/${handle.id}/follow`);
+  }
+
+  unfollowHandle(handle) {
+    return this.ApiService.post(`handles/${handle.id}/unfollow`);
+  }
+
   assignTopic(handleId, topicId) {
     return this.ApiService.post(`handles/${handleId}/topics/${topicId}`);
   }
