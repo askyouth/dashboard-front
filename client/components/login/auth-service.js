@@ -69,7 +69,14 @@ class AuthService {
   }
 
   signup(data) {
-    return this._ApiService.post('/signup', data);
+    return this._ApiService.post('/signup', data).then((response) => {
+      var profile = response.data.user;
+      
+      return this.loadTwitterUser().then(() => {
+        this._$auth.setToken(response.data.auth);
+        return this.currentProfile(profile);
+      });
+    });
   }
 
   logout() {

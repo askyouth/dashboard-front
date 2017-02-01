@@ -116,6 +116,30 @@ application {
   }
 }
 
+.has-error {
+  .form-control {
+    border-color: #ccc;
+
+    &:focus {
+      border-color: #66afe9;
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+    }
+  }
+}
+
+form.ng-submitted {
+  .has-error {
+    .form-control {
+      border-color: #a94442;
+      
+      &:focus {
+        border-color: #a94442;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px #ce8483;
+      }
+    }
+  }
+}
+
 .btn-twitter {
   background-color: #ffffff;
   background-image: url(/images/twitter-logo.svg);

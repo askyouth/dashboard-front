@@ -16,7 +16,7 @@ class ProfileController {
   $onInit() {
     this.currentProfile = this._AuthService.currentProfile();
     this.profileForm = {
-      name: this.currentProfile.name,
+      name: (this.currentProfile) ? this.currentProfile.name : null,
       currentPassword: null,
       password: null,
       confirmPassword: null

@@ -1,29 +1,55 @@
 <div class="login-component">
+    
+    <div class="col-md-5">
+      <form ng-submit="$ctrl.auth(loginForm, $event)" name="loginForm" class="login-form" novalidate>
+        <h2>Login</h2>
 
-  <form ng-submit="$ctrl.auth()" class="login-form" novalidate>
+        <div class="form-group" ng-class="{'has-error': loginForm.login__email.$error.required}">
+          <label for="login-form__email">Email</label>
+          <input type="email" name="login__email" class="form-control" ng-model="$ctrl.loginForm.email" placeholder="user@domain.com" tabindex="1" required>
+        </div><!-- /.form-group -->
 
-    <div class="col-md-12">
-      <h2>Login</h2>
+        <div class="form-group" ng-class="{'has-error': loginForm.login__password.$error.required}">
+          <label for="login-form__password" class="login-form__password">Password <a ui-sref="forgotPassword" class="login-form__forgot-password">I forgot my password!</a></label>
+          <input type="password" name="login__password" class="form-control" ng-model="$ctrl.loginForm.password" placeholder="•••••••••" tabindex="2" required>
+        </div><!-- /.form-group -->
 
-      <div class="form-group">
-        <label for="login-form__email">Email</label>
-        <input type="text" name="login__email" class="form-control" ng-model="$ctrl.loginForm.email" placeholder="user@domain.com" tabindex="1">
-      </div><!-- /.form-group -->
+        <div class="form-group">
+          <button class="btn btn-primary btn-block" type="submit" tabindex="3">Login</button>
+        </div><!-- /.form-group -->
+      </form><!-- /.login-form -->
+    </div><!-- /.col-md-14 -->
+
+    <!-- SIGN UP FORM -->
+    <div class="col-md-5 col-md-offset-2">
+      <form ng-submit="$ctrl.signup(signupForm, $event)" name="signupForm" class="signup-form" novalidate>
+        <h2>Sign up</h2>
+
+        <div class="form-group" ng-class="{'has-error': signupForm.signup__name.$error.required}">
+          <label for="signup-form__email">Full name</label>
+          <input type="text" name="signup__name" class="form-control" ng-model="$ctrl.signupForm.name"  tabindex="4" placeholder="John Doe" required>
+        </div><!-- /.form-group -->
+
+        <div class="form-group" ng-class="{'has-error': signupForm.signup__email.$error.required}">
+          <label for="signup-form__email">Email</label>
+          <input type="email" name="signup__email" class="form-control" ng-model="$ctrl.signupForm.email" placeholder="user@domain.com" tabindex="5" required>
+        </div><!-- /.form-group -->
+
+        <div class="form-group" ng-class="{'has-error': signupForm.signup__password.$error.required}">
+          <label for="signup-form__password" class="signup-form__password">Password</label>
+          <input type="password" name="signup__password" class="form-control" ng-model="$ctrl.signupForm.password" placeholder="At least 6 characters" tabindex="6" reveal-password="$ctrl.signupHelpers.revealPassword" required>
+        </div><!-- /.form-group -->
+
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="$ctrl.signupHelpers.revealPassword"> Show password
+          </label>
+        </div><!-- /.checkbox -->
+
+        <div class="form-group">
+          <button class="btn btn-primary btn-block" type="submit" tabindex="7">Sign up</button>
+        </div><!-- /.form-group -->
+      </form><!-- /.login-form -->
     </div><!-- /.col-md-12 -->
-
-    <div class="col-md-12">
-      <div class="form-group">
-        <label for="login-form__password" class="login-form__password">Password <a ui-sref="forgotPassword" class="login-form__forgot-password">I forgot my password!</a></label>
-        <input type="password" name="login__password" class="form-control" ng-model="$ctrl.loginForm.password" placeholder="•••••••••" tabindex="2">
-      </div><!-- /.form-group -->
-    </div><!-- /.col-md-12 -->
-
-    <div class="form-group">
-      <div class="col-md-12">
-        <button class="btn btn-primary btn-block" type="submit" tabindex="3">Login</button>
-      </div><!-- /.col-md-6 -->
-    </div><!-- /.form-group -->
-
-  </form><!-- /.login-form -->
 
 </div><!-- /.login-component -->
