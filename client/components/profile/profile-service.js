@@ -1,8 +1,9 @@
 class ProfileService {
-  constructor($q, ApiService, ProfileValidator) {
+  constructor($q, ApiService, ProfileValidator, AuthService) {
     'ngInject';
     this._$q = $q;
     this.ApiService = ApiService;
+    this.AuthService = AuthService;
     this.ProfileValidator = ProfileValidator;
   }
 
@@ -16,7 +17,12 @@ class ProfileService {
         data.confirmPassword = undefined;
       }
 
-      return this.ApiService.post('/profile', data);
+      return this.ApiService.post('/profile', data).then((res) => {
+        let profile = this.AuthService.currentProfile();
+        profile.name = data.name;
+        this.AuthService.currentProfile(profile);
+        return res;
+      });
     } else {
       let deferred = this._$q.defer();
       deferred.reject(validator.getMessages());
