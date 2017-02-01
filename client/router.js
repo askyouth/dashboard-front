@@ -352,4 +352,18 @@ module.exports = function ($stateProvider) {
       PageService.setTitle('Reset password');
     }
   })
+
+  $stateProvider.state('setPassword', {
+    url: '/set-password?user_id&token',
+    template: '<set-password-component></set-password-component>',
+    data: { permissions: { only: ['guest'], redirectTo: 'index' } },
+    onEnter: function (PageService, $state, $stateParams) {
+      'ngInject';
+      if (!$stateParams.user_id || !$stateParams.token) {
+      return $state.go('login');
+      }
+
+      PageService.setTitle('Set password');
+    }
+  })
 };

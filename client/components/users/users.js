@@ -65,9 +65,13 @@ class UsersController {
           email: null
         };
 
-        // this.users.push(response.data.user);
+        this.users.push(response.data);
+
         this._Notifications.success('User invited');
         this._$element.find('#invite-user-modal').modal('hide');
+
+        form.$setPristine();
+        form.$setUntouched();
       }).catch((err) => {
         this._Notifications.error(err.data.message);
       })

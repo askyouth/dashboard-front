@@ -42,6 +42,7 @@ app.component('profileComponent', require('./components/profile/profile.js'))
 app.component('loginComponent', require('./components/login/login.js'))
 app.component('forgotPasswordComponent', require('./components/forgot-password/forgot-password.js'));
 app.component('resetPasswordComponent', require('./components/reset-password/reset-password.js'));
+app.component('setPasswordComponent', require('./components/set-password/set-password.js'));
 app.component('usersComponent', require('./components/users/users.js'));
 app.component('listsComponent', require('./components/lists/lists.js'));
 

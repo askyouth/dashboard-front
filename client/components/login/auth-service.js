@@ -96,6 +96,7 @@ class AuthService {
 
     if (validator.isValid()) {
       return this._ApiService.post('/login/reset', data).then((res) => {
+        this.currentProfile(res.data.user);
         this._$auth.setToken(res.data.auth);
         return res;
       }).catch((res) => {
