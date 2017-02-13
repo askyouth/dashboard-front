@@ -39,7 +39,7 @@ class HandlesController {
 
   createHandle($event) {
     if ($event.keyCode === 13) {
-      return this.HandleService.create(this.handleForm.handle, this.handleForm.type).then((handle) => {
+      return this.HandleService.create(this.handleForm.handle, this.handleForm.type, this.handleForm.follow).then((handle) => {
         this.handleForm.handle = null;
         this.filterHandles()
 

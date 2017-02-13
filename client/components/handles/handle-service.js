@@ -34,8 +34,14 @@ class HandleService {
     });
   }
 
-  create(username, campId) {
-    return this.ApiService.post('handles', { username: username, camp_id: parseInt(campId, 10) }).then((response) => {
+  create(username, campId, followOnTwitter) {
+    let data = {
+      username: username,
+      camp_id: parseInt(campId, 10),
+      follow: followOnTwitter
+    };
+
+    return this.ApiService.post('handles', data).then((response) => {
       let handle = response.data;
 
       if (this._handles) {
