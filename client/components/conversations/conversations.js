@@ -29,7 +29,7 @@ class ConversationsController {
       },
 
       page: 1,
-      pageSize: 2,
+      pageSize: 25,
       sort: 'created_at',
       sortOrder: 'asc'
     };
