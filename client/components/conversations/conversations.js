@@ -29,13 +29,16 @@ class ConversationsController {
       },
 
       page: 1,
-      pageSize: 25,
+      pageSize: 2,
       sort: 'created_at',
       sortOrder: 'asc'
     };
 
     this.selectedTopicId = null;
     this.topicCursors = {};
+    this.viewModel = {
+      showLoadMoreButton: true
+    };
   }
 
   $onInit() {
@@ -61,10 +64,7 @@ class ConversationsController {
     }
 
     return this.ConversationsTimeline.listConversations(params).then((conversations) => {
-      if (conversations.length > 0) {
-        let firstConversation = conversations[0];
-        // return this.selectConversation(firstConversation);
-      }
+      this.viewModel.showLoadMoreButton = true;
     });
   }
 
@@ -119,6 +119,34 @@ class ConversationsController {
     }
 
     return title.join(', ');
+  }
+
+  loadMoreConversations($event) {
+    if ($event) {
+      $event.preventDefault();
+    }
+
+    // Increase page counter to load next page
+    this.queryParams.page++;
+
+    let params = angular.copy(this.queryParams);
+    if (this.selectedTopicId) {
+      params.filter.topicId = this.selectedTopicId;
+    }
+
+    if (params.filter.campId === 'both') {
+      params.filter.campId = undefined;
+    }
+
+    return this.ConversationsTimeline.loadMoreConversations(params).then((conversations) => {
+      if (conversations.length === 0) {
+        this.viewModel.showLoadMoreButton = false;
+      } else {
+        if (conversations.length !== this.queryParams.pageSize) {
+          this.viewModel.showLoadMoreButton = false;
+        }
+      }
+    });
   }
 };
 

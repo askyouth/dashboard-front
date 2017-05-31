@@ -51,6 +51,8 @@ class HandleListItemController {
       this._$element.find(config.selectors.REMOVE_HANDLE_BUTTON).attr('disabled', false);
       this.Notifications.success('Handle removed');
       this.onDelete(this.handle);
+    }).catch((err) => {
+      this.Notifications.error(err.message);
     });
   }
 };

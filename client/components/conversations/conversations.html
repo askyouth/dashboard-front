@@ -116,6 +116,10 @@
         <tweet tweet="conversation.tweet" ng-click="$ctrl.selectConversation(conversation)"></tweet>
       </div><!-- /.conversation -->
 
+      <button type="button" class="btn btn-default btn-block" 
+        ng-click="$ctrl.loadMoreConversations($event)"
+        ng-if="$ctrl.viewModel.showLoadMoreButton">Load more</button>
+
     </div><!-- /.col-md-12 -->
 
   </div><!-- /.row.conversations-content -->
