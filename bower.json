@@ -41,7 +41,7 @@
   "resolutions": {
     "masonry": "4.1.1",
     "jquery": "3.1.1",
-    "outlayer": "2.1.0",
+    "outlayer": "2.1.1",
     "angular": "1.5.8",
     "angular-sanitize": "1.5.8",
     "angular-animate": "1.5.8"
