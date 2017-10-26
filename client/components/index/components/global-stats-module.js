@@ -15,7 +15,7 @@ class GlobalStatsModuleController {
     this._AnalyticsService.globalStats().then((globalStats) => {
       this.globalStats = globalStats;
     })
-    this._ApiService.get('/account').then((response) => {
+    this._ApiService.get('/profile').then((response) => {
       this.account = response.data;
       this.account.handle = this.account.handle[0]
     })

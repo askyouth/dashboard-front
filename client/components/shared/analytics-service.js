@@ -5,7 +5,7 @@ class AnalyticsService {
   }
 
   globalStats() {
-    return this._ApiService.get('/account').then((response) => {
+    return this._ApiService.get('/profile').then((response) => {
       return response.data;
     });
   }
