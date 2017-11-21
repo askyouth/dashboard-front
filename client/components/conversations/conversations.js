@@ -1,11 +1,12 @@
 'use strict';
 const config = require('./config.json');
+const appConfig = require('../../../config')
 
 /**
  * IndexController
  */
 class ConversationsController {
-  constructor($rootScope, $element, $state, $stateParams, TopicService, ConversationsService, ConversationsTimeline, Notifications) {
+  constructor($rootScope, $element, $state, $stateParams, TopicService, ConversationsService, ConversationsTimeline, Notifications, AuthService) {
     'ngInject';
     this._$rootScope = $rootScope;
     this._$state = $state;
@@ -15,6 +16,7 @@ class ConversationsController {
     this.ConversationsService = ConversationsService;
     this.ConversationsTimeline = new ConversationsTimeline();
     this.Notifications = Notifications;
+    this.AuthService = AuthService;
 
     this.queryParams = {
       filter: {
@@ -147,6 +149,12 @@ class ConversationsController {
         }
       }
     });
+  }
+
+  exportMetricsLink() {
+    let apiDomain = appConfig.get('api.domain')
+    let token = this.AuthService.getToken();
+    return `${apiDomain}/analytics/metrics?token=${token}`;
   }
 };
 
