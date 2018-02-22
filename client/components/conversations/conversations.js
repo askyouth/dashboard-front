@@ -33,7 +33,7 @@ class ConversationsController {
       page: 1,
       pageSize: 25,
       sort: 'created_at',
-      sortOrder: 'asc'
+      sortOrder: 'desc'
     };
 
     this.selectedTopicId = null;
