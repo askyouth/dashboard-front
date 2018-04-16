@@ -1,20 +1,33 @@
 {
-  "name": "project-boilerplate",
+  "name": "dashboard-front",
   "version": "1.0.0",
-  "description": "Basic project boilerplate for server and client app",
+  "description": "Dashboard frontend app",
   "main": "index.js",
   "engines": {
     "node": ">=5 <6"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=production parallelshell \"./node_modules/.bin/gulp build\" \"node index.js\"",
-    "dev": "DEBUG=app:* parallelshell \"node-dev index.js\" \"./node_modules/.bin/gulp dev\"",
-    "dev.spa": "DEBUG=app:* parallelshell \"node-dev server.spa.js\" \"./node_modules/.bin/gulp dev\"",
-    "postinstall": "./node_modules/.bin/bower install && ./node_modules/.bin/gulp build"
+    "start": "NODE_ENV=production parallelshell \"gulp build\" \"node index.js\"",
+    "dev": "DEBUG=app:* parallelshell \"node-dev index.js\" \"gulp dev\"",
+    "dev.spa": "DEBUG=app:* parallelshell \"node-dev server.spa.js\" \"gulp dev\"",
+    "build": "gulp build",
+    "postinstall": "bower install && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Davor Grubelić <davor.grubelic@gmail.com>",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/askyouth/dashboard-front.git"
+  },
+  "keywords": [
+    "dashboard",
+    "front"
+  ],
+  "author": "UX Passion (http://uxpassion.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/askyouth/dashboard-front/issues"
+  },
+  "homepage": "https://github.com/askyouth/dashboard-front#readme",
   "dependencies": {
     "angular-masonry": "^0.16.0",
     "babel-core": "^6.13.2",
