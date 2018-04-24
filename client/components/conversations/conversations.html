@@ -28,7 +28,7 @@
   <div class="row conversations-filters">
     <div class="col-md-3">
       <div class="conversations-count">
-        <div class="conversations-count__value">771</div><!-- /.conversations-count__value -->
+        <div class="conversations-count__value" ng-bind="$ctrl.ConversationsTimeline.count"></div><!-- /.conversations-count__value -->
         <div class="conversations-count__title">Brokered contributions</div><!-- /.conversations-count__title -->
         <a class="btn btn-link" ng-href="{{$ctrl.exportMetricsLink()}}">Export metrics</a>
       </div><!-- /.conversations-count -->

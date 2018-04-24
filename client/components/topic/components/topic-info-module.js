@@ -25,17 +25,6 @@ class TopicInfoController {
 module.exports = {
   template: `
     <div class="module panel panel-default topic-info">
-      <div class="panel-heading">Show tweets</div>
-      <div class="module__content panel-body">
-        <label>
-          <input type="radio" name="topic__filter" ng-model="$ctrl.topicTweetsFilter" value="handles"> Only from handles added to this topic
-        </label>
-
-        <label>
-          <input type="radio" name="topic__filter" ng-model="$ctrl.topicTweetsFilter" value="all"> From all Twitter users
-        </label>
-      </div>
-
       <div class="panel-heading">Keywords</div>
 
       <div class="module__content panel-body topic-info__keywords">

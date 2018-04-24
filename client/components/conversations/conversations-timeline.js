@@ -37,12 +37,14 @@ module.exports = function ConversationsTimelineFactory(SocketConnection, Convers
       }
 
       return ConversationsService.list(params).then((conversations) => {
+        const count = conversations.count || 0;
         conversations = conversations.contributions || [];
         this.updateQueryParams(params);
         conversations.map(function (conversation) {
           transformContent(conversation.tweet);
         });
         this.conversations = conversations;
+        this.count = count;
         return conversations;
       });
     };
