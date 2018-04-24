@@ -31,36 +31,7 @@
     </div><!-- /.panel panel-default -->
   </div><!-- /.col-md-3 -->
 
-  <div class="col-md-6">
+  <div class="col-md-9">
     <timeline config="{ userId: $ctrl.handle.id }"></timeline>
   </div><!-- /.col-md-6 -->
-
-  <div class="col-md-3">
-    <div class="panel panel-default">
-      <div class="panel-heading">Filter tweets</div><!-- /.panel-heading -->
-      <div class="panel-body">
-        <label for="handle-tweets__full-feed">
-          <input type="radio" id="handle-tweets__full-feed" ng-model="$ctrl.feedFilter" value="full">
-          Show the entire feed
-        </label>
-
-        <label for="handle-tweets__single-feed">
-          <input type="radio" id="handle-tweets__single-feed" ng-model="$ctrl.feedFilter" value="singe_group">
-          Show single group conversations
-        </label>
-
-        <label for="handle-tweets__double-feed">
-          <input type="radio" id="handle-tweets__double-feed" ng-model="$ctrl.feedFilter" value="both_groups">
-          Show both group conversations
-        </label>
-      </div><!-- /.panel-body -->
-    </div><!-- /.panel panel-default -->
-
-    <div class="panel panel-default">
-      <div class="panel-heading">{{$ctrl.handle.name}}'s stats</div><!-- /.panel-heading -->
-      <div class="panel-body">
-        <handle-stats-module handle="$ctrl.handle"></handle-stats-module>
-      </div><!-- /.panel-body -->
-    </div><!-- /.panel panel-default -->
-  </div><!-- /.col-md-3 -->
 </div>

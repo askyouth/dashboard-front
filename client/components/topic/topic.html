@@ -33,14 +33,10 @@
     </div><!-- /#topics-page__left-sidebar.col-md-3 -->
 
     <!-- Content -->
-    <div id="topics-page__content" class="col-md-6">
+    <div id="topics-page__content" class="col-md-9">
       <timeline config="{ topicId: $ctrl.topicCursors.currentTopic.id }" ng-if="$ctrl.topicCursors.currentTopic"></timeline>
     </div><!-- /#topics-page__content.col-md-6 -->
 
-    <!-- Right sidebar -->
-    <div id="topics-page__right-sidebar" class="col-md-3">
-      <topic-stats-module topic="$ctrl.topicCursors.currentTopic"></topic-stats-module>
-    </div><!-- /#topics-page__right-sidebar.col-md-3 -->
   </div><!-- /.row -->
 
 </div><!-- /#topics-page -->
