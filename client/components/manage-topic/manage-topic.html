@@ -22,7 +22,7 @@
           <div class="handle">
             <div class="handle__meta">
               <a ui-sref="handle({ id: handle.id })" class="tweet__user">
-                <img ng-src="{{handle.profile.image}}" alt="" class="tweet__avatar">
+                <img ng-src="{{'https://avatars.io/twitter/'+handle.username}}" alt="" class="tweet__avatar">
                 <span class="tweet__user__name">{{handle.name}}</span>
                 <span class="tweet__user__username">@{{handle.username}}</span>
               </a><!-- /.tweet__user -->

@@ -3,7 +3,9 @@ const objectUtils = require('node-object-utils');
 const handleScheme = {
   name: 'name',
   username: 'username',
-  avatar: 'profile.image'
+  avatar: function (handle) {
+    return 'https://avatars.io/twitter/' + handle.username;
+  }
 };
 
 module.exports = function ContentInput($timeout, ApiService, HandleService) {
