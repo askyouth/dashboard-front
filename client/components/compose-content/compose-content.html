@@ -1,7 +1,7 @@
 <div class="compose-content" ng-class="{'has-media': $ctrl.tweetForm.hasImage}">
     <div class="compose-content__body">
       <div class="compose-content__avatar">
-        <img src="{{$ctrl.currentUser.handle.profile.image}}" alt="{{$ctrl.currentUser.handle.name}}">
+        <img src="{{'https://avatars.io/twitter/'+$ctrl.currentUser.handle.username}}" alt="{{$ctrl.currentUser.handle.name}}">
       </div>
       <div class="tweet-form">
         <div class="tweet-form__content" contenteditable="true" ng-model="$ctrl.tweetForm.content" data-placeholder="Compose new Tweet" content-input>

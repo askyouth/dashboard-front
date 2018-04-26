@@ -2,7 +2,7 @@
   <div class="col-md-3">
     <div class="handle-profile panel panel-default">
       <div class="panel-body">
-        <img ng-src="{{$ctrl.profileImage($ctrl.handle.profile.image)}}" alt="{{$ctrl.handle.name}}" class="handle-profile__avatar img-thumbnail">
+        <img ng-src="{{'https://avatars.io/twitter/'+$ctrl.handle.username}}" alt="{{$ctrl.handle.name}}" class="handle-profile__avatar img-thumbnail">
         <div class="handle-profile__user">
           <a href="https://twitter.com/{{$ctrl.handle.username}}" class="handle-profile__name" target="_blank">{{$ctrl.handle.name}}</a><!-- /.handle-profile__name -->
           <a href="https://twitter.com/{{$ctrl.handle.username}}" class="handle-profile__username" target="_blank">@{{$ctrl.handle.username}}</a><!-- /.handle-profile__username -->

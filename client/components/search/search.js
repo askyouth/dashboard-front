@@ -159,7 +159,7 @@ module.exports = {
             <li class="main-search-results__item" ng-repeat="handle in $ctrl.searchResults.handles" ng-click="$ctrl.goToHandle(handle)">
               <div class="handle handle--inline">
                 <span class="tweet__user">
-                  <img ng-src="{{handle.profile.image}}" alt="" class="tweet__avatar">
+                  <img ng-src="{{'https://avatars.io/twitter/'+handle.username}}" alt="" class="tweet__avatar">
                   <span class="tweet__user__name">{{handle.name}}</span>
                   <span class="tweet__user__username">@{{handle.username}}</span>
                 </span><!-- /.tweet__user -->

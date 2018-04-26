@@ -25,7 +25,7 @@ module.exports = {
         <div class="most-tweets-stats__item" ng-repeat="handle in $ctrl.handles">
           <div class="handle">
             <a ui-sref="handle({ id: handle.id })" class="tweet__user">
-              <img class="tweet__avatar" ng-src="{{handle.profile.image}}">
+              <img class="tweet__avatar" ng-src="{{'https://avatars.io/twitter/'+handle.username}}">
               <span class="tweet__user__name">{{handle.name}}</span>
               <span class="tweet__user__username">@{{handle.username}}</span>
             </a>

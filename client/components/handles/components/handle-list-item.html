@@ -6,7 +6,7 @@
     </div><!-- /.handle__follow -->
 
     <a ui-sref="handle({ id: $ctrl.handle.id })" class="tweet__user">
-      <img ng-src="{{$ctrl.handle.profile.image}}" alt="" class="tweet__avatar">
+      <img ng-src="{{'https://avatars.io/twitter/'+$ctrl.handle.username}}" alt="" class="tweet__avatar">
       <span class="tweet__user__name">{{$ctrl.handle.name}}</span>
       <span class="tweet__user__username">@{{$ctrl.handle.username}}</span>
     </a><!-- /.tweet__user -->
