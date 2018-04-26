@@ -1,5 +1,4 @@
 'use strict';
-var data = require('./data.json');
 
 class TopicService {
   constructor($q, ApiService) {

@@ -1,7 +1,0 @@
-[
-  { "id": 1, "title": "Sexual orientation and gender rights", "meta": { "tweetsFilter": "all" }, "keywords": ["gender", "equality"] },
-  { "id": 2, "title": "Economic crisis / Economy", "meta": { "tweetsFilter": "handles" }, "keywords": ["economy", "titanic"] },
-  { "id": 3, "title": "Immigration", "meta": { "tweetsFilter": "handles" }, "keywords": ["immigration", "trump"] },
-  { "id": 4, "title": "Terrorism", "meta": { "tweetsFilter": "handles" }, "keywords": ["terrorism", "fear"] },
-  { "id": 5, "title": "Environment", "meta": { "tweetsFilter": "all"}, "keywords": ["environment", "nature"] }
-]
